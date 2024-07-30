@@ -17,7 +17,6 @@ import { useGetHomeDataQuery } from "../../redux/api/api";
 import styles from "./Footer.module.scss";
 const Footer = () => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
-  console.log(homeData1);
 
   return (
     <div>

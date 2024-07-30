@@ -1,13 +1,15 @@
+"use client";
 import SearchIcon from "@mui/icons-material/Search";
 import { AppBar, Grid, IconButton } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useGetUserQuery } from "../../../redux/api/api";
 import { backendUrl } from "../../../utils/backendApiUrlProvider";
 import AvarterBtnAdmin from "../HeroNavigationBar/AvarterBtnAdmin";
 import AvaterBtnMeny from "../HeroNavigationBar/AvaterBtnMeny";
 import NavigationDrawer from "./NavigationDrawer";
 import SmallSearch2 from "./SmallSearch2";
+import Link from "next/link";
+import Image from "next/image";
 
 const MobileTopNavigation = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -50,10 +52,10 @@ const MobileTopNavigation = () => {
           justifyContent={`space-between`}
         >
           <Grid item xs={8}>
-            <NavLink to="/">
+            <Link href="/">
               {" "}
-              <img src="/assets/logo.png" alt="" width={200} />
-            </NavLink>
+              <Image src="/assets/logo.png" alt="" width={200} height={70}/>
+            </Link>
           </Grid>
           <Grid item xs={2} display={"flex"} justifyContent={"end"}>
             {

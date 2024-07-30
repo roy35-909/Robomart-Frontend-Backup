@@ -1,16 +1,16 @@
+"use client";
 import HomeIcon from "@mui/icons-material/Home";
 import PlayLessonIcon from "@mui/icons-material/PlayLesson";
 import RssFeedSharpIcon from "@mui/icons-material/RssFeedSharp";
 import StoreIcon from "@mui/icons-material/Store";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { usePathname, useRouter } from "next/navigation";
 const MobileNavigation = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleNavigation = (link) => {
-    navigate(`${link}`);
+    router.push(`${link}`);
   };
 
   return (
@@ -31,9 +31,9 @@ const MobileNavigation = () => {
               fontSize: "20px",
               borderRight: "1px solid #78bd68",
               transition: "all 0.1s ease-in-out",
-              border: location?.pathname === "/" ? "1px solid #e2e2e2" : "",
-              backgroundColor: location?.pathname === "/" ? "black" : "",
-              borderRadius: location?.pathname === "/" ? "5px" : "",
+              border: pathname === "/" ? "1px solid #e2e2e2" : "",
+              backgroundColor: pathname === "/" ? "black" : "",
+              borderRadius: pathname === "/" ? "5px" : "",
               borderBottom: "none",
             }}
             label="Home"
@@ -47,11 +47,9 @@ const MobileNavigation = () => {
               borderRight: "1px solid #78bd68",
               borderLeft: "1px solid #53ad3f",
               transition: "all 0.1s ease-in-out",
-              border:
-                location?.pathname === "/products" ? "1px solid #e2e2e2" : "",
-              backgroundColor:
-                location?.pathname === "/products" ? "black" : "",
-              borderRadius: location?.pathname === "/products" ? "5px" : "",
+              border: pathname === "/products" ? "1px solid #e2e2e2" : "",
+              backgroundColor: pathname === "/products" ? "black" : "",
+              borderRadius: pathname === "/products" ? "5px" : "",
               borderBottom: "none",
             }}
             label="Shop"
@@ -66,11 +64,9 @@ const MobileNavigation = () => {
               borderRight: "1px solid #78bd68",
               borderLeft: "1px solid #53ad3f",
               transition: "all 0.1s ease-in-out",
-              border:
-                location?.pathname === "/tutorials" ? "1px solid #e2e2e2" : "",
-              backgroundColor:
-                location?.pathname === "/tutorials" ? "black" : "",
-              borderRadius: location?.pathname === "/tutorials" ? "5px" : "",
+              border: pathname === "/tutorials" ? "1px solid #e2e2e2" : "",
+              backgroundColor: pathname === "/tutorials" ? "black" : "",
+              borderRadius: pathname === "/tutorials" ? "5px" : "",
               borderBottom: "none",
             }}
             label="Tutorial"
@@ -84,10 +80,9 @@ const MobileNavigation = () => {
               fontSize: "20px",
               borderLeft: "1px solid #53ad3f",
               transition: "all 0.1s ease-in-out",
-              border:
-                location?.pathname === "/blogs" ? "1px solid #e2e2e2" : "",
-              backgroundColor: location?.pathname === "/blogs" ? "black" : "",
-              borderRadius: location?.pathname === "/blogs" ? "5px" : "",
+              border: pathname === "/blogs" ? "1px solid #e2e2e2" : "",
+              backgroundColor: pathname === "/blogs" ? "black" : "",
+              borderRadius: pathname === "/blogs" ? "5px" : "",
               borderBottom: "none",
             }}
             label="Blogs"

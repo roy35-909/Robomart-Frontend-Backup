@@ -6,11 +6,12 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Button, Divider, Drawer, IconButton, List, ListItem } from "@mui/material";
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+
 import SelectCategory from "../HeroNavigationBar/SelectCategory";
 import styles from "./MobileNavigation.module.scss";
 import SmallSearch from "./SmallSearch";
 import { useGetUserQuery } from "../../../redux/api/api";
+import Link from "next/link";
 
 const NavigationDrawer = () => {
   const { data: userData, isLoading, isError } = useGetUserQuery();
@@ -49,10 +50,10 @@ const NavigationDrawer = () => {
             className={styles.drawerListItem}
             onClick={toggleDrawer}
           >
-            <NavLink to={"/shopping-cart"} className={styles.iLink}>
+            <Link href={"/shopping-cart"} className={styles.iLink}>
               <ShoppingCartIcon />
               Cart
-            </NavLink>
+            </Link>
           </ListItem>
 
           <ListItem
@@ -60,20 +61,20 @@ const NavigationDrawer = () => {
             className={styles.drawerListItem}
             onClick={toggleDrawer}
           >
-            <NavLink to={"/login"} className={styles.iLink}>
+            <Link href={"/login"} className={styles.iLink}>
               <LoginIcon />
               Login
-            </NavLink>
+            </Link>
           </ListItem>
           <ListItem
             sx={{ borderBottom: "1px solid #cfcfcfdb" }}
             className={styles.drawerListItem}
             onClick={toggleDrawer}
           >
-            <NavLink to={"/register"} className={styles.iLink}>
+            <Link href={"/register"} className={styles.iLink}>
               <AppRegistrationIcon />
               Register
-            </NavLink>
+            </Link>
           </ListItem>
           
         </List>

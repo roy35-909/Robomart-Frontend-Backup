@@ -3,9 +3,11 @@ import { Divider, Grid, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import React, { useEffect, useState } from "react";
 import Autosuggest from "react-autosuggest";
-import { useNavigate } from "react-router-dom";
+
 import { useGetAllProductsQuery } from "../../../redux/api/api";
 import styles from "../HeroNavigationBar/HeroNavigation.module.scss";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 // Custom CSS for suggestion box
 const suggestionBoxStyle = {
   position: "absolute",
@@ -20,7 +22,7 @@ const suggestionBoxStyle = {
 };
 
 const SmallSearch2 = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { data, isLoading, isError } = useGetAllProductsQuery();
 
   const [products, setProducts] = useState(data);
@@ -54,7 +56,7 @@ const SmallSearch2 = () => {
   };
 
   const handleSearchBtn = () => {
-    navigate(`/products/search=/${query}`);
+    router.push(`/products/search=/${query}`);
   };
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -82,7 +84,7 @@ const SmallSearch2 = () => {
           alignItems: "center",
         }}
       >
-        <img src={`${suggestion.photo}`} alt={suggestion.name} width="75" />
+        <Image src={`${suggestion.photo}`} alt={suggestion.name} width="75" height={50} />
         <div style={{ marginLeft: "20px" }}>
           {" "}
           <Typography

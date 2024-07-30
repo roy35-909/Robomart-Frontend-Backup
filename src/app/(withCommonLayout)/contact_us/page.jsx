@@ -1,8 +1,9 @@
+"use client";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 // Import necessary modules
 import { Button, Container, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import Swal from "sweetalert2";
-import { backendUrl } from "../../utils/backendApiUrlProvider";
 
 // ContactUsForm component
 const ContactUs = () => {

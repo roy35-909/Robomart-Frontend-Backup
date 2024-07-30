@@ -1,0 +1,45 @@
+.drawerList {
+  width: 250px;
+  transition: all 0.3s ease-in;
+  .drawerListItem {
+    &:hover {
+      background-color: var(--primaryColor);
+      color: white;
+    }
+  }
+  .drawerSearch {
+    color: #333;
+  }
+}
+.iLink {
+  font-family: var(--secondaryFont);
+  font-size: 18px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #333;
+  align-items: center;
+  text-decoration: none;
+  svg {
+    color: #333;
+    font-size: 30px;
+  }
+}
+.searchField {
+  background-color: white;
+  border-radius: 0px;
+  width: 100%;
+  &:focus-visible {
+    outline: 1px solid red !important;
+  }
+}
+.searchBtn {
+  margin-top: 5px;
+  border-radius: 0px;
+  background-color: black;
+  padding: 9px 25px;
+
+  &:hover {
+    background-color: rgb(32, 32, 32);
+  }
+}

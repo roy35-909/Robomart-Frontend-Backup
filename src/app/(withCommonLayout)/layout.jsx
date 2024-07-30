@@ -1,15 +1,13 @@
 "use client";
 
+import NavigationBar from "@/shared/NavigationBars/NavigationBar";
+
 const CommonLayout = ({ children }) => {
   return (
     <>
-      {/* <NavigationBar />
-      <MobileTopNavigation />
-      <Toaster />
-      <ScrollToTop /> */}
+      <NavigationBar />
+
       {children}
-      {/* <Footer />
-      <MobileNavigation /> */}
     </>
   );
 };

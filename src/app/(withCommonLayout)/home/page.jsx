@@ -1,11 +1,12 @@
-import React from 'react';
+'use client'
+import Hero from "./_sections/HeroSection/Hero";
 
 const Home = () => {
-    return (
-        <>
-            my home
-        </>
-    );
+  return (
+    <>
+      <Hero />
+    </>
+  );
 };
 
 export default Home;

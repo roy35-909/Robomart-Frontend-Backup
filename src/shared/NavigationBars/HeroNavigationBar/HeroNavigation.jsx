@@ -5,13 +5,13 @@ import { AppBar, Badge, Box, Container, Divider, Grid } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 
-import Image from "next/image";
-import Link from "next/link";
 import {
   useGetCartQuery,
   useGetHomeDataQuery,
   useGetUserQuery,
-} from "../../../redux/api/api";
+} from "@/redux/api/api";
+import Image from "next/image";
+import Link from "next/link";
 import { backendUrl } from "../../../utils/backendApiUrlProvider";
 import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
 import AvarterBtnAdmin from "./AvarterBtnAdmin";
@@ -186,7 +186,6 @@ const HeroNavigation = () => {
         }}
         component=""
         position="relative"
-        
       >
         <Divider></Divider>
         {/* Secondary nav */}

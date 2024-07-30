@@ -1,0 +1,11 @@
+@media (min-width: 1400px) {
+  .heroWrapper {
+    max-width: 85%;
+  }
+}
+@media (max-width: 900px) {
+  .categoryComponent {
+    display: none;
+  }
+}
+

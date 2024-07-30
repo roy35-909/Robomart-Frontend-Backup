@@ -1,3 +1,4 @@
+"use client";
 import CallIcon from "@mui/icons-material/Call";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
@@ -13,8 +14,9 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useGetHomeDataQuery } from "../../redux/api/api";
+
 import styles from "./Footer.module.scss";
+import { useGetHomeDataQuery } from "@/redux/api/api";
 const Footer = () => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
 

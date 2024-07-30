@@ -5,6 +5,7 @@ import { AppBar, Badge, Box, Container, Divider, Grid } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 
+import Image from "next/image";
 import Link from "next/link";
 import {
   useGetCartQuery,
@@ -17,7 +18,6 @@ import AvarterBtnAdmin from "./AvarterBtnAdmin";
 import AvaterBtnMeny from "./AvaterBtnMeny";
 import styles from "./HeroNavigation.module.scss";
 import SearchBar from "./SearchBar";
-import Image from "next/image";
 
 const theme = createTheme({
   palette: {
@@ -182,10 +182,11 @@ const HeroNavigation = () => {
           backgroundColor: "var(--primaryColor)",
           boxShadow: "unset",
           marginTop: "73px",
+          // position: "relative",
         }}
         component=""
-        position=""
-        positionRelative
+        position="relative"
+        
       >
         <Divider></Divider>
         {/* Secondary nav */}

@@ -110,7 +110,6 @@ const Footer = () => {
               <Image
                 src="/assets/logo.png"
                 alt="robomartbd-logo"
-                srcset=""
                 width={200}
                 height={70}
               />

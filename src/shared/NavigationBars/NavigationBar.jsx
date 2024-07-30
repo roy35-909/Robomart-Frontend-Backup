@@ -13,12 +13,12 @@ const NavigationBar = () => {
   return (
     <>
       <div className="desktop-navigation">
-        <CommonNavigation/>
-        {/* {pathname.includes("tutorials") || pathname.includes("blogs") ? (
+       
+        {pathname.includes("tutorials") || pathname.includes("blogs") ? (
           <CommonNavigation />
         ) : (
           <HeroNavigation />
-        )} */}
+        )}
       </div>
     </>
   );

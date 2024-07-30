@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { AppBar, Badge, Box, Container, Divider, Grid } from "@mui/material";
@@ -107,7 +107,7 @@ const HeroNavigation = () => {
                     alt="image"
                     style={{ width: "100%", maxWidth: "200px" }}
                     width={200}
-                    height={100}
+                    height={70}
                   />
                 </Link>
               </Box>

@@ -1,1 +1,1 @@
-export const backendUrl = process.env.NEXT_BACKEND_API_LINK;
+export const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_LINK;

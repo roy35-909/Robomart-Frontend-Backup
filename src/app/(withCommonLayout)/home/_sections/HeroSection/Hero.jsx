@@ -39,7 +39,7 @@ const Hero = () => {
                   <OfferCards />
                 </div>
               </Grid>
-              <Grid item xs={12} sm={12}>
+              <Grid item xs={12} sm={12} >
                 <OurFeatures />
               </Grid>
             </Grid>

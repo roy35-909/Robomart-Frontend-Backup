@@ -13,7 +13,7 @@ const OurFeatures = () => {
   const variantH = isXlScreen ? "h6" : "subtitle2";
 
   return (
-    <div style={{ width: "98%", display: "flex", justifyContent: "center" }}>
+    <div style={{ width: "98%", display: "flex", justifyContent: "center",marginTop:"5px" }}>
       {/* <Container className={styles.ourFeatures_wrapper}> */}
       <Box paddingY={2} className={styles.ourFeatures_wrapper}>
         <Grid container spacing={0}>

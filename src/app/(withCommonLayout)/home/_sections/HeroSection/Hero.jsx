@@ -1,6 +1,7 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Skeleton } from "@mui/material";
 import { useEffect, useState } from "react";
 
+import SideCategoryLoading from "@/components/Skeletons/Home/SideCategoryLoading";
 import { useGetCategoryListProductsQuery } from "@/redux/api/api";
 import AllCategorySideMenu from "@/Shared/AllCategoryListSideMenu/AllCategorySideMenu";
 import OfferCards from "./Components/OfferCards/OfferCards";
@@ -17,6 +18,7 @@ const Hero = () => {
   useEffect(() => {
     setScreenWidth(window.innerWidth);
   }, []);
+
   return (
     <>
       {screenWidth > 1200 && screenWidth < 1500 ? (
@@ -24,8 +26,14 @@ const Hero = () => {
           <Grid item md={3} lg={2}>
             <Box style={{ backgroundColor: "white", margin: "0px 10px" }}>
               <div className={styles.categoryComponent}>
-                {" "}
-                <AllCategorySideMenu category={categoryList?.slice(0, 8)} />
+                {isLoading ? (
+                  <SideCategoryLoading />
+                ) : (
+                  <AllCategorySideMenu
+                    category={categoryList?.slice(0, 8)}
+                    isLoading={isLoading}
+                  />
+                )}
               </div>
             </Box>
           </Grid>
@@ -39,7 +47,7 @@ const Hero = () => {
                   <OfferCards />
                 </div>
               </Grid>
-              <Grid item xs={12} sm={12} >
+              <Grid item xs={12} sm={12}>
                 <OurFeatures />
               </Grid>
             </Grid>

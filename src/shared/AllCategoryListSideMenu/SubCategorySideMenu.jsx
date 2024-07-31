@@ -1,4 +1,5 @@
-import { List, ListItemButton } from "@mui/material";
+import { useGetHomeDataQuery } from "@/redux/api/api";
+import { List, ListItemButton, Skeleton } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "./CategorySideMenu.module.scss";
@@ -8,6 +9,8 @@ const SubCategorySideMenu = ({ items }) => {
   const navigateToSubcategory = (path) => {
     router.push(`/${path}`);
   };
+
+  
 
   return (
     <List

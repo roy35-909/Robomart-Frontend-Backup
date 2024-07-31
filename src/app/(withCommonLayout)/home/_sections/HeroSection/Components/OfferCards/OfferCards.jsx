@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Container, Grid, Skeleton } from "@mui/material";
 
 import { useGetHomeDataQuery } from "@/redux/api/api";
 import Image from "next/image";
@@ -7,8 +7,16 @@ const OfferCards = () => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
 
   if (homeLoading) {
-    return <p>Loading...</p>;
+    return (
+      <>
+        <Container>
+          <Skeleton variant="rectangular" height={200} /> <br />
+          <Skeleton variant="rectangular" height={200} />
+        </Container>
+      </>
+    );
   }
+
   return (
     <>
       <Grid container>

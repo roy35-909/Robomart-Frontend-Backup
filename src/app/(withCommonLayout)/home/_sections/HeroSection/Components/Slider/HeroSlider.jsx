@@ -6,13 +6,13 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import { useGetHomeDataQuery } from "@/redux/api/api";
+import { Skeleton } from "@mui/material";
 import Image from "next/image";
 
 const HeroSlider = () => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
-  console.log(homeData1);
   if (homeLoading) {
-    return <p>Loading...</p>;
+    return <Skeleton variant="rectangular" width={1100} height={450} />;
   }
 
   return (

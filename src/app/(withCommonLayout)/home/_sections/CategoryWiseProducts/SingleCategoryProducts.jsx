@@ -1,3 +1,4 @@
+"use client";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import { lazy, Suspense, useEffect, useState } from "react";
@@ -8,14 +9,13 @@ const SingleProductCard = lazy(() =>
 );
 
 const SingleCategoryProducts = ({ title, fetchProducts, id }) => {
-  const [screenWidth, setScreenWidth] = useState(0);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [maxProductNum, setMaxProductNum] = useState(
     screenWidth > 1200 ? 6 : 4
   );
   const [products, setProducts] = useState(fetchProducts ? fetchProducts : []);
 
   useEffect(() => {
-    setScreenWidth(window.innerWidth);
     if (products?.length > maxProductNum) {
       setProducts(products?.slice(0, maxProductNum));
     } else {

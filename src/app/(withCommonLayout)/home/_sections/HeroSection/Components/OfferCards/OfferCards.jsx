@@ -29,7 +29,7 @@ const OfferCards = () => {
               style={{ width: "80% " }}
             /> */}
             <Image
-              src={`${offer?.poster}`}
+              src={`${offer?.poster ? offer.poster : "/assets/no-img.jpg"}`}
               alt="offer card"
               layout="responsive" // Or 'fill'
               objectFit="cover"

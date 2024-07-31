@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { AppBar, Badge, Box, Container, Divider, Grid } from "@mui/material";

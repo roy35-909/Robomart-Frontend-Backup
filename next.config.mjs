@@ -1,7 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["robomartbd.com" /* Add other domains if needed */],
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "robomartbd.com",
+        port: "",
+        pathname: "/uploads/*",
+      },
+      {
+        protocol: "https",
+        hostname: "robomartbd.com",
+        port: "",
+        pathname: "/uploads/*",
+      },
+    ],
   },
 };
 

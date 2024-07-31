@@ -29,7 +29,9 @@ const HeroSlider = () => {
             {/* Add a key for each slide */}
             <Image
               style={{ width: "100% " }}
-              src={`${sliderImg?.poster}`}
+              src={`${
+                sliderImg?.poster ? sliderImg.poster : "/assets/no-img.jpg"
+              }`}
               alt="hero image"
               width={1113}
               height={477}

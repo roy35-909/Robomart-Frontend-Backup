@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import toast from "react-hot-toast";
 
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
@@ -69,6 +70,17 @@ const SingleProductCard = ({ product }) => {
 
   return (
     <>
+      <Head>
+        <title>
+          {product.name} | RobomartBD- The biggest online robo shop in
+          Bangladesh
+        </title>
+        <meta name="description" content={product.discription} />
+        <meta
+          name="keywords"
+          content={`${product.keywords}, ${product.brand}`}
+        />
+      </Head>
       <Card
         style={{ boxShadow: "none", width: "250px" }}
         className={`${styles.card} card`}
@@ -94,7 +106,7 @@ const SingleProductCard = ({ product }) => {
               image={
                 product?.photo ? `${product?.photo}` : "/assets/no-img.jpg"
               }
-              alt="Products Image"
+              alt={`${product?.name} image`}
               sx={{ width: "100%" }}
               className={styles.cardImg}
             />

@@ -1,13 +1,20 @@
 import { Box, Divider, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from "./CategorySideMenu.module.scss";
 import SubCategorySideMenu from "./SubCategorySideMenu";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+
+export const metadata = {
+  title: "RobomartBD-Home",
+  description:
+    "Welcome to RoboMartBD, your premier destination for all things robotics. Discover a vast array of high-quality components including sensors, parts, and equipment, carefully curated to power your innovative projects. From servos to cutting-edge sensors, we offer a diverse selection to cater to every robotics enthusiast. Our commitment to quality, affordability, and expert curation sets us apart. Shop with confidence knowing you'll find the best deals and fast shipping on components engineered for excellence. Join our global community of robotics enthusiasts and embark on your DIY journey with RoboMartBD, where creativity meets technical excellence.",
+};
+
 const AllCategorySideMenu = ({ category }) => {
   const [viewAll, setViewAll] = useState(false);
-  const pathname=usePathname()
+  const pathname = usePathname();
   useEffect(() => {
     if (pathname === "/" || pathname === "/home") {
       setViewAll(true);

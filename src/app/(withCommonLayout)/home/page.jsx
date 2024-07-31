@@ -2,6 +2,8 @@
 import Head from "next/head";
 import CategoryProducts from "./_sections/CategoryWiseProducts/CategoryProducts";
 import Hero from "./_sections/HeroSection/Hero";
+import TopBlogs from "./_sections/TopBlogs/TopBlogs";
+import TopTutorial from "./_sections/TopTutorial/TopTutorial";
 
 const Home = () => {
   return (
@@ -26,6 +28,8 @@ const Home = () => {
       </Head>
       <Hero />
       <CategoryProducts />
+      <TopBlogs />
+      <TopTutorial />
     </>
   );
 };

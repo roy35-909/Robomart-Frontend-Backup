@@ -1,11 +1,11 @@
 import {
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
+    Button,
+    Card,
+    CardContent,
+    CardMedia,
+    Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./singleproductCard3.module.scss";
 // const useStyles = makeStyles({
@@ -61,7 +61,7 @@ const SingleProductCard3 = () => {
               <CardContent className={styles.overlayContent}>
                 <Typography variant="subtitle">Arduino Uno</Typography>
                 <br />
-                <NavLink to="/products/id">
+                <NavLink href"/products/id">
                   <Button
                     variant="contained"
                     size={"small"}

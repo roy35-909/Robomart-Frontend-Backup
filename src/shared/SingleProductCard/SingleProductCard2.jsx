@@ -9,7 +9,6 @@ import {
   CardMedia,
   Rating,
 } from "@mui/material";
-import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./SingleProductCard.module.scss";
 const SingleProductCard2 = () => {
@@ -54,7 +53,7 @@ const SingleProductCard2 = () => {
                 <h5>add to cart</h5>
               </div>
               <div className={styles.rode}></div>
-              <Link to={`product/`}>
+              <Link href={`product/`}>
                 <VisibilityIcon />
                 <h5>quick view</h5>
               </Link>
@@ -63,7 +62,7 @@ const SingleProductCard2 = () => {
         </Box>
         <CardContent className={styles.cardContent}>
           {/* <p className={styles.category}>{props.data.category}</p> */}
-          <Link to={`product/`} className={styles.title}>
+          <Link href={`product/`} className={styles.title}>
             Arduino Uno
           </Link>
           <Box
@@ -81,7 +80,7 @@ const SingleProductCard2 = () => {
             </p>
           </Box>
         </CardContent>
-        <NavLink to={"/products/id"}>
+        <NavLink href={"/products/id"}>
           <Button
             className={styles.productViewBtn}
             color="primary"

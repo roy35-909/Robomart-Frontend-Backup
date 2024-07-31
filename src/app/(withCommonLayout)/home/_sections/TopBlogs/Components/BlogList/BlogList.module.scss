@@ -1,0 +1,28 @@
+.cardListWrapper {
+  display: flex;
+  justify-content: space-around;
+   transition: all 0.3s ease-in-out;
+  &:hover .cardMedia {
+    transform: scale(1.02);
+  }
+}
+.blogTitle {
+  transition: all 0.3s ease-in;
+  &:hover {
+    color: var(--primaryColor);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.buyThisBtn {
+  background-color: var(--primaryColor);
+  &:hover {
+    background-color: rgb(14, 121, 0);
+  }
+}
+
+.cardMedia {
+
+  max-height: 200px;
+}

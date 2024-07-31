@@ -2,6 +2,8 @@
 import Head from "next/head";
 import CategoryProducts from "./_sections/CategoryWiseProducts/CategoryProducts";
 import Hero from "./_sections/HeroSection/Hero";
+import OurCorporateClients from "./_sections/OurSupplierPartner/OurCorporateClients";
+import OurSupplierNPartner from "./_sections/OurSupplierPartner/OurSupplierNPartner";
 import TopBlogs from "./_sections/TopBlogs/TopBlogs";
 import TopTutorial from "./_sections/TopTutorial/TopTutorial";
 
@@ -30,6 +32,8 @@ const Home = () => {
       <CategoryProducts />
       <TopBlogs />
       <TopTutorial />
+      <OurCorporateClients />
+      <OurSupplierNPartner />
     </>
   );
 };

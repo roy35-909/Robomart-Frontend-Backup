@@ -1,3 +1,4 @@
+import CategoryWiseProductLoading from "@/components/Skeletons/Home/CategoryWiseProductLoading";
 import { useGetHomeDataQuery } from "@/redux/api/api";
 import { lazy, Suspense } from "react";
 
@@ -9,7 +10,11 @@ const CategoryProducts = () => {
   return (
     <>
       {isLoading ? (
-        <div>Loading...</div>
+        <>
+          <CategoryWiseProductLoading />
+          <CategoryWiseProductLoading />
+          <CategoryWiseProductLoading />
+        </>
       ) : (
         <Suspense fallback={<div>Loading Category Products...</div>}>
           {" "}

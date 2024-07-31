@@ -11,36 +11,37 @@ import Image from "next/image";
 
 const HeroSlider = () => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
-  if (homeLoading) {
-    return <Skeleton variant="rectangular" width={1100} height={450} />;
-  }
 
   return (
     <div>
-      <Swiper
-        modules={[Navigation, Pagination]}
-        pagination={{ clickable: true }}
-        navigation={true}
-        autoplay={true}
-      >
-        {homeData1?.homeslider?.map((sliderImg) => (
-          <SwiperSlide key={sliderImg.id}>
-            {" "}
-            {/* Add a key for each slide */}
-            <Image
-              style={{ width: "100% " }}
-              src={`${
-                sliderImg?.poster ? sliderImg.poster : "/assets/no-img.jpg"
-              }`}
-              alt="hero image"
-              width={1113}
-              height={477}
-              layout="responsive" // Or 'fill'
-              objectFit="cover"
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {homeLoading ? (
+        <Skeleton variant="rectangular" width="100%" height={450} />
+      ) : (
+        <Swiper
+          modules={[Navigation, Pagination]}
+          pagination={{ clickable: true }}
+          navigation={true}
+          autoplay={true}
+        >
+          {homeData1?.homeslider?.map((sliderImg) => (
+            <SwiperSlide key={sliderImg.id}>
+              {" "}
+              {/* Add a key for each slide */}
+              <Image
+                style={{ width: "100% " }}
+                src={`${
+                  sliderImg?.poster ? sliderImg.poster : "/assets/no-img.jpg"
+                }`}
+                alt="hero image"
+                width={1113}
+                height={477}
+                layout="responsive" // Or 'fill'
+                objectFit="cover"
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </div>
   );
 };

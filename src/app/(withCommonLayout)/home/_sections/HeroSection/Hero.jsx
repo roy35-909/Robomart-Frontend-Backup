@@ -1,4 +1,4 @@
-import { Box, Grid, Skeleton } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import SideCategoryLoading from "@/components/Skeletons/Home/SideCategoryLoading";
@@ -10,6 +10,7 @@ import styles from "./Hero.module.scss";
 import OurFeatures from "./OurFeatures/OurFeatures";
 const Hero = () => {
   const [screenWidth, setScreenWidth] = useState(0);
+
   const {
     data: categoryList,
     isLoading,

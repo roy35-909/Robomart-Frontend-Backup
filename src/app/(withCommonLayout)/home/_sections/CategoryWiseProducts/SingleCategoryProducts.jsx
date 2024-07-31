@@ -46,7 +46,9 @@ const SingleCategoryProducts = ({ title, fetchProducts, id }) => {
         </Box>
         <Box paddingY={2} display={"flex"} justifyContent={"space-around"}>
           <Grid container spacing={2}>
-            <Suspense fallback={<div>Loading Products...</div>}>
+            <Suspense
+              fallback={<div>{/* <CategoryWiseProductLoading /> */}</div>}
+            >
               {products?.map((product) => (
                 <Grid
                   key={product.id} // Assuming product has an id

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Autosuggest from "react-autosuggest";
-import { useGetAllProductsQuery } from "../../../redux/api/api";
+import { useGetAllProductsQuery } from "@/redux/api/api";
 import styles from "./HeroNavigation.module.scss";
 // Custom CSS for suggestion box
 const suggestionBoxStyle = {

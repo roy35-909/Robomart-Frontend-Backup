@@ -12,12 +12,13 @@ import {
 } from "@/redux/api/api";
 import Image from "next/image";
 import Link from "next/link";
-import { backendUrl } from "../../../utils/backendApiUrlProvider";
-import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import AvarterBtnAdmin from "./AvarterBtnAdmin";
 import AvaterBtnMeny from "./AvaterBtnMeny";
 import styles from "./HeroNavigation.module.scss";
 import SearchBar from "./SearchBar";
+import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
+
 
 const theme = createTheme({
   palette: {

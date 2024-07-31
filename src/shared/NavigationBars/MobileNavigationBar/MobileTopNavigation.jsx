@@ -2,10 +2,10 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { AppBar, Grid, IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useGetUserQuery } from "../../../redux/api/api";
-import { backendUrl } from "../../../utils/backendApiUrlProvider";
-import AvarterBtnAdmin from "../HeroNavigationBar/AvarterBtnAdmin";
-import AvaterBtnMeny from "../HeroNavigationBar/AvaterBtnMeny";
+import { useGetUserQuery } from "@/redux/api/api";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
+import AvarterBtnAdmin from "@/HeroNavigationBar/AvarterBtnAdmin";
+import AvaterBtnMeny from "@/HeroNavigationBar/AvaterBtnMeny";
 import NavigationDrawer from "./NavigationDrawer";
 import SmallSearch2 from "./SmallSearch2";
 import Link from "next/link";

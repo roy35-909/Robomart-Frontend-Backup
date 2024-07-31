@@ -1,19 +1,22 @@
-import AddIcon from "@mui/icons-material/Add";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import RemoveIcon from "@mui/icons-material/Remove";
-import { Box, Button, Container, Grid, Rating } from "@mui/material";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
-import Swal from "sweetalert2";
 import {
   useGetCartQuery,
   useGetUserQuery,
   usePostToCartMutation,
 } from "@/redux/api/api";
+import RecentView from "@/Shared/RecntView/RecentView";
 import { backendUrl } from "@/utils/backendApiUrlProvider";
+import AddIcon from "@mui/icons-material/Add";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { Box, Button, Container, Divider, Grid, Rating } from "@mui/material";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
+import Swal from "sweetalert2";
+import BottomTabs from "./BottomTabs";
 import styles from "./ProductDetail.module.scss";
+import RelatedProducts from "./RelatedProducts";
 const loadingNotify = () => toast.loading("Adding...");
 const successNotify = () => toast.success("Successfully added !");
 const errorNotify = () => toast.error("Something went wrong !");
@@ -137,7 +140,6 @@ const ProductDetailsPage = ({ params }) => {
                       src={item?.photo}
                       key={index}
                       alt={`${productDetails?.name} image`}
-                      
                       // objectFit="contain"
                       width={200}
                       height={200}
@@ -195,7 +197,6 @@ const ProductDetailsPage = ({ params }) => {
                       boxShadow: "1px 1px 20px #e1e1e185",
                       borderRadius: "5px",
                     }}
-                  
                     width={100}
                     height={100}
                   />
@@ -313,10 +314,10 @@ const ProductDetailsPage = ({ params }) => {
           </Grid>
         </Grid>
 
-        {/* <BottomTabs productDetails={productDetails} />
+        <BottomTabs productDetails={productDetails} />
         <RecentView />
         <Divider />
-        <RelatedProducts categoriesId={productDetails?.catagorys} /> */}
+        <RelatedProducts categoriesId={productDetails?.catagorys} />
       </Container>
     </div>
   );

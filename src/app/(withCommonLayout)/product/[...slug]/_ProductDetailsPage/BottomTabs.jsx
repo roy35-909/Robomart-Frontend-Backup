@@ -1,11 +1,10 @@
+import EditorTextViewer from "@/Shared/EditorTextViewer/EditorTextViewer";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import EditorTextViewer from "../../Shared/EditorTextViewer/EditorTextViewer";
 import ReviewAndFeedBack from "./ReviewAndFeedBack";
 
 function CustomTabPanel(props) {
@@ -47,8 +46,6 @@ const BottomTabs = ({ productDetails }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-
 
   return (
     <>
@@ -107,7 +104,7 @@ const BottomTabs = ({ productDetails }) => {
           <EditorTextViewer froalaHTML={productDetails?.product_tutorial} />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          <ReviewAndFeedBack productDetails={productDetails } />
+          <ReviewAndFeedBack productDetails={productDetails} />
         </CustomTabPanel>
         {/* <CustomTabPanel value={value} index={3}></CustomTabPanel> */}
       </Box>

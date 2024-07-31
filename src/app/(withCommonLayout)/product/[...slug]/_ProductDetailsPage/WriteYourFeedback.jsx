@@ -1,9 +1,10 @@
+'use client'
 import CreateIcon from "@mui/icons-material/Create";
 import { Button, Modal, Rating, TextField } from "@mui/material";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import { useGetUserQuery } from "../../redux/api/api";
-import { backendUrl } from "../../utils/backendApiUrlProvider";
+import { useGetUserQuery } from "@/redux/api/api";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import styles from "./ProductDetail.module.scss";
 const WriteYourFeedback = ({ productDetails, getAllFeedData }) => {
   const { data: userData, isLoading, isError } = useGetUserQuery();

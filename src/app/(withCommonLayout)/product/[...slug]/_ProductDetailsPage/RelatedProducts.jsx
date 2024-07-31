@@ -1,41 +1,44 @@
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Box, CircularProgress, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-// import styles from "./CategoryProducts.module.scss";
-import { Navigation } from "swiper";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { backendUrl } from "../../utils/backendApiUrlProvider";
 
 const RelatedProducts = ({ categoriesId }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
+
   useEffect(() => {
-    setIsLoading(true);
-    const fetchData = async () => {
-      const newData = [];
+    if (Array.isArray(categoriesId) && categoriesId.length > 0) {
+      setIsLoading(true);
+      const fetchData = async () => {
+        const newData = [];
 
-      for (const id of categoriesId) {
-        try {
-          const response = await fetch(
-            `${backendUrl}/api/catagory/${id}/category`
-          );
-          if (response.ok) {
-            const categoryData = await response.json();
-            newData.push(categoryData);
+        for (const id of categoriesId) {
+          try {
+            const response = await fetch(
+              `${backendUrl}/api/catagory/${id}/category`
+            );
+            if (response.ok) {
+              const categoryData = await response.json();
+              newData.push(categoryData);
+            }
+          } catch (error) {
+            console.log(error);
           }
-        } catch (error) {
-          console.log(error);
         }
-      }
 
-      setData(...newData);
-      setIsLoading(false);
-    };
+        setData(newData); // Correct the way newData is set to state
+        setIsLoading(false);
+      };
 
-    fetchData();
+      fetchData();
+    }
   }, [categoriesId]);
 
   return (
@@ -52,10 +55,8 @@ const RelatedProducts = ({ categoriesId }) => {
           <Swiper
             slidesPerView={5}
             spaceBetween={20}
-            // pagination={{ clickable: true }}
             navigation={true}
             modules={[Navigation]}
-            // autoplay={true}
             breakpoints={{
               300: {
                 slidesPerView: 1,
@@ -80,15 +81,15 @@ const RelatedProducts = ({ categoriesId }) => {
             }}
             className="mySwiper"
           >
-            {data?.map((product) => (
-              <SwiperSlide>
+            {data?.map((product, idx) => (
+              <SwiperSlide key={idx}>
                 <Link
                   style={{
                     textDecoration: "none",
                     color: "#4f4f4f",
                     "&:hover": { color: "black !important" },
                   }}
-                  to={`/product/${product?.id}/${product?.name?.replace(
+                  href={`/product/${product?.id}/${product?.name?.replace(
                     / /g,
                     "_"
                   )}`}
@@ -99,16 +100,16 @@ const RelatedProducts = ({ categoriesId }) => {
                       justifyContent: "center",
                     }}
                   >
-                    <img
+                    <Image
                       style={{
                         width: "200px",
                         height: "150px",
                         border: "1px solid #e2e2e2",
                       }}
-                      // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
                       src={`${product?.photo}`}
-                      alt="image"
-                      srcset=""
+                      alt={product.name}
+                      width={200}
+                      height={150}
                     />
                   </Box>
                   <p style={{ textAlign: "center" }}>{product?.name}</p>

@@ -22,7 +22,6 @@ const PageNavigationBar = () => {
     >
       <Link
         href={`/`}
-        passHref
         className={`${
           pathname === "/" || pathname === "/home" ? styles.activeRoute : ""
         } ${styles.navigationMenu_Item}`}
@@ -31,7 +30,6 @@ const PageNavigationBar = () => {
       </Link>
       <Link
         href="/products"
-        passHref
         className={`${pathname === "/products" ? styles.activeRoute : ""} ${
           styles.navigationMenu_Item
         }`}
@@ -40,7 +38,6 @@ const PageNavigationBar = () => {
       </Link>
       <Link
         href="/tutorials"
-        passHref
         className={`${pathname === "/tutorials" ? styles.activeRoute : ""} ${
           styles.navigationMenu_Item
         }`}
@@ -49,7 +46,6 @@ const PageNavigationBar = () => {
       </Link>
       <Link
         href="/blogs"
-        passHref
         className={`${pathname === "/blogs" ? styles.activeRoute : ""} ${
           styles.navigationMenu_Item
         }`}
@@ -58,7 +54,6 @@ const PageNavigationBar = () => {
       </Link>
       <Link
         href="/contact_us"
-        passHref
         className={`${pathname === "/contact_us" ? styles.activeRoute : ""} ${
           styles.navigationMenu_Item
         }`}

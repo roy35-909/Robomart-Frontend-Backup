@@ -23,6 +23,7 @@
     "bd-divisions-to-unions": "^1.0.3",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.11",
+    "dompurify": "^3.1.6",
     "js-cookie": "^3.0.5",
     "next": "14.2.5",
     "query-string": "^9.0.0",

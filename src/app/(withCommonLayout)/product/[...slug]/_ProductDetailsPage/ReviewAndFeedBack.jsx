@@ -1,7 +1,8 @@
+'use client'
 import { Box, Card, Grid, Rating } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import WriteYourFeedback from "./WriteYourFeedback";
-import { backendUrl } from "../../utils/backendApiUrlProvider";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 
 const ReviewAndFeedBack = ({ productDetails }) => {
   const [isLoad, setIsLoad] = useState(false);
@@ -21,6 +22,7 @@ const ReviewAndFeedBack = ({ productDetails }) => {
 
   useEffect(() => {
     getAllFeedData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -36,8 +38,8 @@ const ReviewAndFeedBack = ({ productDetails }) => {
           />
         </Box>
         {allFeedback?.length > 0 &&
-          allFeedback?.map((feedback) => (
-            <Card sx={{ marginY: "10px", padding: "1vh 2vh" }}>
+          allFeedback?.map((feedback,idx) => (
+            <Card key={idx} sx={{ marginY: "10px", padding: "1vh 2vh" }}>
               <Grid container>
                 <Grid item xs={12} sx={{ marginY: "2vh", paddingX: "3vh" }}>
                   <Rating

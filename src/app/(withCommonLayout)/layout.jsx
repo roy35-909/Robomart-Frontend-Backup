@@ -1,9 +1,9 @@
 "use client";
 
 import Footer from "@/Shared/Footer/Footer";
-import MobileNavigation from "@/shared/NavigationBars/MobileNavigationBar/MobileNavigation";
-import MobileTopNavigation from "@/shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
-import NavigationBar from "@/shared/NavigationBars/NavigationBar";
+import MobileNavigation from "@/Shared/NavigationBars/MobileNavigationBar/MobileNavigation";
+import MobileTopNavigation from "@/Shared/NavigationBars/MobileNavigationBar/MobileTopNavigation";
+import NavigationBar from "@/Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "@/utils/ScrollToTop";
 import { Toaster } from "react-hot-toast";
 

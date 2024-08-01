@@ -1,3 +1,4 @@
+import TopTutorialsSkeleton from "@/components/Skeletons/Home/TopTutorialsSkeleton";
 import { backendUrl } from "@/utils/backendApiUrlProvider";
 import {
   Box,
@@ -13,7 +14,7 @@ import styles from "../TopBlogs/TopBlogs.module.scss";
 import SingleTutorial2 from "./SingleTutorial2";
 const TopTutorial = () => {
   const [tutorialsData, setTutorialsData] = useState([]);
-  const [load, setLoad] = useState(false);
+  const [load, setLoad] = useState(true);
 
   useEffect(() => {
     setLoad(true);
@@ -21,7 +22,7 @@ const TopTutorial = () => {
       .then((res) => res.json())
       .then((data) => {
         setTutorialsData(data?.results.slice(0, 4));
-        setLoad(false);
+        // setLoad(false);
       });
   }, []);
 
@@ -38,14 +39,19 @@ const TopTutorial = () => {
         >
           Top Tutorials
         </Typography>
-        <Grid container spacing={2}>
-          {load && !tutorialsData && <CircularProgress />}
-          {tutorialsData?.map((tutorial, idx) => (
-            <Grid item xs={6} sm={3} marginY={2} key={idx}>
-              <SingleTutorial2 tutorial={tutorial} />
-            </Grid>
-          ))}
-        </Grid>
+        {load ? (
+          <TopTutorialsSkeleton />
+        ) : (
+          <Grid container spacing={2}>
+            {load && !tutorialsData && <CircularProgress />}
+            {tutorialsData?.map((tutorial, idx) => (
+              <Grid item xs={6} sm={3} marginY={2} key={idx}>
+                <SingleTutorial2 tutorial={tutorial} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
+
         <Box display={"flex"} justifyContent={"end"} paddingY={3}>
           <Link href={`/tutorials`}>
             <Button

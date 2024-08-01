@@ -14,7 +14,7 @@ import styles from "../TopBlogs/TopBlogs.module.scss";
 import SingleTutorial2 from "./SingleTutorial2";
 const TopTutorial = () => {
   const [tutorialsData, setTutorialsData] = useState([]);
-  const [load, setLoad] = useState(true);
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
     setLoad(true);
@@ -22,7 +22,7 @@ const TopTutorial = () => {
       .then((res) => res.json())
       .then((data) => {
         setTutorialsData(data?.results.slice(0, 4));
-        // setLoad(false);
+        setLoad(false);
       });
   }, []);
 

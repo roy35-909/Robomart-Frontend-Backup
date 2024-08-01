@@ -70,8 +70,8 @@ const SingleCategoryProducts = ({ title, fetchProducts, id }) => {
         <Box display={"flex"} justifyContent={"flex-end"}>
           {" "}
           <Link href={`/products/categories/${id}/${title.replace(/ /g, "_")}`}>
-            <Button variant="contained" className={styles.showMoreBtn}>
-              Show More
+            <Button className={styles.showMoreBtn}>
+              <i>{`Show More >>`}</i>
             </Button>
           </Link>
         </Box>

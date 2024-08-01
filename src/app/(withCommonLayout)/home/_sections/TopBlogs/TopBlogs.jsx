@@ -63,12 +63,8 @@ const TopBlogs = () => {
         </Grid>
         <Box display={"flex"} justifyContent={"end"} paddingY={3}>
           <Link href={`/blogs`}>
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "black" }}
-              className={styles.blogSectionBtn}
-            >
-              Explore More Blogs
+            <Button className={styles.blogSectionBtn}>
+              <i>Explore More Blogs{` >>`}</i>
             </Button>
           </Link>
         </Box>

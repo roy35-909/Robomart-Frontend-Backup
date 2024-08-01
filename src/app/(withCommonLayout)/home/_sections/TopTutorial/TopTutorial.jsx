@@ -54,12 +54,8 @@ const TopTutorial = () => {
 
         <Box display={"flex"} justifyContent={"end"} paddingY={3}>
           <Link href={`/tutorials`}>
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "black" }}
-              className={styles.blogSectionBtn}
-            >
-              Explore More Tutorials
+            <Button className={styles.blogSectionBtn}>
+              <i>Explore More Tutorials{` >>`} </i>
             </Button>
           </Link>
         </Box>

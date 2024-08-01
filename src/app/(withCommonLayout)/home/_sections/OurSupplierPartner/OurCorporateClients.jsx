@@ -1,3 +1,4 @@
+import PartnerClientSkeleton from "@/components/Skeletons/Home/PartnerClientSkeleton";
 import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -14,10 +15,15 @@ const OurCorporateClients = () => {
   const theme = useTheme();
   const isMScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    setIsLoading(true);
     fetch(`${backendUrl}/api/our_client`)
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((data) => {
+        setData(data);
+        setIsLoading(false);
+      });
   }, []);
 
   return (
@@ -34,84 +40,88 @@ const OurCorporateClients = () => {
         >
           Our Corporate Clients
         </Typography>
-        <>
-          <Swiper
-            slidesPerView={5}
-            spaceBetween={20}
-            navigation={true}
-            autoplay={{
-              delay: 2500,
-            }}
-            modules={[Navigation, Autoplay]}
-            breakpoints={{
-              300: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              500: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              640: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 4,
-                spaceBetween: 40,
-              },
-              1024: {
-                slidesPerView: 6,
-                spaceBetween: 2,
-              },
-            }}
-            className="mySwiper"
-          >
-            {data?.map((company, idx) => (
-              <SwiperSlide key={idx} className={styles.singlePartner}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
+        {isLoading ? (
+          <PartnerClientSkeleton />
+        ) : (
+          <>
+            <Swiper
+              slidesPerView={5}
+              spaceBetween={20}
+              navigation={true}
+              autoplay={{
+                delay: 2500,
+              }}
+              modules={[Navigation, Autoplay]}
+              breakpoints={{
+                300: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                500: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                640: {
+                  slidesPerView: 3,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 4,
+                  spaceBetween: 40,
+                },
+                1024: {
+                  slidesPerView: 6,
+                  spaceBetween: 2,
+                },
+              }}
+              className="mySwiper"
+            >
+              {data?.map((company, idx) => (
+                <SwiperSlide key={idx} className={styles.singlePartner}>
                   <div
                     style={{
-                      width: "150px",
-                      height: "150px",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      // border: "1px solid #e2e2e2",
                     }}
                   >
-                    <Image
+                    <div
                       style={{
                         width: "150px",
+                        height: "150px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                         // border: "1px solid #e2e2e2",
                       }}
-                      // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
-                      src={`${company?.logo}`}
-                      alt="no-image"
-                      width={150}
-                      height={150}
-                    />
+                    >
+                      <Image
+                        style={{
+                          width: "150px",
+                          // border: "1px solid #e2e2e2",
+                        }}
+                        // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
+                        src={`${company?.logo}`}
+                        alt="no-image"
+                        width={150}
+                        height={150}
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <Typography
-                  variant="subtitle1"
-                  textAlign={"center"}
-                  fontWeight={"bold"}
-                  fontFamily={"Poppins"}
-                >
-                  {company?.name}
-                </Typography>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </>
+                  <Typography
+                    variant="subtitle1"
+                    textAlign={"center"}
+                    fontWeight={"bold"}
+                    fontFamily={"Poppins"}
+                  >
+                    {company?.name}
+                  </Typography>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </>
+        )}
       </div>
     </div>
   );

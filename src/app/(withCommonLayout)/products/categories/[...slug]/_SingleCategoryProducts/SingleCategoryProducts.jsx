@@ -1,14 +1,8 @@
 import AllCategorySideMenu from "@/Shared/AllCategoryListSideMenu/AllCategorySideMenu";
+import CategoryWiseProductLoading from "@/components/Skeletons/Home/CategoryWiseProductLoading";
 import { useGetCategoryListProductsQuery } from "@/redux/api/api";
 import { backendUrl } from "@/utils/backendApiUrlProvider";
-import {
-  Box,
-  CircularProgress,
-  Divider,
-  Grid,
-  Pagination,
-  Typography,
-} from "@mui/material";
+import { Box, Divider, Grid, Pagination, Typography } from "@mui/material";
 import { lazy, Suspense, useEffect, useState } from "react";
 const SingleProductCard = lazy(() =>
   import("@/Shared/SingleProductCard/SingleProductCard")
@@ -51,55 +45,60 @@ const SingleCategoryProducts = ({ params }) => {
           {categoryList && <AllCategorySideMenu category={categoryList} />}
         </Grid>
         <Grid item xs={12} sm={12}>
-          <>
-            {" "}
-            <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>
-              {params?.categoryName.replace(/ /g, "_")} :
-            </Typography>
-            <Divider />
-            {isLoading && <CircularProgress />}
-            <Box paddingY={1} marginY={1}>
-              {!categoryProducts?.length && !isLoading && (
-                <Typography
-                  marginTop={3}
-                  variant="h6"
-                  textAlign={"center"}
-                  fontFamily={"Poppins"}
-                >
-                  No products
-                </Typography>
-              )}
-              <Box
-                paddingY={2}
-                display={"flex"}
-                justifyContent={"space-around"}
-              >
-                <Grid container spacing={2}>
-                  <Suspense
-                    fallback={<div>{/* <CategoryWiseProductLoading /> */}</div>}
+          {isLoading ? (
+            <CategoryWiseProductLoading />
+          ) : (
+            <>
+              {" "}
+              <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>
+                {params?.categoryName.replace(/ /g, "_")} :
+              </Typography>
+              <Divider />
+              <Box paddingY={1} marginY={1}>
+                {!categoryProducts?.length && !isLoading && (
+                  <Typography
+                    marginTop={3}
+                    variant="h6"
+                    textAlign={"center"}
+                    fontFamily={"Poppins"}
                   >
-                    {currentItems?.length > 0 &&
-                      !isLoading &&
-                      currentItems?.map((product) => (
-                        <Grid
-                          item
-                          xs={6}
-                          sm={6}
-                          md={3}
-                          lg={3}
-                          xl={2}
-                          display={"flex"}
-                          justifyContent={"center"}
-                          key={product.id}
-                        >
-                          <SingleProductCard product={product} />
-                        </Grid>
-                      ))}
-                  </Suspense>
-                </Grid>
+                    No products
+                  </Typography>
+                )}
+                <Box
+                  paddingY={2}
+                  display={"flex"}
+                  justifyContent={"space-around"}
+                >
+                  <Grid container spacing={2}>
+                    <Suspense
+                      fallback={
+                        <div>{/* <CategoryWiseProductLoading /> */}</div>
+                      }
+                    >
+                      {currentItems?.length > 0 &&
+                        !isLoading &&
+                        currentItems?.map((product) => (
+                          <Grid
+                            item
+                            xs={6}
+                            sm={6}
+                            md={3}
+                            lg={3}
+                            xl={2}
+                            display={"flex"}
+                            justifyContent={"center"}
+                            key={product.id}
+                          >
+                            <SingleProductCard product={product} />
+                          </Grid>
+                        ))}
+                    </Suspense>
+                  </Grid>
+                </Box>
               </Box>
-            </Box>
-          </>
+            </>
+          )}
 
           <div
             style={{

@@ -14,6 +14,7 @@ const SingleProductCard = lazy(() =>
 import AllCategorySideMenu from "@/Shared/AllCategoryListSideMenu/AllCategorySideMenu";
 import { useGetCategoryListProductsQuery } from "@/redux/api/api";
 import { backendUrl } from "@/utils/backendApiUrlProvider";
+import CategoryWiseProductLoading from "@/components/Skeletons/Home/CategoryWiseProductLoading";
 
 const SubCategoryProducts = ({ params }) => {
   const {
@@ -58,35 +59,42 @@ const SubCategoryProducts = ({ params }) => {
             {params?.subCategoryName.replace(/ /g, "_")} :
           </Typography>
           <Divider />
-          {isLoading && <CircularProgress />}
-
-          <Box paddingY={1} marginY={1}>
-            <Box paddingY={2} display={"flex"} justifyContent={"space-around"}>
-              <Grid container spacing={2}>
-                <Suspense
-                  fallback={<div>{/* <CategoryWiseProductLoading /> */}</div>}
-                >
-                  {currentItems?.length > 0 &&
-                    !isLoading &&
-                    currentItems?.map((product) => (
-                      <Grid
-                        item
-                        xs={6}
-                        sm={6}
-                        md={3}
-                        lg={3}
-                        xl={2}
-                        display={"flex"}
-                        justifyContent={"center"}
-                        key={product.id}
-                      >
-                        <SingleProductCard product={product} />
-                      </Grid>
-                    ))}
-                </Suspense>
-              </Grid>
+          {isLoading ? (
+            <CategoryWiseProductLoading />
+          ) : (
+            <Box paddingY={1} marginY={1}>
+              <Box
+                paddingY={2}
+                display={"flex"}
+                justifyContent={"space-around"}
+              >
+                <Grid container spacing={2}>
+                  <Suspense
+                    fallback={<div>{/* <CategoryWiseProductLoading /> */}</div>}
+                  >
+                    {currentItems?.length > 0 &&
+                      !isLoading &&
+                      currentItems?.map((product) => (
+                        <Grid
+                          item
+                          xs={6}
+                          sm={6}
+                          md={3}
+                          lg={3}
+                          xl={2}
+                          display={"flex"}
+                          justifyContent={"center"}
+                          key={product.id}
+                        >
+                          <SingleProductCard product={product} />
+                        </Grid>
+                      ))}
+                  </Suspense>
+                </Grid>
+              </Box>
             </Box>
-          </Box>
+          )}
+
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Pagination
               color="success"

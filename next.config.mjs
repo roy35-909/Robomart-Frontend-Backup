@@ -50,6 +50,30 @@ const nextConfig = {
         port: "",
         pathname: "/uploads/OurClient/*",
       },
+      {
+        protocol: "http",
+        hostname: "robomartbd.com",
+        port: "",
+        pathname: "/uploads/CategoryImage/*",
+      },
+      {
+        protocol: "https",
+        hostname: "robomartbd.com",
+        port: "",
+        pathname: "/uploads/CategoryImage/*",
+      },
+      {
+        protocol: "http",
+        hostname: "robomartbd.com",
+        port: "",
+        pathname: "/uploads/SubCategoryImage/*",
+      },
+      {
+        protocol: "https",
+        hostname: "robomartbd.com",
+        port: "",
+        pathname: "/uploads/SubCategoryImage/*",
+      },
     ],
   },
 };

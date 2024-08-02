@@ -11,7 +11,6 @@ import {
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-import ProductCardSckeleton from "@/components/Skeletons/ProductCardSckeleton/ProductCardSckeleton";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -96,10 +95,9 @@ const SingleProductCard = ({ product }) => {
           className={styles.imageDiv}
         >
           <Link
-            href={`/product/${product?.id}/${(product?.name).replace(
-              / /g,
-              "_"
-            )}`}
+            href={`/product/${product?.id}/${(product?.name)
+              .replace(/ /g, "_")
+              .replace(/%/g, "percent")}`}
           >
             <CardMedia
               component="img"

@@ -7,9 +7,9 @@ const SubCategoryWiseProduct = ({ params }) => {
     subCategoryName: params.slug[1],
   };
   return (
-    <>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <SubCategoryProducts params={subCategoryParams} />
-    </>
+    </div>
   );
 };
 

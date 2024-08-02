@@ -54,8 +54,8 @@ const SingleCategoryProducts = ({ params }) => {
                 {params?.categoryName.replace(/ /g, "_")} :
               </Typography>
               <Divider />
-              <Box paddingY={1} marginY={1}>
-                {!categoryProducts?.length && !isLoading && (
+              <Box paddingY={1} marginY={1} display={"flex"} justifyContent={"center"}>
+                {categoryProducts?.length==0 && !isLoading && (
                   <Typography
                     marginTop={3}
                     variant="h6"

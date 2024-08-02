@@ -7,9 +7,9 @@ const CategoryProducts = ({ params }) => {
     categoryName: params.slug[1],
   };
   return (
-    <>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <SingleCategoryProducts params={singleCategoryParams} />
-    </>
+    </div>
   );
 };
 

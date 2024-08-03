@@ -40,7 +40,12 @@ const SingleCategoryProducts = ({ params }) => {
 
   return (
     <div>
-      <Grid container sx={{ backgroundColor: "#f2f2f2", minHeight: "80vh" }}>
+      <Grid
+        container
+        sx={{ backgroundColor: "#f2f2f2", minHeight: "80vh" }}
+        display={"flex"}
+        justifyContent={"center"}
+      >
         <Grid item xs={2} padding={2} hidden={{ xs: true }}>
           {categoryList && <AllCategorySideMenu category={categoryList} />}
         </Grid>
@@ -54,8 +59,8 @@ const SingleCategoryProducts = ({ params }) => {
                 {params?.categoryName.replace(/ /g, "_")} :
               </Typography>
               <Divider />
-              <Box paddingY={1} marginY={1} display={"flex"} justifyContent={"center"}>
-                {categoryProducts?.length==0 && !isLoading && (
+              <Box paddingY={1} marginY={1}>
+                {categoryProducts?.length == 0 && !isLoading && (
                   <Typography
                     marginTop={3}
                     variant="h6"

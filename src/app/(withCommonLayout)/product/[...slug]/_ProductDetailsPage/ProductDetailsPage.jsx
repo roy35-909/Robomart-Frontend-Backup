@@ -137,7 +137,7 @@ const ProductDetailsPage = ({ params }) => {
                           ? styles.activeImage
                           : styles.notActive
                       }
-                      src={item?.photo}
+                      src={item?.photo ? item?.photo : "/assets/no-img.jpg"}
                       key={index}
                       alt={`${productDetails?.name} image`}
                       // objectFit="contain"
@@ -153,6 +153,8 @@ const ProductDetailsPage = ({ params }) => {
                     backgroundImage: `url(${
                       productDetails?.media &&
                       productDetails?.media[imageIndex]?.photo
+                        ? productDetails?.media[imageIndex]?.photo
+                        : "/assets/no-img.jpg"
                     })`,
                     backgroundPosition: bgPosition,
                   }}
@@ -161,6 +163,8 @@ const ProductDetailsPage = ({ params }) => {
                     src={`${
                       productDetails?.media &&
                       productDetails?.media[imageIndex]?.photo
+                        ? productDetails?.media[imageIndex]?.photo
+                        : "/assets/no-img.jpg"
                     }`}
                     alt={`${productDetails?.name} image`}
                     style={{
@@ -185,12 +189,20 @@ const ProductDetailsPage = ({ params }) => {
                   className={styles.mainImage}
                   onMouseMove={zoom}
                   style={{
-                    backgroundImage: `url(${productDetails?.photo})`,
+                    backgroundImage: `url(${
+                      productDetails?.photo
+                        ? productDetails?.photo
+                        : "/assets/no-img.jpg"
+                    })`,
                     backgroundPosition: bgPosition,
                   }}
                 >
                   <Image
-                    src={`${productDetails?.photo}`}
+                    src={`${
+                      productDetails?.photo
+                        ? productDetails?.photo
+                        : "/assets/no-img.jpg"
+                    }`}
                     alt={`${productDetails?.name} image`}
                     style={{
                       border: "1px solid #f2f2f2",

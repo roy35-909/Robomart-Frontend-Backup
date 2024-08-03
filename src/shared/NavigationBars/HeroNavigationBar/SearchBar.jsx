@@ -147,7 +147,6 @@ const SearchBar = () => {
         <Grid item sm={3}>
           <Button
             onClick={handleSearchBtn}
-            variant="contained"
             className={styles.searchBtn}
             disableElevation
           >

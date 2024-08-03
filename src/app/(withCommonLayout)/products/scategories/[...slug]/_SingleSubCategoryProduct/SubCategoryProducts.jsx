@@ -43,19 +43,24 @@ const SubCategoryProducts = ({ params }) => {
   return (
     <div>
       {" "}
-      <Grid container sx={{ backgroundColor: "#f2f2f2", minHeight: "80vh" }}>
+      <Grid
+        container
+        sx={{ backgroundColor: "#f2f2f2", minHeight: "80vh" }}
+        display={"flex"}
+        justifyContent={"center"}
+      >
         <Grid item xs={2} padding={2} hidden={{ xs: true }}>
           {categoryList && <AllCategorySideMenu category={categoryList} />}
         </Grid>
         <Grid item xs={10}>
-          <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>
-            {params?.subCategoryName.replace(/ /g, "_")} :
-          </Typography>
-          <Divider />
           {isLoading ? (
             <CategoryWiseProductLoading />
           ) : (
             <>
+              <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>
+                {params?.subCategoryName.replace(/ /g, "_")} :
+              </Typography>
+              <Divider />
               <Box
                 paddingY={1}
                 marginY={1}

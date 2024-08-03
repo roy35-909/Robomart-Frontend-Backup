@@ -37,7 +37,7 @@ const CommonNavigation = () => {
             <Box>
               <Link href="/">
                
-                <Image src="/assets/logo.png" alt="image" width={200} height={100} />
+                <Image src="/assets/logo.png" alt="image" width={200} height={70} />
               </Link>
             </Box>
           </Grid>

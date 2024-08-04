@@ -3,6 +3,7 @@ import BottomPagination from "@/app/(withCommonLayout)/tutorials/_AllTutorials/C
 import PaginationFilter from "@/app/(withCommonLayout)/tutorials/_AllTutorials/Components/PaginationsFilter/PaginationFilter";
 import SingleTutorialCard from "@/app/(withCommonLayout)/tutorials/_AllTutorials/Components/Tutorial_Card/SingleTutorialCard";
 import TutorialCategoryNav from "@/app/(withCommonLayout)/tutorials/_AllTutorials/Components/TutorialCategoryNav/TutorialCategoryNav";
+import CategoryWiseProductLoading from "@/components/Skeletons/Home/CategoryWiseProductLoading";
 import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Container, Divider, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -85,27 +86,36 @@ const AllBlogsPage = () => {
         </Container>
       </div>
       <Divider style={{ borderColor: "#e2e2e2" }} />
-      {/* Pagination and tags */}
-      <Container maxWidth={"xl"}>
-        <PaginationFilter
-          handlePageChange={handlePageChange}
-          totalPages={Math.ceil(blogsData?.length / itemsPerPage)}
-          page={currentPage}
-        />
-      </Container>
-      {/* blogs */}
-      <Container maxWidth="xl" style={{ padding: "5vh 0" }}>
-        <Grid container spacing={2} padding={1}>
-          {/* {load && <CircularProgress />} */}
-          {!load && blogsData?.length == 0 && <h5>No tutorials </h5>}
-          {currentItems?.length &&
-            currentItems?.map((tutorial, idx) => (
-              <Grid key={idx} item xs={6} sm={6} md={4} lg={3}>
-                <SingleTutorialCard tutorial={tutorial} />
-              </Grid>
-            ))}
-        </Grid>
-      </Container>
+
+      {load ? (
+        <CategoryWiseProductLoading />
+      ) : (
+        <>
+          {" "}
+          {/* Pagination and tags */}
+          <Container maxWidth={"xl"}>
+            <PaginationFilter
+              handlePageChange={handlePageChange}
+              totalPages={Math.ceil(blogsData?.length / itemsPerPage)}
+              page={currentPage}
+            />
+          </Container>
+          {/* blogs */}
+          <Container maxWidth="xl" style={{ padding: "5vh 0" }}>
+            <Grid container spacing={2} padding={1}>
+              {/* {load && <CircularProgress />} */}
+              {!load && blogsData?.length == 0 && <h5>No tutorials </h5>}
+              {currentItems?.length &&
+                currentItems?.map((tutorial, idx) => (
+                  <Grid key={idx} item xs={6} sm={6} md={4} lg={3}>
+                    <SingleTutorialCard tutorial={tutorial} />
+                  </Grid>
+                ))}
+            </Grid>
+          </Container>
+        </>
+      )}
+
       <div
         style={{
           display: "flex",

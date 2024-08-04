@@ -2,7 +2,7 @@ import { Divider, Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import CardHeader from "@mui/material/CardHeader";
 import React, { useEffect } from "react";
-import EditorTextViewer from "../../../../../Shared/EditorTextViewer/EditorTextViewer";
+import EditorTextViewer from "@/Shared/EditorTextViewer/EditorTextViewer";
 const TutorialHead = ({ activeSection, setActiveSection, tutorialDetails }) => {
   useEffect(() => {
     const handleScroll = () => {
@@ -21,11 +21,13 @@ const TutorialHead = ({ activeSection, setActiveSection, tutorialDetails }) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let divId = "sec1";
   useEffect(() => {
     if (tutorialDetails?.pages?.length > 0) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       divId = `sec${tutorialDetails?.pages[0]?.page_no}`;
     }
   }, [tutorialDetails]);

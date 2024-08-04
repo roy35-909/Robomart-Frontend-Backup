@@ -1,11 +1,10 @@
+"use client"
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Box, Card, CircularProgress, Grid, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import WriteYourComment from "./WriteYourComment";
-import { backendUrl } from "../../../../../utils/backendApiUrlProvider";
-const AllComments = () => {
+const AllComments = ({params}) => {
   const [isLoad, setIsLoad] = useState(false);
-  const params = useParams();
   const [allComments, setAllComments] = useState([]);
 
   const getALLComments = async () => {
@@ -22,6 +21,7 @@ const AllComments = () => {
 
   useEffect(() => {
     getALLComments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -41,8 +41,8 @@ const AllComments = () => {
           {!isLoad && (
             <>
               {allComments?.length > 0 &&
-                allComments?.map((comment) => (
-                  <Card sx={{ marginY: "10px", padding: "1vh 2vh" }}>
+                allComments?.map((comment, idx) => (
+                  <Card key={idx} sx={{ marginY: "10px", padding: "1vh 2vh" }}>
                     <Grid container>
                       <Grid
                         item

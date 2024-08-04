@@ -1,11 +1,12 @@
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Typography } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import styles from "../../SingleTutorial.module.scss";
 import TagBadge from "./TagBadge";
-import { backendUrl } from "../../../../../utils/backendApiUrlProvider";
 const TutorialTitleNav = ({
   activeSection,
   setActiveSection,
@@ -32,6 +33,7 @@ const TutorialTitleNav = ({
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tutorialDetails]);
 
   return (
@@ -65,8 +67,9 @@ const TutorialTitleNav = ({
         }}
       >
         {tutorialDetails?.pages?.length > 0 &&
-          tutorialDetails?.pages?.map((singlePage) => (
-            <a
+          tutorialDetails?.pages?.map((singlePage, idx) => (
+            <Link
+              key={idx}
               href={`#sec${singlePage?.page_no}`}
               style={{ textDecoration: "none", color: "black" }}
             >
@@ -78,7 +81,7 @@ const TutorialTitleNav = ({
               >
                 <ListItemText primary={singlePage?.page_title} />
               </ListItem>
-            </a>
+            </Link>
           ))}
 
         {/* Tags */}
@@ -103,8 +106,8 @@ const TutorialTitleNav = ({
             padding: "10px",
           }}
         >
-          {allTags?.map((tag) => (
-            <TagBadge tag={tag?.tag_name} tagId={tag?.id} />
+          {allTags?.map((tag, idx) => (
+            <TagBadge key={idx} tag={tag?.tag_name} tagId={tag?.id} />
           ))}
         </div>
       </List>

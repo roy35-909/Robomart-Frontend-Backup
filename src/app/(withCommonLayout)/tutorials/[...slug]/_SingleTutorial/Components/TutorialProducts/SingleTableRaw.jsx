@@ -1,17 +1,15 @@
+import { useGetUserQuery, usePostToCartMutation } from "@/redux/api/api";
 import AddIcon from "@mui/icons-material/Add";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { IconButton } from "@mui/material";
-import React, { useState } from "react";
+import Link from "next/link";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import {
-  useGetUserQuery,
-  usePostToCartMutation,
-} from "../../../../../redux/api/api";
 import { StyledTableCell } from "./TutorialProducts";
 import styles from "./TutorialsProductTable.module.scss";
+import Image from "next/image";
 
 const successNotify = () => toast.success("Successfully cart updated !");
 const errorNotify = () => toast.error("Something went wrong !");
@@ -22,9 +20,9 @@ const SingleTableRaw = ({ singleItem, idx }) => {
   const { data: userData } = useGetUserQuery();
   const [postToCart, { isLoading, isError, isSuccess }] =
     usePostToCartMutation();
-  
+
   const addToCart = () => {
-    setCheck(true)
+    setCheck(true);
     if (!userData) {
       Swal.fire({
         position: "top-center",
@@ -41,9 +39,9 @@ const SingleTableRaw = ({ singleItem, idx }) => {
     }
   };
 
-  if (isSuccess&&check) {
+  if (isSuccess && check) {
     successNotify();
-    setCheck(false)
+    setCheck(false);
   }
 
   return (
@@ -51,13 +49,16 @@ const SingleTableRaw = ({ singleItem, idx }) => {
       <StyledTableCell align="left">{idx + 1}</StyledTableCell>
       <StyledTableCell align="left">
         <Link
-          to={`/product/${
+          href={`/product/${
             singleItem?.product?.id
-          }/${(singleItem?.product?.name).replace(/ /g, "_")}`}
+          }/${(singleItem?.product?.name)
+            .replace(/ /g, "_")
+            .replace(/%/g, "percent")}`}
         >
-          <img
+          <Image
             src={`${singleItem?.product?.photo}`}
             width={100}
+            height={100}
             alt=""
             srcset=""
           />

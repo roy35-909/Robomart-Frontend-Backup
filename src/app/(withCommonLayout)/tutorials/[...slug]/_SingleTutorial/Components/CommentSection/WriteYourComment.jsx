@@ -1,9 +1,9 @@
+import { useGetUserQuery } from "@/redux/api/api";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import CreateIcon from "@mui/icons-material/Create";
 import { Button, Modal, TextField } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import Swal from "sweetalert2";
-import { useGetUserQuery } from "../../../../../redux/api/api";
-import { backendUrl } from "../../../../../utils/backendApiUrlProvider";
 import styles from "../../SingleTutorial.module.scss";
 const WriteYourComment = ({ blogId, getALLComments }) => {
   const { data: userData, isLoading, isError } = useGetUserQuery();

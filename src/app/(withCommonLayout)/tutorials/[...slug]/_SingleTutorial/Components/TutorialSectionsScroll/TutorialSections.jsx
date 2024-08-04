@@ -1,12 +1,6 @@
+import EditorTextViewer from "@/Shared/EditorTextViewer/EditorTextViewer";
 import { Typography } from "@mui/material";
-import React, { useEffect } from "react";
-import EditorTextViewer from "../../../../../Shared/EditorTextViewer/EditorTextViewer";
-
-
-
-
-
-
+import { useEffect } from "react";
 
 const TutorialSections = ({
   activeSection,
@@ -35,13 +29,18 @@ const TutorialSections = ({
         observer.unobserve(section);
       });
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const testArr = [2, 3, 4, 5, 6];
 
   return (
     <>
-      {tutorialDetails?.pages?.slice(1)?.map((test) => (
-        <div id={`sec${test?.page_no}`} className="scroll-spy-section">
+      {tutorialDetails?.pages?.slice(1)?.map((test, idx) => (
+        <div
+          key={idx}
+          id={`sec${test?.page_no}`}
+          className="scroll-spy-section"
+        >
           <Typography
             variant="h6"
             style={{

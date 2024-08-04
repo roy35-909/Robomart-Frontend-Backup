@@ -1,11 +1,10 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import styles from "../../SingleTutorial.module.scss";
 
 const TagBadge = ({ tag, tagId }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const handleTagNavigate = () => {
-    navigate(`/tutorials/tag/${tagId}/${tag.replace(/ /g, "_")}`);
+    router.push(`/tutorials/tag/${tagId}/${tag.replace(/ /g, "_")}`);
   };
   return (
     <>

@@ -1,3 +1,4 @@
+import { useGetUserQuery, usePostAllToCartMutation } from "@/redux/api/api";
 import { Button, Container, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -7,13 +8,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
+import { useRouter } from "next/navigation";
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import {
-  useGetUserQuery,
-  usePostAllToCartMutation,
-} from "../../../../../redux/api/api";
 import SingleTableRaw from "./SingleTableRaw";
 import styles from "./TutorialsProductTable.module.scss";
 
@@ -59,10 +56,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const TutorialProducts = ({ tutorialDetails }) => {
   const [track, setTrack] = React.useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
   const [postAllToCart, { isLoading, isError, isSuccess, errors }] =
     usePostAllToCartMutation();
-
 
   const {
     data: userData,
@@ -80,7 +76,7 @@ const TutorialProducts = ({ tutorialDetails }) => {
   const addToCart = () => {
     setTrack(true);
     if (!userData) {
-      navigate("/login");
+      router.push("/login");
       Swal.fire({
         position: "top-center",
         icon: "warning",

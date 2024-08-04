@@ -1,18 +1,17 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 // import styles from "./CategoryProducts.module.scss";
-import { Navigation } from "swiper";
+import Link from "next/link";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import Image from "next/image";
 
 const TutorialRelatedProducts = ({ data }) => {
   const [isLoading, setIsLoading] = useState(false);
-//   const [data, setData] = useState([]);
-  
+  //   const [data, setData] = useState([]);
 
   return (
     <>
@@ -56,18 +55,17 @@ const TutorialRelatedProducts = ({ data }) => {
             }}
             className="mySwiper"
           >
-            {data?.map((product) => (
-              <SwiperSlide>
+            {data?.map((product, idx) => (
+              <SwiperSlide key={idx}>
                 <Link
                   style={{
                     textDecoration: "none",
                     color: "#4f4f4f",
                     "&:hover": { color: "black !important" },
                   }}
-                  to={`/product/${product?.id}/${product?.name?.replace(
-                    / /g,
-                    "_"
-                  )}`}
+                  href={`/product/${product?.id}/${product?.name
+                    ?.replace(/ /g, "_")
+                    .replace(/%/g, "percent")}`}
                 >
                   <Box
                     style={{
@@ -75,7 +73,7 @@ const TutorialRelatedProducts = ({ data }) => {
                       justifyContent: "center",
                     }}
                   >
-                    <img
+                    <Image
                       style={{
                         width: "200px",
                         height: "150px",
@@ -84,7 +82,8 @@ const TutorialRelatedProducts = ({ data }) => {
                       // src={`https://i.ibb.co/zbyRK5d/small-product.png`}
                       src={`${product?.photo}`}
                       alt="image"
-                      srcset=""
+                      width={200}
+                      height={150}
                     />
                   </Box>
                   <p style={{ textAlign: "center" }}>{product?.name}</p>

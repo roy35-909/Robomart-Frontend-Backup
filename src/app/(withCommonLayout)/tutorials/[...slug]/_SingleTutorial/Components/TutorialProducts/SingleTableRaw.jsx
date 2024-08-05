@@ -3,13 +3,13 @@ import AddIcon from "@mui/icons-material/Add";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { IconButton } from "@mui/material";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import Swal from "sweetalert2";
 import { StyledTableCell } from "./TutorialProducts";
 import styles from "./TutorialsProductTable.module.scss";
-import Image from "next/image";
 
 const successNotify = () => toast.success("Successfully cart updated !");
 const errorNotify = () => toast.error("Something went wrong !");
@@ -65,7 +65,16 @@ const SingleTableRaw = ({ singleItem, idx }) => {
         </Link>
       </StyledTableCell>
       <StyledTableCell align="left">
-        {singleItem?.product?.name}
+        <Link
+          style={{ color: "black" }}
+          href={`/product/${
+            singleItem?.product?.id
+          }/${(singleItem?.product?.name)
+            .replace(/ /g, "_")
+            .replace(/%/g, "percent")}`}
+        >
+          {singleItem?.product?.name}
+        </Link>
       </StyledTableCell>
 
       <StyledTableCell align="left">

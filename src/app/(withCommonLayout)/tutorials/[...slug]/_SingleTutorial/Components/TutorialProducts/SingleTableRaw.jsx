@@ -66,7 +66,12 @@ const SingleTableRaw = ({ singleItem, idx }) => {
       </StyledTableCell>
       <StyledTableCell align="left">
         <Link
-          style={{ color: "black" }}
+          style={{
+            color: "black",
+            "&:hover": {
+              color: "var(--primaryColor) !important",
+            },
+          }}
           href={`/product/${
             singleItem?.product?.id
           }/${(singleItem?.product?.name)

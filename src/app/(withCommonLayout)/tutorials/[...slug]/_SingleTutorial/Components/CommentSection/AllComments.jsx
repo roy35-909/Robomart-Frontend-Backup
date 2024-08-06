@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Box, Card, CircularProgress, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import WriteYourComment from "./WriteYourComment";
-const AllComments = ({params}) => {
+const AllComments = ({ params }) => {
   const [isLoad, setIsLoad] = useState(false);
   const [allComments, setAllComments] = useState([]);
 
@@ -14,9 +14,7 @@ const AllComments = ({params}) => {
     );
     const data = await response.json();
     setAllComments(data.reverse());
-    if (data?.length) {
-      setIsLoad(false);
-    }
+    setIsLoad(false);
   };
 
   useEffect(() => {
@@ -37,9 +35,11 @@ const AllComments = ({params}) => {
               getALLComments={getALLComments}
             />
           </Box>
-          {isLoad && <CircularProgress />}
-          {!isLoad && (
+          {isLoad ? (
+            <CircularProgress />
+          ) : (
             <>
+              {allComments?.length === 0 && <p>No comments yet</p>}
               {allComments?.length > 0 &&
                 allComments?.map((comment, idx) => (
                   <Card key={idx} sx={{ marginY: "10px", padding: "1vh 2vh" }}>

@@ -1,4 +1,5 @@
 "use client";
+import TutorialDetailsPageSkeleton from "@/components/Skeletons/TutorialDetailsPageSkeleton";
 import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -10,14 +11,19 @@ import TutorialTitleNav from "./Components/TutorialTitleNav/TutorialTitleNav";
 import TutorialHead from "./Components/TutorialsHead/TutorialHead";
 import styles from "./SingleTutorial.module.scss";
 const SIngleTutorialPage = ({ params }) => {
+  const [loading, setLoading] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
   const [changePosition, setChangePosition] = useState(false);
   const [tutorialDetails, setTutorialDetails] = useState({});
 
   useEffect(() => {
+    setLoading(true);
     fetch(`${backendUrl}/blog/get_blog/${params?.tutorialId}`)
       .then((res) => res.json())
-      .then((data) => setTutorialDetails(data));
+      .then((data) => {
+        setTutorialDetails(data);
+        setLoading(false);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -36,61 +42,67 @@ const SIngleTutorialPage = ({ params }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+  
   return (
     <>
-      <Container maxWidth={"xl"} style={{ minHeight: "80vh" }}>
-        <Typography
-          variant="h4"
-          style={{
-            padding: "5vh 0 0vh 0vh",
-            fontFamily: "Poppins",
-            fontWeight: "bold",
-          }}
-          className={styles.tutorialTitle}
-        >
-          {tutorialDetails?.title}
-        </Typography>
+      {loading ? (
+        <TutorialDetailsPageSkeleton />
+      ) : (
+        <Container maxWidth={"xl"} style={{ minHeight: "80vh" }}>
+          <Typography
+            variant="h4"
+            style={{
+              padding: "5vh 0 0vh 0vh",
+              fontFamily: "Poppins",
+              fontWeight: "bold",
+            }}
+            className={styles.tutorialTitle}
+          >
+            {tutorialDetails?.title}
+          </Typography>
 
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={12} lg={8}>
-            <TutorialHead
-              setActiveSection={setActiveSection}
-              activeSection={activeSection}
-              tutorialDetails={tutorialDetails}
-            />
-            <TutorialProducts tutorialDetails={tutorialDetails} />
-            <div style={{ width: "100%" }} className={styles.allSections}>
-              {" "}
-              <TutorialSections
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={12} lg={8}>
+              <TutorialHead
                 setActiveSection={setActiveSection}
                 activeSection={activeSection}
                 tutorialDetails={tutorialDetails}
               />
-            </div>
+              <TutorialProducts tutorialDetails={tutorialDetails} />
+              <div style={{ width: "100%" }} className={styles.allSections}>
+                {" "}
+                <TutorialSections
+                  setActiveSection={setActiveSection}
+                  activeSection={activeSection}
+                  tutorialDetails={tutorialDetails}
+                />
+              </div>
 
-            <TutorialRelatedProducts data={tutorialDetails?.related_Product} />
-            {/* Comments Section */}
-            <AllComments params={params} />
-          </Grid>
-          <Grid item md={12} lg={4}>
-            <div
-              style={{
-                // width: "100%",
-                position: changePosition ? "sticky" : "",
-                top: changePosition ? "20px" : "",
-                marginBottom: "3vh",
-              }}
-            >
-              <TutorialTitleNav
-                setActiveSection={setActiveSection}
-                activeSection={activeSection}
-                tutorialDetails={tutorialDetails}
+              <TutorialRelatedProducts
+                data={tutorialDetails?.related_Product}
               />
-            </div>
+              {/* Comments Section */}
+              <AllComments params={params} />
+            </Grid>
+            <Grid item md={12} lg={4}>
+              <div
+                style={{
+                  // width: "100%",
+                  position: changePosition ? "sticky" : "",
+                  top: changePosition ? "20px" : "",
+                  marginBottom: "3vh",
+                }}
+              >
+                <TutorialTitleNav
+                  setActiveSection={setActiveSection}
+                  activeSection={activeSection}
+                  tutorialDetails={tutorialDetails}
+                />
+              </div>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
+        </Container>
+      )}
     </>
   );
 };

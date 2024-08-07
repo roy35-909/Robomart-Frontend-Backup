@@ -2,16 +2,20 @@ import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import CloseIcon from "@mui/icons-material/Close";
 import LoginIcon from "@mui/icons-material/Login";
 import MenuIcon from "@mui/icons-material/Menu";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Button, Divider, Drawer, IconButton, List, ListItem } from "@mui/material";
-import React, { useState } from "react";
+import {
+  Button,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+} from "@mui/material";
+import { useState } from "react";
 
-import SelectCategory from "../HeroNavigationBar/SelectCategory";
-import styles from "./MobileNavigation.module.scss";
-import SmallSearch from "./SmallSearch";
-import { useGetUserQuery } from "../../../redux/api/api";
 import Link from "next/link";
+import { useGetUserQuery } from "../../../redux/api/api";
+import styles from "./MobileNavigation.module.scss";
 
 const NavigationDrawer = () => {
   const { data: userData, isLoading, isError } = useGetUserQuery();
@@ -25,9 +29,7 @@ const NavigationDrawer = () => {
   return (
     <>
       <IconButton variant="text" onClick={toggleDrawer} sx={{ color: "white" }}>
-        <MenuIcon
-          sx={{ fontWeight: "bold", fontSize: "35px",}}
-        />{" "}
+        <MenuIcon sx={{ fontWeight: "bold", fontSize: "35px" }} />{" "}
       </IconButton>
       <Drawer anchor="right" open={open} onClose={toggleDrawer}>
         <List className={styles.drawerList}>
@@ -61,7 +63,7 @@ const NavigationDrawer = () => {
             className={styles.drawerListItem}
             onClick={toggleDrawer}
           >
-            <Link href={"/login"} className={styles.iLink}>
+            <Link href={"/auth/login"} className={styles.iLink}>
               <LoginIcon />
               Login
             </Link>
@@ -71,12 +73,11 @@ const NavigationDrawer = () => {
             className={styles.drawerListItem}
             onClick={toggleDrawer}
           >
-            <Link href={"/register"} className={styles.iLink}>
+            <Link href={"/auth/register"} className={styles.iLink}>
               <AppRegistrationIcon />
               Register
             </Link>
           </ListItem>
-          
         </List>
       </Drawer>
     </>

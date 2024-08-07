@@ -46,7 +46,7 @@ const SingleProductCard = ({ product }) => {
   const addToCart = () => {
     setCheck(true);
     if (!userData) {
-      router.push("/login");
+      router.push("/auth/login");
       Swal.fire({
         position: "top-center",
         icon: "warning",

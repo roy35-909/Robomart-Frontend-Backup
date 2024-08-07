@@ -45,16 +45,13 @@ const ProvideNewPassForget = () => {
   const test = "";
   const submitNewPassword = (password) => {
     setIsLoading(true);
-    fetch(
-      `${backendUrl}/api/renew_password/${params?.email}/${params?.code}`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ new_password: password }),
-      }
-    )
+    fetch(`${backendUrl}/api/renew_password/${params?.email}/${params?.code}`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ new_password: password }),
+    })
       .then((res) => res.json())
       .then((result) => {
         setIsLoading(false);
@@ -67,7 +64,7 @@ const ProvideNewPassForget = () => {
             showConfirmButton: false,
             timer: 3000,
           });
-          navigate("/login");
+          navigate("/auth/login");
         } else {
           Swal.fire({
             position: "center",

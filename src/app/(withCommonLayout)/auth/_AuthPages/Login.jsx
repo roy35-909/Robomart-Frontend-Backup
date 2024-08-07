@@ -1,14 +1,14 @@
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { backendUrl } from "../../utils/backendApiUrlProvider";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import styles from "./AuthPage.module.scss";
 import LoginWithGoogle from "./LoginWithGoogle";
+import Link from "next/link";
 const notify = () => toast.error("Password not match!");
 const successMassage = () =>
   toast.success("Register successfully! Now Login Here");
@@ -16,8 +16,7 @@ const errorMassage = () => toast.error("Not register please try again!");
 const customError = (massage) => toast.error(massage);
 
 const Login = ({ showPass, setShowPass }) => {
-  const navigate = useNavigate();
-
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -45,7 +44,7 @@ const Login = ({ showPass, setShowPass }) => {
           localStorage.setItem("user", JSON.stringify(result.access));
 
           reset();
-          navigate("/");
+          router.push("/");
           Swal.fire({
             position: "center",
             icon: "success",
@@ -112,10 +111,10 @@ const Login = ({ showPass, setShowPass }) => {
             />
           </form>
           <p style={{ textAlign: "center", marginBottom: "10px" }}>- or -</p>
-          <LoginWithGoogle />
+          {/* <LoginWithGoogle /> */}
           <p style={{ margin: "15px 0px" }}>
             Forget your password ?
-            <NavLink to={"/auth/forget_password"}>Click Here</NavLink>
+            <Link href={"/auth/forgotpassword"}>Click Here</Link>
           </p>
         </Box>
       </Box>

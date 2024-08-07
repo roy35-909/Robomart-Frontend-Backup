@@ -1,12 +1,13 @@
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Box, Typography } from "@mui/material";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { backendUrl } from "../../utils/backendApiUrlProvider";
 import styles from "./AuthPage.module.scss";
 import LoginWithGoogle from "./LoginWithGoogle";
 const notify = () => toast.error("Password not match!");
@@ -16,7 +17,7 @@ const errorMassage = () => toast.error("Not register please try again!");
 const customError = (massage) => toast.error(massage);
 const Register = ({ showPass, setShowPass }) => {
   const [showPass2, setShowPass2] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -45,7 +46,7 @@ const Register = ({ showPass, setShowPass }) => {
             timer: 1500,
           });
           successMassage();
-          navigate("/login");
+          router.push("/auth/login");
           reset();
         } else if (result.password) {
           customError(result.password);
@@ -155,7 +156,7 @@ const Register = ({ showPass, setShowPass }) => {
           <p style={{ textAlign: "center", marginBottom: "10px" }}>- or -</p>
           <LoginWithGoogle />
           <p style={{ margin: "15px 0px" }}>
-            Already Have an Account ?<NavLink to={"/login"}>Login Here</NavLink>
+            Already Have an Account ?<Link href={"/auth/login"}>Login Here</Link>
           </p>
         </Box>
       </Box>

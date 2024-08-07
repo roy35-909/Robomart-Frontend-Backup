@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import styles from "./AuthPage.module.scss";
 const LoginWithGoogle = () => {
-  const apiUrl = import.meta.env.VITE_GOOGLE_AUTH_LINK;
+  const apiUrl = process.env.NEXT_PUBLIC_GOOGLE_AUTH_LINK;
   const [authUrl, setAuthUrl] = useState("");
 
   const openNewTab = (url) => {

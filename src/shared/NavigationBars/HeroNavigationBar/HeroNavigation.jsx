@@ -10,15 +10,14 @@ import {
   useGetHomeDataQuery,
   useGetUserQuery,
 } from "@/redux/api/api";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import Image from "next/image";
 import Link from "next/link";
-import { backendUrl } from "@/utils/backendApiUrlProvider";
+import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
 import AvarterBtnAdmin from "./AvarterBtnAdmin";
 import AvaterBtnMeny from "./AvaterBtnMeny";
 import styles from "./HeroNavigation.module.scss";
 import SearchBar from "./SearchBar";
-import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
-
 
 const theme = createTheme({
   palette: {
@@ -163,11 +162,11 @@ const HeroNavigation = () => {
 
                 {!data?.email && (
                   <>
-                    <Link href="/login">
+                    <Link href="/auth/login">
                       <p>Login</p>
                     </Link>
                     <p style={{ margin: "0px 3px" }}>/</p>
-                    <Link href="/register">
+                    <Link href="/auth/register">
                       <p> Register</p>
                     </Link>
                   </>

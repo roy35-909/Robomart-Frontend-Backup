@@ -1,12 +1,12 @@
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import { AppBar, Box, Container, Grid } from "@mui/material";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useGetUserQuery } from "../../../redux/api/api";
 import AvaterBtnMeny from "../HeroNavigationBar/AvaterBtnMeny";
 import PageNavigationBar from "../PageNavigationBar.jsx/PageNavigationBar";
 import styles from "./CommnNavigation.module.scss";
-import Image from "next/image";
 // this navigation is  use in blogs and forum page
 const CommonNavigation = () => {
   const { data, isLoading, isError } = useGetUserQuery();
@@ -36,8 +36,12 @@ const CommonNavigation = () => {
           >
             <Box>
               <Link href="/">
-               
-                <Image src="/assets/logo.png" alt="image" width={200} height={70} />
+                <Image
+                  src="/assets/logo.png"
+                  alt="image"
+                  width={200}
+                  height={70}
+                />
               </Link>
             </Box>
           </Grid>
@@ -70,13 +74,11 @@ const CommonNavigation = () => {
               <br />
               {!data && (
                 <>
-                  <Link href="/login">
+                  <Link href="/auth/login">
                     <p>Login</p>
                   </Link>
                   <p style={{ margin: "0px 3px" }}>/</p>
-                  <Link href="/register">
-                     Register
-                  </Link>
+                  <Link href="/auth/register">Register</Link>
                 </>
               )}
             </div>

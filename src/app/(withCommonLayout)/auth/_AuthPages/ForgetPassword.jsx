@@ -1,3 +1,4 @@
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import MoveToInboxIcon from "@mui/icons-material/MoveToInbox";
 import {
   Button,
@@ -7,13 +8,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import Swal from "sweetalert2";
-import { backendUrl } from "../../utils/backendApiUrlProvider";
 
 const ForgetPassword = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [emailSent, setEmailSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -41,7 +43,7 @@ const ForgetPassword = () => {
             timer: 1500,
           });
           setLoading(false);
-          navigate("/login");
+          router.push("/auth/login");
         } else {
           Swal.fire({
             position: "center",
@@ -51,7 +53,7 @@ const ForgetPassword = () => {
             timer: 1500,
           });
           setLoading(false);
-          navigate("/login");
+          router.push("/auth/login");
         }
       });
   };
@@ -103,10 +105,11 @@ const ForgetPassword = () => {
               {emailSent ? (
                 <CardContent>
                   <div style={{ display: "flex", justifyContent: "center" }}>
-                    <img
+                    <Image
                       src="/assets/email.png"
                       alt="email-logo"
-                      width={"200px"}
+                        width={200}
+                        height={200}
                     />
                   </div>
                   <Typography
@@ -123,7 +126,7 @@ const ForgetPassword = () => {
                   </Typography>
 
                   <div style={{ textAlign: "center", margin: "15px 0" }}>
-                    <a
+                    <Link
                       href="https://mail.google.com/mail/u/0/#inbox"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -139,7 +142,7 @@ const ForgetPassword = () => {
                       >
                         Check Inbox
                       </Button>
-                    </a>
+                    </Link>
                   </div>
                 </CardContent>
               ) : (

@@ -76,7 +76,7 @@ const TutorialProducts = ({ tutorialDetails }) => {
   const addToCart = () => {
     setTrack(true);
     if (!userData) {
-      router.push("/login");
+      router.push("/auth/login");
       Swal.fire({
         position: "top-center",
         icon: "warning",

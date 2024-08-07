@@ -1,14 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { CircularProgress, Typography } from "@mui/material";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import queryString from "query-string";
-import React, { useEffect } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 import Swal from "sweetalert2";
-import { backendUrl } from "../../utils/backendApiUrlProvider";
 const GoogleAuthLink = () => {
-  const navigate = useNavigate();
-  const params = useParams();
-  const location = useLocation();
+  const router = useRouter();
 
   const postLoginData = async (state, code) => {
     const details = {
@@ -38,7 +37,7 @@ const GoogleAuthLink = () => {
           localStorage.setItem("user", JSON.stringify(res.data.access));
 
           //   reset();
-          navigate("/");
+          router.push("/");
           Swal.fire({
             position: "center",
             icon: "success",

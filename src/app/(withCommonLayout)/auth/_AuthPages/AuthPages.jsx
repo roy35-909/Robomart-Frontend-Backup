@@ -1,31 +1,33 @@
+"use client"
 import { Box, Container, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import styles from "./AuthPage.module.scss"
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 const AuthPages = () => {
   const [showPass,setShowPass] = useState(false);
   const [component, setComponent] = useState("login");
-  const location = useLocation();
+  const pathName = usePathname();
   useEffect(() => {
-    if (location.pathname === "/login") {
+    if (pathName === "/auth/login") {
       setComponent("login");
     } else {
       setComponent("register");
     }
-  }, [location]);
+  }, [pathName]);
 
   return (
     <div style={{ backgroundColor: "#ededed" }}>
       <Container sx={{ minHeight: "70vh", paddingBottom: "10vh" }}>
         <Box sx={{ py: 7, display: "flex", justifyContent: "center" }}>
-          <NavLink
+          <Link
             style={{
               textDecoration: "none",
               color: component === "login" ? "black" : "#c7c7c7",
             }}
-            to="/login"
+            href="/auth/login"
           >
             <Typography
               variant="h3"
@@ -40,13 +42,13 @@ const AuthPages = () => {
             >
               Login
             </Typography>
-          </NavLink>
-          <NavLink
+          </Link>
+          <Link
             style={{
               textDecoration: "none",
               color: component === "register" ? "black" : "#c7c7c7",
             }}
-            to="/register"
+            href="/auth/register"
           >
             <Typography
               className={styles.authTitle}
@@ -61,7 +63,7 @@ const AuthPages = () => {
             >
               Register
             </Typography>
-          </NavLink>
+          </Link>
         </Box>
         <Box sx={{ py: 3 }} display={"flex"} justifyContent={"center"} className={styles.loginWrapper}>
           {component === "login" && (

@@ -118,7 +118,6 @@ const SearchBar = () => {
     </div>
   );
 
-       
   return (
     <>
       <Grid container marginLeft={10}>
@@ -153,6 +152,12 @@ const SearchBar = () => {
         </Grid>{" "}
         <Grid item sm={3}>
           <Button
+            style={{
+              borderRadius: "2px 10px 10px 0px",
+              backgroundColor: "black",
+              padding: "9px 25px",
+              color: "white",
+            }}
             onClick={handleSearchBtn}
             className={styles.searchBtn}
             disableElevation

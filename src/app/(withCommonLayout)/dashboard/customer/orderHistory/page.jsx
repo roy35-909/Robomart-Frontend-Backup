@@ -1,3 +1,4 @@
+"use client"
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import { Container, IconButton, Tooltip, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
@@ -8,10 +9,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
-import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { backendUrl } from "../../../../utils/backendApiUrlProvider";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import styles from "./OrderHistory.module.scss";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -50,8 +51,6 @@ const OrderHistory = () => {
       .then((res) => res.json())
       .then((data) => setOrderData(data));
   }, []);
-
-  
 
   return (
     <div style={{ minHeight: "70vh" }}>
@@ -122,11 +121,14 @@ const OrderHistory = () => {
                       >
                         {/* <Typography variant="subtitle3"> */}
                         <div>
-                          {order?.items?.map((product) => (
+                          {order?.items?.map((product, idx) => (
                             <Link
-                              to={`/product/${
+                              key={idx}
+                              href={`/product/${
                                 product?.product?.id
-                              }/${product?.product?.name?.replace(/ /g, "_")}`}
+                              }/${product?.product?.name
+                                ?.replace(/ /g, "_")
+                                .replace(/%/g, "percent")}`}
                             >
                               <span style={{ margin: "0px 5px" }}>
                                 {product?.product?.name}
@@ -165,15 +167,15 @@ const OrderHistory = () => {
                           {" "}
                           <Tooltip title="Details">
                             <IconButton aria-label="Details" size="large">
-                              <NavLink
-                                to={`/dashboard/user/order_history/${order?.id}`}
+                              <Link
+                                href={`/dashboard/customer/orderHistory/${order?.id}`}
                               >
                                 {" "}
                                 <ReadMoreIcon
                                   fontSize="inherit"
                                   style={{ color: "green" }}
                                 />
-                              </NavLink>
+                              </Link>
                             </IconButton>
                           </Tooltip>
                           {/* <Tooltip title="Delete">

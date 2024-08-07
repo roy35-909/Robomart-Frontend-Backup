@@ -131,10 +131,9 @@ const SingleProductCard = ({ product }) => {
         </Box>
         <CardContent className={styles.cardContent}>
           <Link
-            href={`/product/${product?.id}/${(product?.name).replace(
-              / /g,
-              "_"
-            )}`}
+            href={`/product/${product?.id}/${(product?.name)
+              .replace(/ /g, "_")
+              .replace(/%/g, "percent")}`}
             className={styles.title}
             style={{ height: "30px", overflow: "hidden" }}
           >

@@ -93,7 +93,7 @@ const AvaterBtnMeny = ({ data }) => {
           </Link>
           <Divider />
           <Link
-            href="/shopping-cart"
+            href="/shoppingCart"
             style={{ textDecoration: "none", color: "black" }}
           >
             <MenuItem onClick={handleCloseUserMenu}>

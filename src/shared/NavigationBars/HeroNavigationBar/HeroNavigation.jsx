@@ -135,7 +135,7 @@ const HeroNavigation = () => {
             >
               {data?.email && (
                 <ThemeProvider theme={theme}>
-                  <Link href="/shopping-cart">
+                  <Link href="/shoppingCart">
                     <Badge
                       color={"black"}
                       className={styles.iconBadge}

@@ -52,7 +52,7 @@ const NavigationDrawer = () => {
             className={styles.drawerListItem}
             onClick={toggleDrawer}
           >
-            <Link href={"/shopping-cart"} className={styles.iLink}>
+            <Link href={"/shoppingCart"} className={styles.iLink}>
               <ShoppingCartIcon />
               Cart
             </Link>

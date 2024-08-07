@@ -12,22 +12,22 @@ import {
 } from "@mui/material";
 
 import {
+  useGetCartQuery,
+  useGetUserProfileQuery,
+  useGetUserQuery,
+  usePostOrderMutation,
+} from "@/redux/api/api";
+import {
   getAllDistrict,
   getAllDivision,
   getAllUnion,
   getAllUpazila,
 } from "bd-divisions-to-unions";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import {
-  useGetCartQuery,
-  useGetUserProfileQuery,
-  useGetUserQuery,
-  usePostOrderMutation,
-} from "../../redux/api/api";
 import BillingOptions from "./BillingOptions";
 import styles from "./CheckOut.module.scss";
 import FormAddressFieldCheckout from "./FormAddressFieldCheckout";
@@ -58,7 +58,7 @@ const CheckOutPage = () => {
   const { data, isLoading, isError } = useGetUserQuery();
   const { data: cartData } = useGetCartQuery();
   const [user, setUser] = useState({});
-  const navigate = useNavigate();
+  const router = useRouter();
   //when reload page this data remove from redux so we redirect it previous page
   useEffect(() => {
     if (
@@ -66,8 +66,9 @@ const CheckOutPage = () => {
       checkoutData?.cupon === "" &&
       checkoutData?.useBalance === false
     ) {
-      navigate("/shopping-cart");
+      router.push("/shoppingCart");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkoutData?.delivery, checkoutData?.cupon, checkoutData?.useBalance]);
 
   const [
@@ -79,7 +80,7 @@ const CheckOutPage = () => {
       error: postOrderErrors,
     },
   ] = usePostOrderMutation();
-  
+
   const {
     register,
     control,
@@ -91,7 +92,7 @@ const CheckOutPage = () => {
   } = useForm({});
   useEffect(() => {
     if (!data && !isLoading) {
-      navigate("/login");
+      router.push("/auth/login");
       Swal.fire({
         position: "top-center",
         icon: "warning",
@@ -101,6 +102,7 @@ const CheckOutPage = () => {
       });
     }
     setUser(data);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   if (isLoading) {
@@ -240,7 +242,7 @@ const CheckOutPage = () => {
       showConfirmButton: false,
       timer: 5000,
     });
-    navigate("/");
+    router.push("/");
   }
 
   return (

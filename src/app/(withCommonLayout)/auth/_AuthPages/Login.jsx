@@ -111,7 +111,7 @@ const Login = ({ showPass, setShowPass }) => {
             />
           </form>
           <p style={{ textAlign: "center", marginBottom: "10px" }}>- or -</p>
-          {/* <LoginWithGoogle /> */}
+          <LoginWithGoogle />
           <p style={{ margin: "15px 0px" }}>
             Forget your password ?
             <Link href={"/auth/forgotpassword"}>Click Here</Link>

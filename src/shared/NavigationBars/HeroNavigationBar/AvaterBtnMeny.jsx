@@ -84,7 +84,7 @@ const AvaterBtnMeny = ({ data }) => {
           onClose={handleCloseUserMenu}
         >
           <Link
-            href="/dashboard/user/profile"
+            href="/dashboard/customer/profile"
             style={{ textDecoration: "none", color: "black" }}
           >
             <MenuItem onClick={handleCloseUserMenu}>
@@ -102,7 +102,7 @@ const AvaterBtnMeny = ({ data }) => {
           </Link>
           <Divider />
           <Link
-            href="/dashboard/user/order_history"
+            href="/dashboard/customer/orderHistory"
             style={{ textDecoration: "none", color: "black" }}
           >
             <MenuItem onClick={handleCloseUserMenu}>

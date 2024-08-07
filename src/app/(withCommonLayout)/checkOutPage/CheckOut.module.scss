@@ -1,0 +1,41 @@
+.checkout_wrapper {
+  width: 100%;
+}
+.auth_label {
+  font-family: "Roboto";
+  color: #000000;
+}
+.auth_form_inputField {
+  width: 95%;
+  height: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  &:focus-visible {
+    outline: 1px solid var(--primaryColor);
+  }
+}
+ .form_submitBtn {
+        font-size: 16px;
+        background-color: var(--primaryColor);
+        font-family: var(--secondaryFont);
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        color: #fff;
+        margin: 20px 0px;
+        width: 100%;
+        padding: 10px 40px;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          background-color: green;
+          cursor: pointer;
+        }
+      }
+@media screen and (max-width: 900px) {
+  .billMPGrid {
+    flex-direction: column-reverse;
+  }
+}

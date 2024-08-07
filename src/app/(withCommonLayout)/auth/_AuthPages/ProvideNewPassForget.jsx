@@ -12,17 +12,15 @@ import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { backendUrl } from "../../utils/backendApiUrlProvider";
+import { useRouter } from "next/navigation";
 const errorNotify = () => toast.error("Password not match !");
-const ProvideNewPassForget = () => {
+const ProvideNewPassForget = ({ params }) => {
+  const router = useRouter();
   const [loading, setIsLoading] = useState(false);
-  const params = useParams();
-  const location = useLocation();
-  const navigate = useNavigate();
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -41,7 +39,6 @@ const ProvideNewPassForget = () => {
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
   };
-  console.log(params);
   const test = "";
   const submitNewPassword = (password) => {
     setIsLoading(true);
@@ -64,7 +61,7 @@ const ProvideNewPassForget = () => {
             showConfirmButton: false,
             timer: 3000,
           });
-          navigate("/auth/login");
+          router.push("/auth/login");
         } else {
           Swal.fire({
             position: "center",
@@ -73,7 +70,7 @@ const ProvideNewPassForget = () => {
             showConfirmButton: false,
             timer: 3000,
           });
-          navigate("/auth/forget_password");
+          router.push("/auth/forget_password");
         }
       });
   };

@@ -8,7 +8,6 @@ import styles from "./ProductSearch.module.scss";
 
 export default function ProductSearch({ params }) {
   const searchTerm = params?.slug[0];
-  console.log(searchTerm);
 
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(retrieveAndDecryptData());
@@ -20,7 +19,6 @@ export default function ProductSearch({ params }) {
     const filteredSuggestions = data?.filter((product) =>
       product?.name?.toLowerCase().includes(searchTerm?.toLowerCase())
     );
-
     setProducts(filteredSuggestions);
     setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -50,7 +48,7 @@ export default function ProductSearch({ params }) {
           </div>
         ) : (
           <>
-            {products?.length === 0 && (
+            {products?.length === 0 &&!loading&& (
               <Typography
                 variant="h5"
                 style={{ textAlign: "center", padding: "5vh 0" }}

@@ -16,7 +16,16 @@ const CategoryProducts = () => {
           <CategoryWiseProductLoading />
         </>
       ) : (
-        <Suspense fallback={<div>Loading Category Products...</div>}>
+        <Suspense
+          fallback={
+            <div>
+              {" "}
+              <CategoryWiseProductLoading />
+              <CategoryWiseProductLoading />
+              <CategoryWiseProductLoading />
+            </div>
+          }
+        >
           {" "}
           {homeData?.catagory?.map((category, idx) => (
             <SingleCategoryProducts

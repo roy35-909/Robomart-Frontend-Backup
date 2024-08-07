@@ -1,12 +1,13 @@
-"use client"
+"use client";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Container, Grid, Typography } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "../OrderHistory.module.scss";
-import { backendUrl } from "@/utils/backendApiUrlProvider";
-import Link from "next/link";
 
-const SingleOrderDetailsPage = ({params}) => {
+const SingleOrderDetailsPage = ({ params }) => {
   const pathName = usePathname();
   // const [isAdmin, setIsAdmin] = useState(
   //   pathName?.includes("portal_admin") ? true : false
@@ -138,12 +139,12 @@ const SingleOrderDetailsPage = ({params}) => {
                   </thead>
                   <tbody>
                     <>
-                      {orderData?.items?.map((item,idx) => (
+                      {orderData?.items?.map((item, idx) => (
                         <tr key={idx}>
                           <td>
                             <div className={styles.product}>
                               <div className={styles.imgDiv}>
-                                <img
+                                <Image
                                   src={
                                     item?.product?.photo
                                       ? `${item?.product?.photo}`
@@ -151,12 +152,16 @@ const SingleOrderDetailsPage = ({params}) => {
                                   }
                                   alt="product_photo"
                                   className={styles.imgCard}
+                                  width={100}
+                                  height={100}
                                 />
                               </div>
                               <Link
                                 href={`/product/${
                                   item?.product?.id
-                                }/${(item?.product?.name).replace(/ /g, "_").replace(/%/g, "percent")}`}
+                                }/${(item?.product?.name)
+                                  .replace(/ /g, "_")
+                                  .replace(/%/g, "percent")}`}
                               >
                                 {item?.product?.name}
                               </Link>

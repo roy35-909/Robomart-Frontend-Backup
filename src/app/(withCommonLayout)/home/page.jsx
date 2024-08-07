@@ -1,5 +1,9 @@
 "use client";
+import { useGetHomeDataQuery } from "@/redux/api/api";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
+import { encryptAndStoreData } from "@/utils/encript";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import CategoryProducts from "./_sections/CategoryWiseProducts/CategoryProducts";
 import Hero from "./_sections/HeroSection/Hero";
 import OurCorporateClients from "./_sections/OurSupplierPartner/OurCorporateClients";
@@ -8,6 +12,26 @@ import TopBlogs from "./_sections/TopBlogs/TopBlogs";
 import TopTutorial from "./_sections/TopTutorial/TopTutorial";
 
 const Home = () => {
+  const [reFetch, setRefetch] = useState(false);
+  const { data: homeData, isLoading, isError, error } = useGetHomeDataQuery();
+
+  useEffect(() => {
+    if (error?.status === 401 && !isLoading) {
+      localStorage.removeItem("user");
+      window.location.reload();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error]);
+
+  useEffect(() => {
+    if (homeData) {
+      fetch(`${backendUrl}/api/products`)
+        .then((res) => res.json())
+        .then((data) => {
+          encryptAndStoreData(data);
+        });
+    }
+  }, [homeData]);
   return (
     <>
       <Head>

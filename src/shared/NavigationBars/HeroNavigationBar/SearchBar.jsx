@@ -1,11 +1,11 @@
-// "use client";
+"use client";
 import { Button, Divider, Grid, Typography } from "@mui/material";
 
+import { useGetAllProductsQuery } from "@/redux/api/api";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Autosuggest from "react-autosuggest";
-import { useGetAllProductsQuery } from "@/redux/api/api";
 import styles from "./HeroNavigation.module.scss";
 // Custom CSS for suggestion box
 const suggestionBoxStyle = {
@@ -56,7 +56,7 @@ const SearchBar = () => {
 
   const handleSearchBtn = () => {
     if (query !== "") {
-      router.push(`/products/search=/${query}`);
+      router.push(`/searchProducts/${query}`);
     }
   };
   const handleKeyDown = (event) => {
@@ -73,10 +73,9 @@ const SearchBar = () => {
       <div
         onClick={() =>
           goTODetails(
-            `/product/${suggestion?.id}/${(suggestion?.name).replace(
-              / /g,
-              "_"
-            )}`
+            `/product/${suggestion?.id}/${(suggestion?.name)
+              .replace(/ /g, "_")
+              .replace(/%/g, "percent")}`
           )
         }
         style={{
@@ -85,7 +84,14 @@ const SearchBar = () => {
           alignItems: "center",
         }}
       >
-        <Image src={`${suggestion.photo}`} alt={suggestion.name} width="75" />
+        <Image
+          src={`${
+            suggestion?.photo ? suggestion?.photo : "/assets/no-img.jpg"
+          }`}
+          alt={suggestion.name}
+          width="75"
+          height={"75"}
+        />
         <div style={{ marginLeft: "20px" }}>
           {" "}
           <Typography
@@ -112,6 +118,7 @@ const SearchBar = () => {
     </div>
   );
 
+       
   return (
     <>
       <Grid container marginLeft={10}>
@@ -133,7 +140,7 @@ const SearchBar = () => {
             }}
             suggestions={suggestions}
             onSuggestionSelected={handleSuggestionSelected}
-            getSuggestionValue={(suggestion) => suggestion.name}
+            getSuggestionValue={(suggestion) => suggestion?.name}
             renderSuggestion={renderSuggestion}
             onKeyDown={handleKeyDown}
             theme={{

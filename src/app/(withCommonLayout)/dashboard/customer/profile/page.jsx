@@ -28,7 +28,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import styles from "./Profile.module.scss";
-import FormAddressFieldCheckout from "@/app/(withCommonLayout)/checkOutPage/FormAddressFieldCheckout";
+import FormAddressFieldCheckout from "@/app/(withCommonLayout)/checkOut/FormAddressFieldCheckout";
 const Profile = () => {
   const { data, isLoading, isError } = useGetUserQuery();
 

@@ -45,7 +45,7 @@ const AvaterBtnMeny = ({ data }) => {
 
   const handleSearch = () => {
     // Add your search logic here
-    navigate(`/products/search=/${query}`);
+    router.push(`/products/search=/${query}`);
     handleCloseUserMenu();
     setQuery("");
   };

@@ -1,6 +1,7 @@
+"use client"
 import { Container, Divider, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { useGetCartQuery } from "../../redux/api/api";
+import { useGetCartQuery } from "@/redux/api/api";
 import CheckOutPageForm from "./CheckOutPageForm";
 const CheckOutPage = () => {
   const [formData, setFormData] = useState({});

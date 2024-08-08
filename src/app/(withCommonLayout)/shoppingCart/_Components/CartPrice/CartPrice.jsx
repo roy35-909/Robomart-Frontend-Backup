@@ -111,7 +111,7 @@ const CartPrice = ({ isDataChange }) => {
 
   const handleNavigateCheckout = () => {
     setDataForCheckOut();
-    navigate("/checkOut");
+    router.push("/checkOut");
   };
 
   // useEffect(() => {

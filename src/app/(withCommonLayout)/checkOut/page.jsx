@@ -1,7 +1,7 @@
-"use client"
-import { Container, Divider, Typography } from "@mui/material";
-import React, { useState } from "react";
+"use client";
 import { useGetCartQuery } from "@/redux/api/api";
+import { Container, Divider, Typography } from "@mui/material";
+import { useState } from "react";
 import CheckOutPageForm from "./CheckOutPageForm";
 const CheckOutPage = () => {
   const [formData, setFormData] = useState({});
@@ -11,7 +11,7 @@ const CheckOutPage = () => {
     : 0;
   return (
     <>
-      <Container style={{ marginTop: "5vh"}}>
+      <Container style={{ marginTop: "5vh" }}>
         <Typography
           variant="h5"
           style={{
@@ -25,7 +25,7 @@ const CheckOutPage = () => {
         <Divider />
       </Container>
       {cartCount === 0 ? (
-        <div style={{minHeight:"50vh"}}>
+        <div style={{ minHeight: "50vh" }}>
           <Typography
             variant="h5"
             style={{

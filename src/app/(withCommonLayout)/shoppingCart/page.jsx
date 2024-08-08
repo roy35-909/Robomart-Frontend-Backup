@@ -52,7 +52,7 @@ const ShoppingCartPage = () => {
                 fontFamily: "Poppins",
               }}
             >
-              Your cart is empty🛒
+              Your cart is empty 
             </Typography>
           </>
         ) : (

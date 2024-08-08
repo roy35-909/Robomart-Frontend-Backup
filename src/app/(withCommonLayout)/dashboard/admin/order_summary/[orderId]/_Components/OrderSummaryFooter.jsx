@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import React from "react";
-import { useGetHomeDataQuery } from "../../../../../redux/api/api";
+import { useGetHomeDataQuery } from "@/redux/api/api";
 
 const OrderSummaryFooter = () => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();

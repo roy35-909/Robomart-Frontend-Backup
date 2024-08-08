@@ -1,8 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
+import { useGetHomeDataQuery } from "@/redux/api/api";
 import { Grid, Typography } from "@mui/material";
-import React from "react";
 import Barcode from "react-barcode";
-import { useParams } from "react-router-dom";
-import { useGetHomeDataQuery } from "../../../../../redux/api/api";
 
 function insertNewlineAfterThreeWords(inputString) {
   // Split the input string into an array of words
@@ -28,7 +27,7 @@ function insertNewlineAfterThreeWords(inputString) {
   return outputString;
 }
 
-const OrderSummaryHeader2 = ({ ordersInfo, customerInfo }) => {
+const PayBillHeader = ({ ordersInfo }) => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
@@ -40,25 +39,24 @@ const OrderSummaryHeader2 = ({ ordersInfo, customerInfo }) => {
     return `${day}/${month}/${year}`;
   };
 
-  const params = useParams();
-  console.log(ordersInfo);
   return (
     <div>
       <Grid container>
-        <Grid item xs={5}>
+        <Grid item xs={4}>
           <div>
             <img src="/assets/logo2.png" alt="" width={"200px"} srcset="" />
           </div>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={3}>
           {" "}
           <Typography
             style={{ marginTop: "10px" }}
-            variant="h4"
+            variant="h5"
             fontFamily={"Poppins"}
             fontWeight={"bold"}
+            textAlign={"center"}
           >
-            Invoice
+            Delivery Slip
           </Typography>
         </Grid>
         <Grid item xs={5} display={"flex"} justifyContent={"center"}>
@@ -143,6 +141,10 @@ const OrderSummaryHeader2 = ({ ordersInfo, customerInfo }) => {
           </Grid>
         </Grid>
         <Grid item xs={5}>
+          {/* <Barcode
+            value={`#INV${ordersInfo?.invoiceId ? ordersInfo?.invoiceId : ""}`}
+            height={50}
+          /> */}
           <Grid container>
             <Grid item xs={6}>
               <Typography
@@ -187,8 +189,7 @@ const OrderSummaryHeader2 = ({ ordersInfo, customerInfo }) => {
               </Typography>
               <br />
               <Typography variant="subtitle2" fontFamily={"Poppins"}>
-                Status : {ordersInfo?.invoiceId?.status}
-                <br />
+                Status :{ordersInfo?.invoiceId?.status} <br />
                 Option: {ordersInfo?.billing_option} <br />
                 Method: {ordersInfo?.payment_method}
                 <br />
@@ -204,4 +205,4 @@ const OrderSummaryHeader2 = ({ ordersInfo, customerInfo }) => {
   );
 };
 
-export default OrderSummaryHeader2;
+export default PayBillHeader;

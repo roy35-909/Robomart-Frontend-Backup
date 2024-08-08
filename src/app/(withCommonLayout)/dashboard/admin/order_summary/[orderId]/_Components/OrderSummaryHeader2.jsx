@@ -1,8 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 import { Grid, Typography } from "@mui/material";
 import React from "react";
 import Barcode from "react-barcode";
-import { useParams } from "react-router-dom";
-import { useGetHomeDataQuery } from "../../../../../redux/api/api";
+import { useGetHomeDataQuery } from "@/redux/api/api";
 
 function insertNewlineAfterThreeWords(inputString) {
   // Split the input string into an array of words
@@ -28,7 +28,7 @@ function insertNewlineAfterThreeWords(inputString) {
   return outputString;
 }
 
-const PayBillHeader = ({ ordersInfo }) => {
+const OrderSummaryHeader2 = ({ ordersInfo, }) => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
@@ -40,26 +40,23 @@ const PayBillHeader = ({ ordersInfo }) => {
     return `${day}/${month}/${year}`;
   };
 
-  const params = useParams();
-
   return (
     <div>
       <Grid container>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <div>
             <img src="/assets/logo2.png" alt="" width={"200px"} srcset="" />
           </div>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           {" "}
           <Typography
             style={{ marginTop: "10px" }}
-            variant="h5"
+            variant="h4"
             fontFamily={"Poppins"}
             fontWeight={"bold"}
-            textAlign={"center"}
           >
-            Delivery Slip
+            Invoice
           </Typography>
         </Grid>
         <Grid item xs={5} display={"flex"} justifyContent={"center"}>
@@ -144,10 +141,6 @@ const PayBillHeader = ({ ordersInfo }) => {
           </Grid>
         </Grid>
         <Grid item xs={5}>
-          {/* <Barcode
-            value={`#INV${ordersInfo?.invoiceId ? ordersInfo?.invoiceId : ""}`}
-            height={50}
-          /> */}
           <Grid container>
             <Grid item xs={6}>
               <Typography
@@ -192,7 +185,8 @@ const PayBillHeader = ({ ordersInfo }) => {
               </Typography>
               <br />
               <Typography variant="subtitle2" fontFamily={"Poppins"}>
-                Status :{ordersInfo?.invoiceId?.status} <br />
+                Status : {ordersInfo?.invoiceId?.status}
+                <br />
                 Option: {ordersInfo?.billing_option} <br />
                 Method: {ordersInfo?.payment_method}
                 <br />
@@ -208,4 +202,4 @@ const PayBillHeader = ({ ordersInfo }) => {
   );
 };
 
-export default PayBillHeader;
+export default OrderSummaryHeader2;

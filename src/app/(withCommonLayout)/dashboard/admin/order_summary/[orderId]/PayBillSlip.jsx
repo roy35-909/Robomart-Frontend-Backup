@@ -1,15 +1,11 @@
-import CreditScore from "@mui/icons-material/CreditScore";
 import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
-import { Button, Container, Divider } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
-import { backendUrl } from "../../../../utils/backendApiUrlProvider";
-import OrderSummaryFooter from "./Components/OrderSummaryFooter";
-import OrderSummaryHeader from "./Components/OrderSummaryHeader";
-import OrderSummaryProducts from "./Components/OrderSummaryProducts";
-import OrderSummaryHeader2 from "./Components/OrderSummaryHeader2";
-const OrderSummaryPrint = () => {
-  const params = useParams();
+import { Button, CircularProgress, Container, Divider } from "@mui/material";
+import { useEffect, useState } from "react";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
+import OrderSummaryFooter from "./_Components/OrderSummaryFooter";
+import PayBillHeader from "./_Components/PayBillHeader";
+import PayBillProduct from "./_Components/PayBillProduct";
+const PayBillSlip = ({params}) => {
   const [orderData, setOrderData] = useState({});
   const [allUserData, setAllUserData] = useState([]);
   const [customerData, setCustomerData] = useState({});
@@ -40,6 +36,7 @@ const OrderSummaryPrint = () => {
   useEffect(() => {
     const customer = allUserData?.find((item) => item?.id === orderData?.user);
     setCustomerData(customer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allUserData]);
 
   useEffect(() => {
@@ -55,9 +52,9 @@ const OrderSummaryPrint = () => {
       .then((res) => res.json())
       .then((data) => {
         setOrderData(data);
-        /* if (data?.user) {
+        if (data?.user) {
           getCustomerInfo();
-        } */
+        }
       });
   }, [params]);
 
@@ -70,25 +67,7 @@ const OrderSummaryPrint = () => {
           padding: "5vh 0",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            margin: "10px 0",
-            justifyContent: "space-between",
-          }}
-        >
-          <NavLink to={`/dashboard/admin/bill/${params?.orderId}`}>
-            <Button
-              startIcon={<CreditScore />}
-              variant="contained"
-              disableElevation
-              marginY={2}
-              style={{ backgroundColor: "green" }}
-            >
-              Delivery Bill Slip
-            </Button>
-          </NavLink>
-
+        <div style={{ textAlign: "right", margin: "10px 0" }}>
           <Button
             startIcon={<LocalPrintshopIcon />}
             variant="contained"
@@ -100,23 +79,24 @@ const OrderSummaryPrint = () => {
             Print
           </Button>
         </div>
-        <div
-          style={{ border: "1px dashed #e2e2e2", padding: "10px" }}
-          id="printAbleArea"
-        >
-          <OrderSummaryHeader2
-            ordersInfo={orderData}
-            // customerInfo={customerData}
-          />
-          <Divider color={"black"} />
-          <div>
-            <OrderSummaryProducts ordersInfo={orderData} />
+        {!orderData?.invoiceId?.id ? (
+          <CircularProgress />
+        ) : (
+          <div
+            style={{ border: "1px dashed #e2e2e2", padding: "10px" }}
+            id="printAbleArea"
+          >
+            <PayBillHeader ordersInfo={orderData} customerInfo={customerData} />
+            <Divider color={"black"} />
+            <div>
+              <PayBillProduct ordersInfo={orderData} />
+            </div>
+            <OrderSummaryFooter />
           </div>
-          <OrderSummaryFooter />
-        </div>
+        )}
       </Container>
     </>
   );
 };
 
-export default OrderSummaryPrint;
+export default PayBillSlip;

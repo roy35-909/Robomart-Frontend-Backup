@@ -1,24 +1,23 @@
+/* eslint-disable @next/next/no-img-element */
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import * as React from "react";
 
 const PayBillProduct = ({ ordersInfo }) => {
   const subTotal = ordersInfo?.items?.reduce(
     (acc, product) => acc + product.price,
     0
   );
- 
+
   return (
     <div>
       {" "}
       <TableContainer style={{ borderBottom: "1px solid black" }}>
         <Table sx={{ minWidth: 700 }} aria-label="spanning table">
           <TableHead>
-            
             <TableRow>
               <TableCell>Sl no </TableCell>
               <TableCell>Product Code</TableCell>
@@ -58,7 +57,6 @@ const PayBillProduct = ({ ordersInfo }) => {
                 {/* <TableCell align="right">{row?.price}</TableCell> */}
               </TableRow>
             ))}
-            
           </TableBody>
         </Table>
       </TableContainer>

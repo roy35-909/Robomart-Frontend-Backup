@@ -149,7 +149,7 @@ const SinglePendingOrderRow = ({ pendingOrder }) => {
               >
                 <Tooltip title="Details">
                   <Link
-                    href={`/dashboard/admin/orderHistory/${pendingOrder?.id}`}
+                    href={`/dashboard/admin/orderDetails/${pendingOrder?.id}`}
                   >
                     <IconButton aria-label="Details" size="large">
                       <ReadMoreIcon

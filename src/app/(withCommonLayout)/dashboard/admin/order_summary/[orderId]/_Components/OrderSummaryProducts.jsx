@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";

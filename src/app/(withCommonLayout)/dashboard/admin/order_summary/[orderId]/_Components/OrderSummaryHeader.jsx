@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Grid, Typography } from "@mui/material";
 import React from "react";
 import Barcode from "react-barcode";

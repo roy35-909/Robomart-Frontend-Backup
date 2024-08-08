@@ -1,16 +1,17 @@
+"use client"
+/* eslint-disable @next/next/no-img-element */
 import { Container, Grid, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
-import { backendUrl } from "../../../../utils/backendApiUrlProvider";
-import styles from "./OrderHistory.module.scss";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
+import styles from "./OrderHistory.module.scss";
 
-const SingleOrderDetailsPage2 = () => {
+const SingleOrderDetailsPage2 = ({ params }) => {
   const pathName = usePathname();
   const [isAdmin, setIsAdmin] = useState(
-    pathname?.includes("admin") ? true : false
+    pathName?.includes("admin") ? true : false
   );
-  const params = useParams();
   const [orderData, setOrderData] = useState({});
 
   useEffect(() => {
@@ -137,8 +138,8 @@ const SingleOrderDetailsPage2 = () => {
                   </thead>
                   <tbody>
                     <>
-                      {orderData?.items?.map((item) => (
-                        <tr>
+                      {orderData?.items?.map((item, idx) => (
+                        <tr key={idx}>
                           <td>
                             <div className={styles.product}>
                               <div className={styles.imgDiv}>
@@ -153,9 +154,11 @@ const SingleOrderDetailsPage2 = () => {
                                 />
                               </div>
                               <Link
-                                to={`/product/${
+                                href={`/product/${
                                   item?.product?.id
-                                }/${(item?.product?.name).replace(/ /g, "_")}`}
+                                }/${(item?.product?.name)
+                                  .replace(/ /g, "_")
+                                  .replace(/%/g, "percent")}`}
                               >
                                 {item?.product?.name}
                               </Link>

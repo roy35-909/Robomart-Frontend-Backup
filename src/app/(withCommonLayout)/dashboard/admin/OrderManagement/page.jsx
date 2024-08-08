@@ -1,14 +1,15 @@
+"use client"
 import { Container, Divider, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import ActiveOrders from "./Components/ActiveOrders/ActiveOrders";
-import CompleteOrders from "./Components/CompleteOrders/CompleteOrders";
-import PendingOrders from "./Components/PendingOrders/PendingOrders";
-import AllReturn from "./Components/ReturnOrders/AllReturn";
-import AllSuccess from "./Components/SuccessOrders/AllSuccess";
+import ActiveOrders from "./_Components/ActiveOrders/ActiveOrders";
+import CompleteOrders from "./_Components/CompleteOrders/CompleteOrders";
+import PendingOrders from "./_Components/PendingOrders/PendingOrders";
+import AllReturn from "./_Components/ReturnOrders/AllReturn";
+import AllSuccess from "./_Components/SuccessOrders/AllSuccess";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -23,7 +24,7 @@ function CustomTabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <>{children}</>
         </Box>
       )}
     </div>

@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { backendUrl } from "../../../../utils/backendApiUrlProvider";
 import styles from "./OrderHistory.module.scss";
+import { usePathname } from "next/navigation";
 
 const SingleOrderDetailsPage2 = () => {
-  const location = useLocation();
+  const pathName = usePathname();
   const [isAdmin, setIsAdmin] = useState(
-    location?.pathname?.includes("portal_admin") ? true : false
+    pathname?.includes("admin") ? true : false
   );
   const params = useParams();
   const [orderData, setOrderData] = useState({});

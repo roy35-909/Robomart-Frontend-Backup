@@ -3,9 +3,9 @@ import { IconButton, Tooltip, Typography } from "@mui/material";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
-import React, { useState } from "react";
+import Link from "next/link";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import { NavLink } from "react-router-dom";
 import styles from "../../OrderManagement.module.scss";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,7 +32,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const successNotify = () => toast.success("Successfully status changed !");
 const errorNotify = () => toast.error("Something went wrong !");
 
-const SingleSuccess = ({ activeOrder }) => {
+const SingleReturn = ({ activeOrder }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [check, setCheck] = useState(false);
@@ -44,7 +44,7 @@ const SingleSuccess = ({ activeOrder }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  console.log(activeOrder);
+
   return (
     <>
       <StyledTableRow>
@@ -73,10 +73,10 @@ const SingleSuccess = ({ activeOrder }) => {
             style={{
               fontWeight: "bold",
               fontSize: "16px",
-              color: "green",
+              color: "#c79d01",
             }}
           >
-            Success
+            Return
           </span>
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
@@ -87,16 +87,14 @@ const SingleSuccess = ({ activeOrder }) => {
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <Tooltip title="Details">
-              <NavLink
-                to={`/dashboard/portal_admin/order_summary/${activeOrder?.id}`}
-              >
+              <Link href={`/dashboard/admin/order_summary/${activeOrder?.id}`}>
                 <IconButton aria-label="Details" size="large">
                   <ReadMoreIcon
                     fontSize="inherit"
                     style={{ color: "#007FFF" }}
                   />
                 </IconButton>
-              </NavLink>
+              </Link>
             </Tooltip>
           </div>
         </StyledTableCell>
@@ -105,4 +103,4 @@ const SingleSuccess = ({ activeOrder }) => {
   );
 };
 
-export default SingleSuccess;
+export default SingleReturn;

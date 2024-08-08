@@ -77,7 +77,7 @@ const OrderSummaryPrint = () => {
             justifyContent: "space-between",
           }}
         >
-          <NavLink to={`/dashboard/portal_admin/bill/${params?.orderId}`}>
+          <NavLink to={`/dashboard/admin/bill/${params?.orderId}`}>
             <Button
               startIcon={<CreditScore />}
               variant="contained"

@@ -1,3 +1,4 @@
+"use client"
 import { CircularProgress, TextField } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -8,8 +9,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
-import { useGetActivesOrdersQuery } from "../../../../../../redux/api/api";
-import SingleActiveOrderRow from "./SingleActiveOrderRow";
+import { useGetSuccessOrdersQuery } from "@/redux/api/api";
+import SingleSuccess from "./SingleSuccess";
+// import SingleActiveOrderRow from "./SingleActiveOrderRow";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -31,17 +33,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
-const ActiveOrders = () => {
+const AllSuccess = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredOrders, setFilteredOrders] = useState([]);
   const {
-    data: activeOrdersData,
+    data: successOrdersData,
     isLoading,
     isError,
-  } = useGetActivesOrdersQuery();
+  } = useGetSuccessOrdersQuery();
+
   const handleSearch = () => {
-    const filtered = activeOrdersData?.filter((order) => {
+    const filtered = successOrdersData?.filter((order) => {
       const orderId = order?.id?.toString();
       const email = order?.user?.email?.toString()?.toLowerCase();
 
@@ -55,7 +57,9 @@ const ActiveOrders = () => {
   };
   useEffect(() => {
     handleSearch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
+console.log(successOrdersData);
 
   return (
     <div style={{ minHeight: "70vh" }}>
@@ -73,35 +77,36 @@ const ActiveOrders = () => {
           placeholder="Search by Order Id, Email, or Phone Number"
         />
       </div>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 1000 }} aria-label="customized table">
-          <TableHead style={{ backgroundColor: "#f2f2f2" }}>
-            <TableRow>
-              <StyledTableCell align="left">Order Id</StyledTableCell>
-              <StyledTableCell align="left">Date</StyledTableCell>
-              <StyledTableCell align="left">User Email</StyledTableCell>
-              <StyledTableCell align="left">Contact</StyledTableCell>
-              <StyledTableCell align="left">Delivery Address</StyledTableCell>
-              <StyledTableCell align="left">Status</StyledTableCell>
-              <StyledTableCell align="left">Total</StyledTableCell>
-              <StyledTableCell align="left">
-                Details/Update Status
-              </StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {isLoading && <CircularProgress />}
-            {(filteredOrders?.length > 0
-              ? filteredOrders
-              : activeOrdersData
-            )?.map((activeOrder) => (
-              <SingleActiveOrderRow activeOrder={activeOrder} />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 1000 }} aria-label="customized table">
+            <TableHead style={{ backgroundColor: "#f2f2f2" }}>
+              <TableRow>
+                <StyledTableCell align="left">Order Id</StyledTableCell>
+                <StyledTableCell align="left">Date</StyledTableCell>
+                <StyledTableCell align="left">User Email</StyledTableCell>
+                <StyledTableCell align="left">Contact</StyledTableCell>
+                <StyledTableCell align="left">Delivery Address</StyledTableCell>
+                <StyledTableCell align="left">Status</StyledTableCell>
+                <StyledTableCell align="left">Total</StyledTableCell>
+                <StyledTableCell align="left">Invoice</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {(filteredOrders?.length > 0
+                ? filteredOrders
+                : successOrdersData
+              )?.map((activeOrder, idx) => (
+                <SingleSuccess key={idx} activeOrder={activeOrder} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
     </div>
   );
 };
 
-export default ActiveOrders;
+export default AllSuccess;

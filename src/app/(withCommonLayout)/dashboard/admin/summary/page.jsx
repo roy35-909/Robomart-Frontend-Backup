@@ -1,7 +1,8 @@
+"use client"
 import { Container, Divider, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import MonthlyBar from "./Components/MonthlyBar";
-import { backendUrl } from "../../../../utils/backendApiUrlProvider";
+import MonthlyBar from "./_Components/MonthlyBar";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 
 const AdminDashboard = () => {
   const [dashboardData, setDashboardData] = useState({});

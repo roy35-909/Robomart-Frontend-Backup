@@ -1,3 +1,7 @@
+import {
+  useDeletePendingOrderStatusMutation,
+  useUpdateDeliveredOrderStatusMutation,
+} from "@/redux/api/api";
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import ReplyAllIcon from "@mui/icons-material/ReplyAll";
 import { IconButton, Tooltip, Typography } from "@mui/material";
@@ -5,13 +9,9 @@ import Button from "@mui/material/Button";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
-import React, { useState } from "react";
+import Link from "next/link";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import { NavLink } from "react-router-dom";
-import {
-  useDeletePendingOrderStatusMutation,
-  useUpdateDeliveredOrderStatusMutation,
-} from "../../../../../../redux/api/api";
 import styles from "../../OrderManagement.module.scss";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -134,14 +134,14 @@ const CompleteOrdersSingleRow = ({ deliveredOrder }) => {
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <Tooltip title="Details">
-              <NavLink
-                to={`/dashboard/portal_admin/order_summary/${deliveredOrder?.id}`}
+              <Link
+                href={`/dashboard/admin/order_summary/${deliveredOrder?.id}`}
               >
                 <IconButton aria-label="Details" size="large">
                   {" "}
                   <ReadMoreIcon fontSize="inherit" style={{ color: "green" }} />
                 </IconButton>{" "}
-              </NavLink>
+              </Link>
             </Tooltip>
 
             <Button

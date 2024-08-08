@@ -17,7 +17,7 @@ import {
 } from "recharts";
 
 import { useState } from "react";
-import { backendUrl } from "../../../../../utils/backendApiUrlProvider";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -154,8 +154,9 @@ const MonthlyBar = () => {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {yearsArray?.map((year) => (
+          {yearsArray?.map((year,id) => (
             <MenuItem
+              key={id}
               value={year}
               style={{ borderBottom: "1px solid #e2e2e2" }}
             >

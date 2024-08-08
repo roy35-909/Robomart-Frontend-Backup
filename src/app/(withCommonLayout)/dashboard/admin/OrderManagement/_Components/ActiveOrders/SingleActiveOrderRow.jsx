@@ -1,5 +1,4 @@
-import CancelIcon from "@mui/icons-material/Cancel";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { useUpdateActivesOrderStatusMutation } from "@/redux/api/api";
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import {
   CircularProgress,
@@ -7,18 +6,14 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import Button from "@mui/material/Button";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
-import React, { useState } from "react";
+import Link from "next/link";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import { NavLink } from "react-router-dom";
-import {
-  useDeletePendingOrderStatusMutation,
-  useUpdatePendingOrderStatusMutation,
-} from "../../../../../../redux/api/api";
 import styles from "../../OrderManagement.module.scss";
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -41,147 +36,117 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const successNotify = () => toast.success("Successfully order approved !");
+const successNotify = () => toast.success("Successfully status changed !");
 const errorNotify = () => toast.error("Something went wrong !");
-const SinglePendingOrderRow = ({ pendingOrder }) => {
+
+const SingleActiveOrderRow = ({ activeOrder }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
   const [check, setCheck] = useState(false);
   const [check2, setCheck2] = useState(false);
-
   const [
-    deletePendingOrderStatus,
-    {
-      isLoading: deleteStatusLoading,
-      isError: deleteStatusError,
-      isSuccess: deleteStatusSuccess,
-    },
-  ] = useDeletePendingOrderStatusMutation();
-  const [
-    updatePendingOrderStatus,
+    updateActiveOrderStatus,
     {
       isLoading: updateStatusLoading,
       isError: updateStatusError,
       isSuccess: updateStatusSuccess,
+      errors,
     },
-  ] = useUpdatePendingOrderStatusMutation();
+  ] = useUpdateActivesOrderStatusMutation();
 
-  const handleUpdatePendingStatus = (id) => {
-    setCheck(true);
-    const options = { data: { flag: "payment_done", orderid: id } };
-    updatePendingOrderStatus(options);
+  console.log(errors);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
-  const handlePendingDelete = (id) => {
-    setCheck2(true);
-    const options = { data: { id: id } };
-    deletePendingOrderStatus(options);
+  const handleUpdateActiveOrderStatus = (id) => {
+    setCheck(true);
+    const options = { data: { orderid: id, flag: "served_done" } };
+    updateActiveOrderStatus(options);
   };
 
   if (updateStatusSuccess && check) {
     successNotify();
     setCheck(false);
   }
-  if (deleteStatusSuccess && check2) {
-    successNotify();
-    setCheck2(false);
-  }
 
   if (updateStatusError && check) {
     errorNotify();
     setCheck(false);
   }
-  if (deleteStatusError && check2) {
-    errorNotify();
-    setCheck2(false);
-  }
+
   return (
     <>
       <StyledTableRow>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           <Typography variant="subtitle1" paddingLeft={2} fontWeight={"bold"}>
-            #{pendingOrder?.id}
+            #{activeOrder?.id}
           </Typography>
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           {" "}
           <Typography variant="subtitle1" fontWeight={"bold"}>
-            {pendingOrder?.order_date?.split("T")[0]}
+            {activeOrder?.order_date?.split("T")[0]}
           </Typography>
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
-          {pendingOrder?.email}
+          {activeOrder?.email}
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
-          {pendingOrder?.phone}
+          {activeOrder?.phone}
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
-          <p style={{ maxWidth: "250px", overflow: "hidden" }}>
-            {" "}
-            {pendingOrder?.address}
-          </p>
+          {activeOrder?.address}
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           <span
             style={{
               fontWeight: "bold",
               fontSize: "16px",
-              color: "#007FFF",
+              color: "green",
             }}
           >
-            Pending
+            Approved
           </span>
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
           <span style={{ fontSize: "15px", fontWeight: "bold" }}>
-            {" "}
-            {pendingOrder?.total_price}
+            {activeOrder?.total_price}
           </span>
         </StyledTableCell>
         <StyledTableCell component="th" scope="row" className={styles.tdStyle}>
-          {updateStatusLoading || updateStatusLoading ? (
+          {updateStatusLoading ? (
             <CircularProgress />
           ) : (
             <>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                }}
-              >
+              <div style={{ display: "flex", justifyContent: "space-around" }}>
                 <Tooltip title="Details">
-                  <NavLink
-                    to={`/dashboard/portal_admin/order_history/${pendingOrder?.id}`}
+                  <Link
+                    href={`/dashboard/admin/order_summary/${activeOrder?.id}`}
                   >
                     <IconButton aria-label="Details" size="large">
                       <ReadMoreIcon
                         fontSize="inherit"
-                        style={{ color: "green" }}
+                        style={{ color: "#007FFF" }}
                       />
                     </IconButton>
-                  </NavLink>
+                  </Link>
                 </Tooltip>
 
-                <Tooltip title="Approve">
-                  <IconButton
-                    aria-label="delete"
-                    size="large"
-                    onClick={() => handleUpdatePendingStatus(pendingOrder?.id)}
-                  >
-                    <CheckCircleIcon
-                      fontSize="inherit"
-                      style={{ color: "green" }}
-                    />
-                  </IconButton>
-                </Tooltip>
-
-                <Tooltip title="Delete">
-                  <IconButton
-                    aria-label="delete"
-                    size="large"
-                    onClick={() => handlePendingDelete(pendingOrder?.id)}
-                  >
-                    <CancelIcon fontSize="inherit" style={{ color: "red" }} />
-                  </IconButton>
-                </Tooltip>
+                <Button
+                  variant="outlined"
+                  onClick={() => handleUpdateActiveOrderStatus(activeOrder?.id)}
+                  style={{
+                    color: "#007FFF",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Delivered
+                </Button>
               </div>
             </>
           )}
@@ -191,4 +156,4 @@ const SinglePendingOrderRow = ({ pendingOrder }) => {
   );
 };
 
-export default SinglePendingOrderRow;
+export default SingleActiveOrderRow;

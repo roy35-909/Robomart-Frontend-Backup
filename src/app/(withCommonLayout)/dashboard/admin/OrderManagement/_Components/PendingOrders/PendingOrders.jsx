@@ -9,7 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useGetPendingOrdersQuery } from "../../../../../../redux/api/api";
+import { useGetPendingOrdersQuery } from "@/redux/api/api";
 import SinglePendingOrderRow from "./SinglePendingOrderRow";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -63,6 +63,7 @@ const PendingOrders = () => {
 
   useEffect(() => {
     handleSearch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   return (
@@ -82,42 +83,45 @@ const PendingOrders = () => {
         />
       </div>
 
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 1000 }} aria-label="customized table">
-          <TableHead style={{ backgroundColor: "#f2f2f2" }}>
-            <TableRow>
-              <StyledTableCell align="left">Order Id</StyledTableCell>
-              <StyledTableCell align="left">
-                Date <small>(y/mm/dd)</small>{" "}
-              </StyledTableCell>
-              <StyledTableCell align="left">User Email</StyledTableCell>
-              <StyledTableCell align="left">Contact</StyledTableCell>
-              <StyledTableCell align="left">Delivery Address</StyledTableCell>
-              <StyledTableCell align="left">Status</StyledTableCell>
-              <StyledTableCell align="left">Total</StyledTableCell>
-              <StyledTableCell align="left">
-                Details/Approved/Cancel
-              </StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {isLoading && <CircularProgress />}
-            {(filteredOrders?.length > 0
-              ? filteredOrders
-              : pendingOrdersData
-            )?.map((pendingOrder) => (
-              <SinglePendingOrderRow pendingOrder={pendingOrder} />
-            ))}
-          </TableBody>
-          {/*  <TableBody>
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 1000 }} aria-label="customized table">
+            <TableHead style={{ backgroundColor: "#f2f2f2" }}>
+              <TableRow>
+                <StyledTableCell align="left">Order Id</StyledTableCell>
+                <StyledTableCell align="left">
+                  Date <small>(y/mm/dd)</small>{" "}
+                </StyledTableCell>
+                <StyledTableCell align="left">User Email</StyledTableCell>
+                <StyledTableCell align="left">Contact</StyledTableCell>
+                <StyledTableCell align="left">Delivery Address</StyledTableCell>
+                <StyledTableCell align="left">Status</StyledTableCell>
+                <StyledTableCell align="left">Total</StyledTableCell>
+                <StyledTableCell align="left">
+                  Details/Approved/Cancel
+                </StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {(filteredOrders?.length > 0
+                ? filteredOrders
+                : pendingOrdersData
+              )?.map((pendingOrder, idx) => (
+                <SinglePendingOrderRow key={idx} pendingOrder={pendingOrder} />
+              ))}
+            </TableBody>
+            {/*  <TableBody>
             {isLoading && <CircularProgress />}
             {pendingOrdersData?.length > 0 &&
               pendingOrdersData?.map((pendingOrder) => (
                 <SinglePendingOrderRow pendingOrder={pendingOrder} />
               ))}
           </TableBody> */}
-        </Table>
-      </TableContainer>
+          </Table>
+        </TableContainer>
+      )}
     </div>
   );
 };

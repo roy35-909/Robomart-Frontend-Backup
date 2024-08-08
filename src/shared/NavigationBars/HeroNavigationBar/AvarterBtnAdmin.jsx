@@ -67,7 +67,7 @@ const AvarterBtnAdmin = ({ data }) => {
           onClose={handleCloseUserMenu}
         >
           <Link
-            href="/dashboard/portal_admin/profile/"
+            href="/dashboard/admin/profile/"
             style={{ textDecoration: "none", color: "black" }}
           >
             <MenuItem onClick={handleCloseUserMenu}>
@@ -76,7 +76,7 @@ const AvarterBtnAdmin = ({ data }) => {
           </Link>
           <Divider />
           <Link
-            href="/dashboard/portal_admin/dashboard/"
+            href="/dashboard/admin/summary/"
             style={{ textDecoration: "none", color: "black" }}
           >
             <MenuItem onClick={handleCloseUserMenu}>
@@ -85,7 +85,7 @@ const AvarterBtnAdmin = ({ data }) => {
           </Link>
           <Divider />
           <Link
-            href="/dashboard/portal_admin/order_management/"
+            href="/dashboard/admin/orderManagement/"
             style={{ textDecoration: "none", color: "black" }}
           >
             <MenuItem onClick={handleCloseUserMenu}>

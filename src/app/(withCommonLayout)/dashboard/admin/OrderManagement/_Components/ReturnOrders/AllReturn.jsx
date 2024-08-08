@@ -1,4 +1,4 @@
-import { CircularProgress, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,8 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
-import { useGetSuccessOrdersQuery } from "../../../../../../redux/api/api";
-import SingleSuccess from "./SingleSuccess";
+import { useGetReturnOrdersQuery } from "@/redux/api/api";
+import SingleReturn from "./SingleReturn";
 // import SingleActiveOrderRow from "./SingleActiveOrderRow";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,17 +32,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-const AllSuccess = () => {
+
+const AllReturn = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredOrders, setFilteredOrders] = useState([]);
   const {
-    data: successOrdersData,
+    data: returnOrdersData,
     isLoading,
     isError,
-  } = useGetSuccessOrdersQuery();
-
+  } = useGetReturnOrdersQuery();
   const handleSearch = () => {
-    const filtered = successOrdersData?.filter((order) => {
+    const filtered = returnOrdersData?.filter((order) => {
       const orderId = order?.id?.toString();
       const email = order?.user?.email?.toString()?.toLowerCase();
 
@@ -56,8 +56,9 @@ const AllSuccess = () => {
   };
   useEffect(() => {
     handleSearch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
-
+  console.log(returnOrdersData);
   return (
     <div style={{ minHeight: "70vh" }}>
       <div
@@ -89,12 +90,11 @@ const AllSuccess = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {isLoading && <CircularProgress />}
             {(filteredOrders?.length > 0
               ? filteredOrders
-              : successOrdersData
-            )?.map((activeOrder) => (
-              <SingleSuccess activeOrder={activeOrder} />
+              : returnOrdersData
+            )?.map((activeOrder,idx) => (
+              <SingleReturn key={idx} activeOrder={activeOrder} />
             ))}
           </TableBody>
         </Table>
@@ -103,4 +103,4 @@ const AllSuccess = () => {
   );
 };
 
-export default AllSuccess;
+export default AllReturn;

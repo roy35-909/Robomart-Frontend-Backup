@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
-import { useGetDeliveredOrdersQuery } from "../../../../../../redux/api/api";
+import { useGetDeliveredOrdersQuery } from "@/redux/api/api";
 import CompleteOrdersSingleRow from "./CompleteOrdersSingleRow";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -56,6 +56,7 @@ const CompleteOrders = () => {
   };
   useEffect(() => {
     handleSearch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   return (
@@ -95,8 +96,8 @@ const CompleteOrders = () => {
             {(filteredOrders?.length > 0
               ? filteredOrders
               : deliveredOrdersData
-            )?.map((deliveredOrder) => (
-              <CompleteOrdersSingleRow deliveredOrder={deliveredOrder} />
+            )?.map((deliveredOrder,id) => (
+              <CompleteOrdersSingleRow key={id} deliveredOrder={deliveredOrder} />
             ))}
             {/* {deliveredOrdersData?.length > 0 &&
               deliveredOrdersData?.map((deliveredOrder) => (

@@ -52,7 +52,7 @@ const EditorTextViewer = ({ froalaHTML }) => {
   const removeString =
     '<p style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;" data-f-id="pbf">Powered by <a title="Froala Editor" href="https://www.froala.com/wysiwyg-editor?pb=1">Froala Editor</a></p>';
   const newText = updatedHtml?.replace(removeString, "");
-  console.log(newText);
+  // console.log(newText);
   return <div dangerouslySetInnerHTML={{ __html: newText }} />;
 };
 

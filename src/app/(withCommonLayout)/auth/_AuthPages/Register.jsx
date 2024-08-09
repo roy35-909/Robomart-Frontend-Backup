@@ -36,7 +36,7 @@ const Register = ({ showPass, setShowPass }) => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result?.id) {
           Swal.fire({
             position: "top-end",

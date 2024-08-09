@@ -45,7 +45,7 @@ const SingleSuccess = ({ activeOrder }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  console.log(activeOrder);
+  // console.log(activeOrder);
   return (
     <>
       <StyledTableRow>

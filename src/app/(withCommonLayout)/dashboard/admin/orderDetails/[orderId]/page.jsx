@@ -2,7 +2,7 @@
 import SingleOrderDetailsPage2 from "../../../customer/orderHistory/SingleOrderDetailsPage2";
 
 const OrderHitoryPage = ({ params }) => {
-  console.log(params);
+  // console.log(params);
 
   return (
     <>

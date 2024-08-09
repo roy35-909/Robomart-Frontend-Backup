@@ -109,7 +109,7 @@ const Profile = () => {
   }, [updateError, profileUpdateSuccess]);
 
   const updateInformation = (updatedData) => {
-    console.log(updatedData);
+    // console.log(updatedData);
 
     const options = { updatedData: updatedData };
     updateUserProfile(options)
@@ -145,7 +145,7 @@ const Profile = () => {
       phone: mobile || userProfile?.phone,
       address: updatedAddress || userProfile?.address,
     };
-    console.log(updatedData);
+    // console.log(updatedData);
 
     updateInformation(updatedData);
   };

@@ -29,7 +29,7 @@ const RelatedProducts = ({ categoriesId }) => {
               newData.push(categoryData);
             }
           } catch (error) {
-            console.log(error);
+            // console.log(error);
           }
         }
 

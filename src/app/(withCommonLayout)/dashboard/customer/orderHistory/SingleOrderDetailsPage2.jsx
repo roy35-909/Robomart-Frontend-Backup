@@ -40,7 +40,7 @@ const SingleOrderDetailsPage2 = ({ params }) => {
 
     return `${day}/${month}/${year}`;
   };
-  console.log(orderData?.price_after_add_copun);
+  // console.log(orderData?.price_after_add_copun);
   return (
     <div style={{ minHeight: "70vh" }}>
       <Container style={{ padding: "4vh" }}>

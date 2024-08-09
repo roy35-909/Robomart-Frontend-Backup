@@ -14,7 +14,7 @@ const TutorialCategoryNav = () => {
   useEffect(() => {
     getCategoriesData();
   }, []);
-console.log(pathname);
+// console.log(pathname);
 
   return (
     <div>

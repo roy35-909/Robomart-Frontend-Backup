@@ -54,7 +54,7 @@ const SingleActiveOrderRow = ({ activeOrder }) => {
     },
   ] = useUpdateActivesOrderStatusMutation();
 
-  console.log(errors);
+  // console.log(errors);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

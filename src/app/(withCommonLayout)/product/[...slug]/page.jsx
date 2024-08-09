@@ -3,7 +3,7 @@
 import ProductDetailsPage from "./_ProductDetailsPage/ProductDetailsPage";
 
 const SingleProduct = ({ params }) => {
-  console.log(params);
+  // console.log(params);
   
   const detailsPageParams = {
     productId: params.slug[0],

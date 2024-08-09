@@ -58,7 +58,7 @@ const AllReturn = () => {
     handleSearch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
-  console.log(returnOrdersData);
+  // console.log(returnOrdersData);
   return (
     <div style={{ minHeight: "70vh" }}>
       <div

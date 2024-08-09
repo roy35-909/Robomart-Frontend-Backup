@@ -15,7 +15,7 @@ const LoginWithGoogle = () => {
       const data = await response.json();
       setAuthUrl(data?.authorization_url);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

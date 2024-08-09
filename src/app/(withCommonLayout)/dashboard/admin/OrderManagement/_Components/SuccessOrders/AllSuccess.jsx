@@ -59,7 +59,7 @@ const AllSuccess = () => {
     handleSearch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
-console.log(successOrdersData);
+// console.log(successOrdersData);
 
   return (
     <div style={{ minHeight: "70vh" }}>

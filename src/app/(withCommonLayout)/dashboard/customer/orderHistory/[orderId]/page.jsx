@@ -41,7 +41,7 @@ const SingleOrderDetailsPage = ({ params }) => {
     return `${day}/${month}/${year}`;
   };
 
-  console.log(orderData);
+  // console.log(orderData);
   return (
     <div style={{ minHeight: "70vh" }}>
       <Container style={{ padding: "4vh" }}>

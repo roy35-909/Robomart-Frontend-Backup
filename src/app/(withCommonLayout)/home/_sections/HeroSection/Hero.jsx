@@ -22,7 +22,7 @@ const Hero = () => {
 
   return (
     <>
-      {screenWidth > 1200 && screenWidth < 1500 ? (
+      {/* {screenWidth > 1200 && screenWidth < 1500 ? (
         <Grid container paddingTop={1}>
           <Grid item md={3} lg={2}>
             <Box style={{ backgroundColor: "white", margin: "0px 10px" }}>
@@ -54,7 +54,7 @@ const Hero = () => {
             </Grid>
           </Grid>
         </Grid>
-      ) : (
+      ) : ( */}
         <>
           <Grid
             container
@@ -80,7 +80,7 @@ const Hero = () => {
           </Grid>
           <OurFeatures />
         </>
-      )}
+      {/* )} */}
     </>
   );
 };

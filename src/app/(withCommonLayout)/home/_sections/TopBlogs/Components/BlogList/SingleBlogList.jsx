@@ -15,7 +15,7 @@ const SingleBlogList = ({ blog }) => {
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <Link
-              href={`/blogs/${blog?.id}/${blog?.title?.replace(/ /g, "_")}`}
+              href={`/blogs/${blog?.id}/${encodeURIComponent(blog?.title)}`}
             >
               <CardMedia
                 component="img"
@@ -29,7 +29,7 @@ const SingleBlogList = ({ blog }) => {
           <Grid item xs={12} md={6}>
             <CardContent className={styles.cardContent}>
               <Link
-                href={`/blogs/${blog?.id}/${blog?.title?.replace(/ /g, "_")}`}
+                href={`/blogs/${blog?.id}/${encodeURIComponent(blog?.title)}`}
                 style={{ color: "black" }}
               >
                 {" "}

@@ -1,4 +1,4 @@
-import SIngleTutorialPage from "./_SingleTutorial/SIngleTutorialPage";
+import SIngleTutorialPage from "../_SingleTutorial/SIngleTutorialPage";
 
 const TutorialDetailsPage = ({ params }) => {
   const tutorialDetailsParams = {

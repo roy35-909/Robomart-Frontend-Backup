@@ -20,7 +20,7 @@ const Home = () => {
       localStorage.removeItem("user");
       window.location.reload();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const Home = () => {
     }
   }, [homeData]);
   return (
-    <>
+    <div style={{ minHeight: "90vh" }}>
       <Head>
         <meta charSet="utf-8" />
         <title>RobomartBD-Home</title>
@@ -58,7 +58,7 @@ const Home = () => {
       <TopTutorial />
       <OurCorporateClients />
       <OurSupplierNPartner />
-    </>
+    </div>
   );
 };
 

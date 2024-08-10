@@ -1,10 +1,10 @@
-"use client"
+"use client";
 /* eslint-disable @next/next/no-img-element */
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { backendUrl } from "@/utils/backendApiUrlProvider";
 import styles from "./OrderHistory.module.scss";
 
 const SingleOrderDetailsPage2 = ({ params }) => {
@@ -156,9 +156,7 @@ const SingleOrderDetailsPage2 = ({ params }) => {
                               <Link
                                 href={`/product/${
                                   item?.product?.id
-                                }/${(item?.product?.name)
-                                  .replace(/ /g, "_")
-                                  .replace(/%/g, "percent")}`}
+                                }/${encodeURIComponent(item?.product?.name)}`}
                               >
                                 {item?.product?.name}
                               </Link>

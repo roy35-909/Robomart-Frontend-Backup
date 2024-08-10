@@ -95,9 +95,9 @@ const SingleProductCard = ({ product }) => {
           className={styles.imageDiv}
         >
           <Link
-            href={`/product/${product?.id}/${(product?.name)
-              .replace(/ /g, "_")
-              .replace(/%/g, "percent")}`}
+            href={`/product/${product?.id}/${encodeURIComponent(
+              product?.name
+            )}`}
           >
             <CardMedia
               component="img"
@@ -131,9 +131,9 @@ const SingleProductCard = ({ product }) => {
         </Box>
         <CardContent className={styles.cardContent}>
           <Link
-            href={`/product/${product?.id}/${(product?.name)
-              .replace(/ /g, "_")
-              .replace(/%/g, "percent")}`}
+            href={`/product/${product?.id}/${encodeURIComponent(
+              product?.name
+            )}`}
             className={styles.title}
             style={{ height: "30px", overflow: "hidden" }}
           >
@@ -177,7 +177,7 @@ const SingleProductCard = ({ product }) => {
           </Box>
         </CardContent>
         <Link
-          href={`/product/${product?.id}/${(product?.name).replace(/ /g, "_")}`}
+          href={`/product/${product?.id}/${encodeURIComponent(product?.name)}`}
         >
           <Button
             className={styles.productViewBtn}

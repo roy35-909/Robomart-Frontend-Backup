@@ -31,33 +31,7 @@ const ProductDetailsPage = ({ params }) => {
   const [amount, setAmount] = useState(1);
   const [imageIndex, setImageIndex] = useState(0);
   const router = useRouter();
-  const {
-    data: userData,
-    isLoading: userLoading,
-    isError: userError,
-  } = useGetUserQuery();
-  const { data: cartData } = useGetCartQuery();
-  const [postToCart, { isLoading, isError, isSuccess }] =
-    usePostToCartMutation();
-
-  const addToCart = () => {
-    setCheck(true);
-    if (!userData) {
-      router.push("/auth/login");
-      Swal.fire({
-        position: "top-center",
-        icon: "warning",
-        title: "Please Login First !",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } else {
-      const options = {
-        product: { product: productDetails?.id, quantity: amount },
-      };
-      postToCart(options);
-    }
-  };
+  
 
   if (isSuccess && check) {
     successNotify();

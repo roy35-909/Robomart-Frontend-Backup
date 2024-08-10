@@ -1,3 +1,4 @@
+"use client"
 import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import Image from "next/image";

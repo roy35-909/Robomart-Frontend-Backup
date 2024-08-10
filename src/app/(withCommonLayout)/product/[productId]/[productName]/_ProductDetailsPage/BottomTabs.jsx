@@ -1,3 +1,4 @@
+"use client"
 import EditorTextViewer from "@/Shared/EditorTextViewer/EditorTextViewer";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";

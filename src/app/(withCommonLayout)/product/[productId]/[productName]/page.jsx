@@ -1,20 +1,25 @@
 "use client";
-
+import { getSingleProducts } from "@/utils/ApiCall/productApicall";
 import { useParams } from "next/navigation";
 import ProductDetailsPage from "./_ProductDetailsPage/ProductDetailsPage";
 
-const SingleProduct = () => {
+// eslint-disable-next-line @next/next/no-async-client-component
+const SingleProduct = async () => {
   const params = useParams();
-  console.log(params);
-
-  // const detailsPageParams = {
-  //   productId: params.slug[0],
-  // };
+  const productDetails = await getSingleProducts(params.productId);
   return (
     <>
-      <ProductDetailsPage params={params} />
+      <ProductDetailsPage productDetails={productDetails} />
     </>
   );
 };
 
 export default SingleProduct;
+
+// export async function generateStaticParams() {
+//   const products = await getAllProducts();
+
+//   return products.map((product) => ({
+//     productId: product.id.toString(),
+//   }));
+// }

@@ -1,3 +1,4 @@
+"use client";
 import AllCategorySideMenu from "@/Shared/AllCategoryListSideMenu/AllCategorySideMenu";
 import PartnerClientSkeleton from "@/components/Skeletons/Home/PartnerClientSkeleton";
 import { useGetCategoryListProductsQuery } from "@/redux/api/api";

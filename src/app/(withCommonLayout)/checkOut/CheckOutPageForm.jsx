@@ -68,7 +68,7 @@ const CheckOutPage = () => {
     ) {
       router.push("/shoppingCart");
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkoutData?.delivery, checkoutData?.cupon, checkoutData?.useBalance]);
 
   const [
@@ -102,7 +102,7 @@ const CheckOutPage = () => {
       });
     }
     setUser(data);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   if (isLoading) {
@@ -242,7 +242,7 @@ const CheckOutPage = () => {
       showConfirmButton: false,
       timer: 5000,
     });
-    router.push("/");
+    router.push("/home");
   }
 
   return (

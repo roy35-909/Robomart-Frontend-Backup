@@ -42,7 +42,7 @@ const SIngleTutorialPage = ({ params }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
+
   return (
     <>
       {loading ? (

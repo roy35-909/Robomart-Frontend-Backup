@@ -122,10 +122,7 @@ const AllCategorySideMenu = ({ category }) => {
             <>
               <div className={styles.menu_item}>
                 <Link
-                  href={`/products/categories/${scat?.id}/${scat?.name?.replace(
-                    / /g,
-                    "_"
-                  )}`}
+                  href={`/products/categories/${scat?.id}/${encodeURIComponent(scat?.name)}`}
                   style={{ textDecoration: "none", color: "black" }}
                 >
                   <span style={styles.menuName}>{scat?.name}</span>

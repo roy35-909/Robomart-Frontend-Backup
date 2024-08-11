@@ -25,15 +25,15 @@ const MobileNavigation = () => {
           showLabels
         >
           <BottomNavigationAction
-            onClick={() => handleNavigation("/")}
+            onClick={() => handleNavigation("/home")}
             sx={{
               color: "white",
               fontSize: "20px",
               borderRight: "1px solid #78bd68",
               transition: "all 0.1s ease-in-out",
-              border: pathname === "/" ? "1px solid #e2e2e2" : "",
-              backgroundColor: pathname === "/" ? "black" : "",
-              borderRadius: pathname === "/" ? "5px" : "",
+              border: pathname === "/home" ? "1px solid #e2e2e2" : "",
+              backgroundColor: pathname === "/home" ? "black" : "",
+              borderRadius: pathname === "/home" ? "5px" : "",
               borderBottom: "none",
             }}
             label="Home"

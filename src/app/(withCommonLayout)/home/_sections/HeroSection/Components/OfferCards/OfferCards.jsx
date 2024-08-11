@@ -35,10 +35,11 @@ const OfferCards = () => {
         </Grid>
       ) : (
         <Grid container>
-          {homeData1?.spacialoffer?.map((offer) => (
+          {homeData1?.spacialoffer?.map((offer, idx) => (
             // eslint-disable-next-line react/jsx-key
             <Grid
               item
+              key={idx}
               xs={6}
               md={6}
               lg={12}

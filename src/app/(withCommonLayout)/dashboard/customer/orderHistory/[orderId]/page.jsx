@@ -159,9 +159,7 @@ const SingleOrderDetailsPage = ({ params }) => {
                               <Link
                                 href={`/product/${
                                   item?.product?.id
-                                }/${(item?.product?.name)
-                                  .replace(/ /g, "_")
-                                  .replace(/%/g, "percent")}`}
+                                }/${encodeURIComponent(item?.product?.name)}`}
                               >
                                 {item?.product?.name}
                               </Link>

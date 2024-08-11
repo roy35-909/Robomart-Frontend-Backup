@@ -23,7 +23,7 @@ const PageNavigationBar = () => {
       <Link
         href={`/`}
         className={`${
-          pathname === "/" || pathname === "/home" ? styles.activeRoute : ""
+          pathname === "/home" || pathname === "/home" ? styles.activeRoute : ""
         } ${styles.navigationMenu_Item}`}
       >
         <HomeIcon /> <span>Home</span>

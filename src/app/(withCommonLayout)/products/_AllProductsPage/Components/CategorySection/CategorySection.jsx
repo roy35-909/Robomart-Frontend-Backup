@@ -24,7 +24,7 @@ const CategorySection = ({ categoryList }) => {
                     <Link
                       href={`/products/categories/${
                         singleCategory?.id
-                      }/${singleCategory?.name?.replace(/ /g, "_")}`}
+                      }/${encodeURIComponent(singleCategory?.name)}`}
                       style={{
                         minWidth: "100px",
                         maxWidth: "150px",

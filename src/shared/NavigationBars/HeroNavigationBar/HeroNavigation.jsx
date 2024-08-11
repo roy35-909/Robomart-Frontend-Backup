@@ -101,7 +101,7 @@ const HeroNavigation = () => {
               alignItems="center"
             >
               <Box>
-                <Link href={"/"}>
+                <Link href={"/home"}>
                   <Image
                     src="/assets/logo.png"
                     alt="image"

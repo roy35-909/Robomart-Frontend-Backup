@@ -1,4 +1,5 @@
-"use client"
+"use client";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import { Container, IconButton, Tooltip, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
@@ -12,7 +13,6 @@ import { styled } from "@mui/material/styles";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import styles from "./OrderHistory.module.scss";
-import { backendUrl } from "@/utils/backendApiUrlProvider";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -126,9 +126,7 @@ const OrderHistory = () => {
                               key={idx}
                               href={`/product/${
                                 product?.product?.id
-                              }/${product?.product?.name
-                                ?.replace(/ /g, "_")
-                                .replace(/%/g, "percent")}`}
+                              }/${encodeURIComponent(product?.product?.name)}`}
                             >
                               <span style={{ margin: "0px 5px" }}>
                                 {product?.product?.name}

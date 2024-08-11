@@ -53,7 +53,7 @@ const MobileTopNavigation = () => {
           justifyContent={`space-between`}
         >
           <Grid item xs={8}>
-            <Link href="/">
+            <Link href="/home">
               {" "}
               <Image src="/assets/logo.png" alt="" width={200} height={70} />
             </Link>

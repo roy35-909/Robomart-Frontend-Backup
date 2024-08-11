@@ -30,8 +30,11 @@ const errorNotify = () => toast.error("Something went wrong !");
 //   successNotify: "Successfully added !",
 //   errorNotify: "Something went wrong !",
 // });
+
+
+
 const SingleProductCard = ({ product }) => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(window?.innerWidth);
   const [check, setCheck] = useState(false);
   const router = useRouter();
   const {
@@ -69,17 +72,6 @@ const SingleProductCard = ({ product }) => {
   }
   return (
     <>
-      <Head>
-        <title>
-          {product.name} | RobomartBD- The biggest online robo shop in
-          Bangladesh
-        </title>
-        <meta name="description" content={product.discription} />
-        <meta
-          name="keywords"
-          content={`${product.keywords}, ${product.brand}`}
-        />
-      </Head>
       <Card
         style={{ boxShadow: "none", width: "250px" }}
         className={`${styles.card} card`}
@@ -95,9 +87,9 @@ const SingleProductCard = ({ product }) => {
           className={styles.imageDiv}
         >
           <Link
-            href={`/product/${product?.id}/${(product?.name)
-              .replace(/ /g, "_")
-              .replace(/%/g, "percent")}`}
+            href={`/product/${product?.id}/${encodeURIComponent(
+              product?.name
+            )}`}
           >
             <CardMedia
               component="img"
@@ -131,9 +123,9 @@ const SingleProductCard = ({ product }) => {
         </Box>
         <CardContent className={styles.cardContent}>
           <Link
-            href={`/product/${product?.id}/${(product?.name)
-              .replace(/ /g, "_")
-              .replace(/%/g, "percent")}`}
+            href={`/product/${product?.id}/${encodeURIComponent(
+              product?.name
+            )}`}
             className={styles.title}
             style={{ height: "30px", overflow: "hidden" }}
           >
@@ -177,7 +169,7 @@ const SingleProductCard = ({ product }) => {
           </Box>
         </CardContent>
         <Link
-          href={`/product/${product?.id}/${(product?.name).replace(/ /g, "_")}`}
+          href={`/product/${product?.id}/${encodeURIComponent(product?.name)}`}
         >
           <Button
             className={styles.productViewBtn}

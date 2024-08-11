@@ -6,7 +6,7 @@ import { useGetHomeDataQuery } from "@/redux/api/api";
 
 function insertNewlineAfterThreeWords(inputString) {
   // Split the input string into an array of words
-  const words = inputString.split(",");
+  const words = inputString?.split(",");
 
   // Initialize an empty array to store the result
   const result = [];

@@ -62,7 +62,7 @@ const AllComments = ({ params }) => {
                           </span>{" "}
                           on{" "}
                           <span style={{ fontWeight: "bold" }}>
-                            {(comment?.created_at).split("T")[0]}
+                            {(comment?.created_at)?.split("T")[0]}
                           </span>{" "}
                         </p>
                       </Grid>

@@ -15,8 +15,8 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 
-import styles from "./Footer.module.scss";
 import { useGetHomeDataQuery } from "@/redux/api/api";
+import styles from "./Footer.module.scss";
 const Footer = () => {
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
 
@@ -27,7 +27,7 @@ const Footer = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <Typography variant="h6" className={styles.footerTitle}>
-                <Link style={{ color: "black" }} href={"/"}>
+                <Link style={{ color: "black" }} href={"/home"}>
                   Home
                 </Link>
               </Typography>
@@ -172,35 +172,35 @@ const Footer = () => {
           >
             <p>Stay Connected:</p>{" "}
             <Link
-              href={`${homeData1 ? homeData1?.facebook : "/"}`}
+              href={`${homeData1 ? homeData1?.facebook : "/home"}`}
               style={{ color: "white" }}
             >
               {" "}
               <FacebookIcon className={styles.socialIcon} />
             </Link>
             <Link
-              href={`${homeData1 ? homeData1?.youtube : "/"}`}
+              href={`${homeData1 ? homeData1?.youtube : "/home"}`}
               style={{ color: "white" }}
             >
               {" "}
               <YouTubeIcon className={styles.socialIcon} />
             </Link>
             <Link
-              href={`${homeData1 ? homeData1?.linkdin : "/"}`}
+              href={`${homeData1 ? homeData1?.linkdin : "/home"}`}
               style={{ color: "white" }}
             >
               {" "}
               <LinkedInIcon className={styles.socialIcon} />
             </Link>
             <Link
-              href={`${homeData1 ? homeData1?.twiter : "/"}`}
+              href={`${homeData1 ? homeData1?.twiter : "/home"}`}
               style={{ color: "white" }}
             >
               {" "}
               <TwitterIcon className={styles.socialIcon} />
             </Link>
             <Link
-              href={`${homeData1 ? homeData1?.instragram : "/"}`}
+              href={`${homeData1 ? homeData1?.instragram : "/home"}`}
               style={{ color: "white" }}
             >
               {" "}

@@ -28,15 +28,15 @@ const SingleProduct = async ({ params }) => {
 
 export default SingleProduct;
 
-export async function generateStaticParams() {
-  try {
-    const products = await getAllProducts();
-    return products.map((product) => ({
-      productId: product.id.toString(),
-    }));
-  } catch (error) {
-    console.error("Error generating static params:", error);
-    // Optionally handle the error state
-    return [];
-  }
-}
+// export async function generateStaticParams() {
+//   try {
+//     const products = await getAllProducts();
+//     return products.map((product) => ({
+//       productId: product.id.toString(),
+//     }));
+//   } catch (error) {
+//     console.error("Error generating static params:", error);
+//     // Optionally handle the error state
+//     return [];
+//   }
+// }

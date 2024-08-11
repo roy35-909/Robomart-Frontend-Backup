@@ -35,7 +35,7 @@ const AvarterBtnAdmin = ({ data }) => {
   const handleLogout = () => {
     handleCloseUserMenu();
     localStorage.clear();
-    router.push("/");
+    router.push("/home");
     window.location.reload();
   };
   return (

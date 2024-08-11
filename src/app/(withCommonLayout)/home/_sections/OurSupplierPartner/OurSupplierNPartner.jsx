@@ -5,13 +5,13 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./OurPartnerClinet.module.scss";
+import { useEffect, useState } from "react";
 
 const OurSupplierNPartner = () => {
   const theme = useTheme();
@@ -45,7 +45,7 @@ const OurSupplierNPartner = () => {
           Our Partners
         </Typography>
 
-        {isLoading ? (
+        {!data ? (
           <PartnerClientSkeleton />
         ) : (
           <>

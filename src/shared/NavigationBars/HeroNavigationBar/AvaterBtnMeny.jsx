@@ -39,7 +39,7 @@ const AvaterBtnMeny = ({ data }) => {
   const handleLogout = () => {
     handleCloseUserMenu();
     localStorage.clear();
-    router.push("/");
+    router.push("/home");
     window.location.reload();
   };
 

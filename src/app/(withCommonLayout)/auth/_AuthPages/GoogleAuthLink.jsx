@@ -37,7 +37,7 @@ const GoogleAuthLink = () => {
           localStorage.setItem("user", JSON.stringify(res.data.access));
 
           //   reset();
-          router.push("/");
+          router.push("/home");
           Swal.fire({
             position: "center",
             icon: "success",

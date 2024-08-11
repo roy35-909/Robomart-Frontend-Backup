@@ -1,14 +1,14 @@
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Box, Typography } from "@mui/material";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
-import { backendUrl } from "@/utils/backendApiUrlProvider";
 import styles from "./AuthPage.module.scss";
 import LoginWithGoogle from "./LoginWithGoogle";
-import Link from "next/link";
 const notify = () => toast.error("Password not match!");
 const successMassage = () =>
   toast.success("Register successfully! Now Login Here");
@@ -44,7 +44,7 @@ const Login = ({ showPass, setShowPass }) => {
           localStorage.setItem("user", JSON.stringify(result.access));
 
           reset();
-          router.push("/");
+          router.push("/home");
           Swal.fire({
             position: "center",
             icon: "success",

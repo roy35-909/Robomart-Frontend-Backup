@@ -5,15 +5,15 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
 
+import { getHomeData } from "@/utils/ApiCall/homedataApi";
+import { useRouter } from "next/navigation";
 import styles from "./Hero.module.scss";
 import SingleListItem from "./SingleListItem";
-import { useRouter } from "next/navigation";
-import { useGetHomeDataQuery } from "@/redux/api/api";
-const CategoryList = () => {
+const CategoryList = async () => {
   const [toggle, setToggle] = useState(false);
-  const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
+  const homeData1 = await getHomeData();
+  // const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
   const router = useRouter();
-
 
   const handleNavigation = (id) => {
     router.push(`/products/categories/${id}`);

@@ -1,5 +1,6 @@
 import ProductDetailsPageSkeleton from "@/components/Skeletons/ProductDetailsPageSkeleton";
 import RecentView from "@/Shared/RecntView/RecentView";
+import { storeRecentViewProduct } from "@/utils/ApiCall/productApicall";
 import { Box, Button, Container, Divider, Grid, Rating } from "@mui/material";
 import AddToCartButton from "./AddToCartButton";
 import BottomTabs from "./BottomTabs";
@@ -9,7 +10,7 @@ import RelatedProducts from "./RelatedProducts";
 const ProductDetailsPage = ({ productDetails }) => {
   // const [loading, setLoading] = useState(false);
   // const router = useRouter();
-
+  
   return (
     <div>
       {!productDetails ? (
@@ -18,7 +19,9 @@ const ProductDetailsPage = ({ productDetails }) => {
         <Container sx={{ py: "5vh" }}>
           <Grid container spacing={2} sx={{ justifyContent: "center" }}>
             <Grid item md={6} className={styles.left}>
-              <LeftImageCom productDetails={productDetails} />
+              {productDetails?.media !== undefined && (
+                <LeftImageCom productDetails={productDetails} />
+              )}
             </Grid>
             <Grid item md={6}>
               <div className={styles.right}>

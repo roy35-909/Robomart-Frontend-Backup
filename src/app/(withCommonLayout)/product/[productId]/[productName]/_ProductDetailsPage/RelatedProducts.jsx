@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import Image from "next/image";
@@ -13,33 +13,30 @@ import { Swiper, SwiperSlide } from "swiper/react";
 const RelatedProducts = ({ categoriesId }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
-
   useEffect(() => {
-    if (Array.isArray(categoriesId) && categoriesId.length > 0) {
-      setIsLoading(true);
-      const fetchData = async () => {
-        const newData = [];
+    setIsLoading(true);
+    const fetchData = async () => {
+      const newData = [];
 
-        for (const id of categoriesId) {
-          try {
-            const response = await fetch(
-              `${backendUrl}/api/catagory/${id}/category`
-            );
-            if (response.ok) {
-              const categoryData = await response.json();
-              newData.push(categoryData);
-            }
-          } catch (error) {
-            // console.log(error);
+      for (const id of categoriesId) {
+        try {
+          const response = await fetch(
+            `${backendUrl}/api/catagory/${id}/category`
+          );
+          if (response.ok) {
+            const categoryData = await response.json();
+            newData.push(categoryData);
           }
+        } catch (error) {
+          console.log(error);
         }
+      }
 
-        setData(newData); // Correct the way newData is set to state
-        setIsLoading(false);
-      };
+      setData(...newData);
+      setIsLoading(false);
+    };
 
-      fetchData();
-    }
+    fetchData();
   }, [categoriesId]);
 
   return (
@@ -107,7 +104,9 @@ const RelatedProducts = ({ categoriesId }) => {
                         height: "150px",
                         border: "1px solid #e2e2e2",
                       }}
-                      src={`${product?.photo}`}
+                      src={`${
+                        product?.photo ? product?.photo : "/assets/no-img.jpg"
+                      }`}
                       alt={product.name}
                       width={200}
                       height={150}

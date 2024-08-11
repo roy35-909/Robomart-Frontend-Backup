@@ -26,6 +26,7 @@
 // };
 "use client";
 import DOMPurify from "dompurify";
+import { useEffect, useState } from "react";
 
 const addClassToTextImages = (htmlContent, className) => {
   // Create a temporary div element (off the DOM)
@@ -47,13 +48,21 @@ const addClassToTextImages = (htmlContent, className) => {
 };
 
 const EditorTextViewer = ({ froalaHTML }) => {
-  const updatedHtml = addClassToTextImages(froalaHTML, "section_img");
+  const [updatedHtml, setUpdatedHtml] = useState("");
 
-  const removeString =
-    '<p style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;" data-f-id="pbf">Powered by <a title="Froala Editor" href="https://www.froala.com/wysiwyg-editor?pb=1">Froala Editor</a></p>';
-  const newText = updatedHtml?.replace(removeString, "");
-  // console.log(newText);
-  return <div dangerouslySetInnerHTML={{ __html: newText }} />;
+  useEffect(() => {
+    if (typeof document !== "undefined" && froalaHTML) {
+      const htmlWithClasses = addClassToTextImages(froalaHTML, "section_img");
+
+      const removeString =
+        '<p style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;" data-f-id="pbf">Powered by <a title="Froala Editor" href="https://www.froala.com/wysiwyg-editor?pb=1">Froala Editor</a></p>';
+      const cleanedHtml = htmlWithClasses.replace(removeString, "");
+
+      setUpdatedHtml(cleanedHtml);
+    }
+  }, [froalaHTML]);
+
+  return <div dangerouslySetInnerHTML={{ __html: updatedHtml }} />;
 };
 
 export default EditorTextViewer;

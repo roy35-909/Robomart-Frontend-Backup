@@ -11,12 +11,13 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import styles from "./ProductDetail.module.scss";
 
 const loadingNotify = () => toast.loading("Adding...");
 const successNotify = () => toast.success("Successfully added !");
 const errorNotify = () => toast.error("Something went wrong !");
 
-const AddToCartButton = (productDetails) => {
+const AddToCartButton = ({ productDetails }) => {
   const [check, setCheck] = useState(false);
   const {
     data: userData,
@@ -76,7 +77,7 @@ const AddToCartButton = (productDetails) => {
         </div>
       </div>
       <span style={{ fontFamily: "Poppins", fontWeight: "bold" }}>
-        X<span style={{ margin: "0 5px" }}> {productDetails?.price}</span> =
+        X<span style={{ margin: "0 5px" }}> {productDetails?.price} </span> =
         <span style={{ margin: "0 5px" }}>
           {" "}
           {amount * productDetails?.price}

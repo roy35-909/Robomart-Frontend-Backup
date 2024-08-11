@@ -28,7 +28,7 @@ const SingleCategoryAllTutorial = ({ params }) => {
           <Typography variant="h5" paddingY={4} fontFamily={"Poppins"}>
             {" "}
             <span style={{ fontWeight: "bold" }}>Category:</span>{" "}
-            {params?.categoryName}{" "}
+            {decodeURIComponent(params?.categoryName)}
           </Typography>
           <Divider />
           <Grid container spacing={2} paddingY={5}>

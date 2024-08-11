@@ -1,4 +1,4 @@
-import SIngleTutorialPage from "../../tutorials/[...slug]/_SingleTutorial/SIngleTutorialPage";
+import SIngleTutorialPage from "../../tutorials/[tutorialId]/[tutorialTitle]/_SingleTutorial/SIngleTutorialPage";
 const SingleBlogDetails = ({ params }) => {
   const blogDetailsParams = {
     tutorialId: params.slug[0],

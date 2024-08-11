@@ -1,3 +1,4 @@
+"use client"
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -24,7 +25,7 @@ const SingleTutorialCard = ({ tutorial }) => {
           <Link
             href={`/${pathname === "/blogs" ? "blogs" : "tutorials"}/${
               tutorial?.id
-            }/${(tutorial?.title).replace(/ /g, "_")}`}
+            }/${encodeURIComponent(tutorial?.title)}`}
             style={{ textDecoration: "none" }}
           >
             <Typography

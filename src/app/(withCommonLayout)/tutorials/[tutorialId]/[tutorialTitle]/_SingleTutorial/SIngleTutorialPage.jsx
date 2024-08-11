@@ -1,6 +1,5 @@
 "use client";
 import TutorialDetailsPageSkeleton from "@/components/Skeletons/TutorialDetailsPageSkeleton";
-import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import AllComments from "./Components/CommentSection/AllComments";
@@ -10,22 +9,22 @@ import TutorialSections from "./Components/TutorialSectionsScroll/TutorialSectio
 import TutorialTitleNav from "./Components/TutorialTitleNav/TutorialTitleNav";
 import TutorialHead from "./Components/TutorialsHead/TutorialHead";
 import styles from "./SingleTutorial.module.scss";
-const SIngleTutorialPage = ({ params }) => {
+const SIngleTutorialPage = ({ tutorialDetails, params }) => {
   const [loading, setLoading] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
   const [changePosition, setChangePosition] = useState(false);
-  const [tutorialDetails, setTutorialDetails] = useState({});
+  // const [tutorialDetails, setTutorialDetails] = useState({});
 
-  useEffect(() => {
-    setLoading(true);
-    fetch(`${backendUrl}/blog/get_blog/${params?.tutorialId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setTutorialDetails(data);
-        setLoading(false);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   fetch(`${backendUrl}/blog/get_blog/${params?.tutorialId}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setTutorialDetails(data);
+  //       setLoading(false);
+  //     });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,7 +44,7 @@ const SIngleTutorialPage = ({ params }) => {
 
   return (
     <>
-      {loading ? (
+      {!tutorialDetails?.id ? (
         <TutorialDetailsPageSkeleton />
       ) : (
         <Container maxWidth={"xl"} style={{ minHeight: "80vh" }}>

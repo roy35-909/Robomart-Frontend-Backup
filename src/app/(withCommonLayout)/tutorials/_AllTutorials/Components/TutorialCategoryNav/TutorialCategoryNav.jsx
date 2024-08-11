@@ -1,7 +1,7 @@
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { backendUrl } from "@/utils/backendApiUrlProvider";
 import styles from "./TutorialCategoryList.module.scss";
 const TutorialCategoryNav = () => {
   const pathname = usePathname();
@@ -14,7 +14,7 @@ const TutorialCategoryNav = () => {
   useEffect(() => {
     getCategoriesData();
   }, []);
-// console.log(pathname);
+  // console.log(pathname);
 
   return (
     <div>
@@ -25,9 +25,8 @@ const TutorialCategoryNav = () => {
               <Link
                 href={`/${
                   pathname === "/tutorials" ? "tutorials" : "blogs"
-                }/category/${category?.id}/${(category?.name).replace(
-                  / /g,
-                  "_"
+                }/category/${category?.id}/${encodeURIComponent(
+                  category?.name
                 )}`}
                 style={{ textDecoration: "none", color: "black" }}
               >

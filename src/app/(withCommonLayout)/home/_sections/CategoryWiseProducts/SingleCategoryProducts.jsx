@@ -69,7 +69,7 @@ const SingleCategoryProducts = ({ title, fetchProducts, id }) => {
         </Box>
         <Box display={"flex"} justifyContent={"flex-end"}>
           {" "}
-          <Link href={`/products/categories/${id}/${title.replace(/ /g, "_")}`}>
+          <Link href={`/products/categories/${id}/${encodeURIComponent(title)}`}>
             <Button className={styles.showMoreBtn}>
               <i>{`Show More >>`}</i>
             </Button>

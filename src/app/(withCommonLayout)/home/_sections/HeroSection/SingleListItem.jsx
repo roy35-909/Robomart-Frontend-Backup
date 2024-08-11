@@ -48,7 +48,7 @@ const SingleListItem = ({ category, setToggle,toggle }) => {
                     handleSubCategory(
                       `/products/categories/${
                         singleSub?.id
-                      }/${singleSub?.name?.replace(/ /g, "_")}`
+                      }/${encodeURIComponent(singleSub?.name)}`
                     )
                   }
                 >
@@ -63,10 +63,7 @@ const SingleListItem = ({ category, setToggle,toggle }) => {
             </>
           )}
           <Link
-            href={`/products/categories/${category?.id}/${category?.name.replace(
-              / /g,
-              "_"
-            )}`}
+            href={`/products/categories/${category?.id}/${encodeURIComponent(category?.name)}`}
           >
             {" "}
             <ListItemText

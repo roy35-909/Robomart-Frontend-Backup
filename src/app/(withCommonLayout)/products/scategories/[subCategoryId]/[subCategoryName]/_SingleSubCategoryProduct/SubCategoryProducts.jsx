@@ -1,45 +1,51 @@
-import AllCategorySideMenu from "@/Shared/AllCategoryListSideMenu/AllCategorySideMenu";
-import CategoryWiseProductLoading from "@/components/Skeletons/Home/CategoryWiseProductLoading";
-import { useGetCategoryListProductsQuery } from "@/redux/api/api";
-import { backendUrl } from "@/utils/backendApiUrlProvider";
+"use client";
+
 import { Box, Divider, Grid, Pagination, Typography } from "@mui/material";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 const SingleProductCard = lazy(() =>
   import("@/Shared/SingleProductCard/SingleProductCard")
 );
 
-const SingleCategoryProducts = ({ params }) => {
+import AllCategorySideMenu from "@/Shared/AllCategoryListSideMenu/AllCategorySideMenu";
+import CategoryWiseProductLoading from "@/components/Skeletons/Home/CategoryWiseProductLoading";
+import { useGetCategoryListProductsQuery } from "@/redux/api/api";
+
+const SubCategoryProducts = ({data, params }) => {
   const {
     data: categoryList,
     isLoading: catLoading,
     isError,
   } = useGetCategoryListProductsQuery();
   const [isLoading, setIsLoading] = useState(false);
-  const [categoryProducts, setCategoryProducts] = useState([]);
+  const [categoryProducts, setCategoryProducts] = useState(
+    data?.length > 0 ? data : []
+  );
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(70); // Set the number of items per page
+  const [itemsPerPage] = useState(50); // Set the number of items per page
 
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(`${backendUrl}/api/catagory/${params.categoryId}/category`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCategoryProducts(data);
-        setIsLoading(false);
-      });
-  }, [params]);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   fetch(`${backendUrl}/api/catagory/${params.subCategoryId}/subcategory`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setCategoryProducts(data);
+  //       setIsLoading(false);
+  //     });
+  // }, [params]);
 
   // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems =
-    categoryProducts?.length > 0 &&
-    categoryProducts.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = categoryProducts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
+      {" "}
       <Grid
         container
         sx={{ backgroundColor: "#f2f2f2", minHeight: "80vh" }}
@@ -49,27 +55,21 @@ const SingleCategoryProducts = ({ params }) => {
         <Grid item xs={2} padding={2} hidden={{ xs: true }}>
           {categoryList && <AllCategorySideMenu category={categoryList} />}
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={10}>
           {isLoading ? (
             <CategoryWiseProductLoading />
           ) : (
             <>
-              {" "}
               <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>
-                {params?.categoryName.replace(/ /g, "_")} :
+                {decodeURIComponent(params?.subCategoryName)} :
               </Typography>
               <Divider />
-              <Box paddingY={1} marginY={1}>
-                {categoryProducts?.length == 0 && !isLoading && (
-                  <Typography
-                    marginTop={3}
-                    variant="h6"
-                    textAlign={"center"}
-                    fontFamily={"Poppins"}
-                  >
-                    No products
-                  </Typography>
-                )}
+              <Box
+                paddingY={1}
+                marginY={1}
+                display={"flex"}
+                justifyContent={"center"}
+              >
                 <Box
                   paddingY={2}
                   display={"flex"}
@@ -105,13 +105,7 @@ const SingleCategoryProducts = ({ params }) => {
             </>
           )}
 
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              padding: "5vh 0",
-            }}
-          >
+          <div style={{ display: "flex", justifyContent: "center" }}>
             <Pagination
               color="success"
               count={Math.ceil(categoryProducts.length / itemsPerPage)}
@@ -126,4 +120,4 @@ const SingleCategoryProducts = ({ params }) => {
   );
 };
 
-export default SingleCategoryProducts;
+export default SubCategoryProducts;

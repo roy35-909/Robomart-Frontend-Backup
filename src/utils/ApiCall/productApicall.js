@@ -54,3 +54,16 @@ export const storeRecentViewProduct = (data) => {
     }
   }
 };
+
+export const categoryAllProducts = async (params) => {
+  const result = await fetch(
+    `${backendUrl}/api/catagory/${params.categoryId}/category`
+  );
+  return await result.json();
+};
+export const subCategoryAllProducts = async (params) => {
+  const result = await fetch(
+    `${backendUrl}/api/catagory/${params.subCategoryId}/subcategory`
+  );
+  return await result.json();
+};

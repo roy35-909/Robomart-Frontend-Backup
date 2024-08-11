@@ -1,48 +1,38 @@
-import { Box, Divider, Grid, Pagination, Typography } from "@mui/material";
-import { lazy, Suspense, useEffect, useState } from "react";
-const SingleProductCard = lazy(() =>
-  import("@/Shared/SingleProductCard/SingleProductCard")
-);
+"use client";
 
 import AllCategorySideMenu from "@/Shared/AllCategoryListSideMenu/AllCategorySideMenu";
 import CategoryWiseProductLoading from "@/components/Skeletons/Home/CategoryWiseProductLoading";
 import { useGetCategoryListProductsQuery } from "@/redux/api/api";
-import { backendUrl } from "@/utils/backendApiUrlProvider";
+import { Box, Divider, Grid, Pagination, Typography } from "@mui/material";
+import { lazy, Suspense, useState } from "react";
+const SingleProductCard = lazy(() =>
+  import("@/Shared/SingleProductCard/SingleProductCard")
+);
 
-const SubCategoryProducts = ({ params }) => {
+const SingleCategoryProducts = ({ data, params }) => {
   const {
     data: categoryList,
     isLoading: catLoading,
     isError,
   } = useGetCategoryListProductsQuery();
   const [isLoading, setIsLoading] = useState(false);
-  const [categoryProducts, setCategoryProducts] = useState([]);
+  const [categoryProducts, setCategoryProducts] = useState(
+    data?.length > 0 ? data : []
+  );
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(50); // Set the number of items per page
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(`${backendUrl}/api/catagory/${params.subCategoryId}/subcategory`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCategoryProducts(data);
-        setIsLoading(false);
-      });
-  }, [params]);
+  const [itemsPerPage] = useState(70); // Set the number of items per page
 
   // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = categoryProducts.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
+  const currentItems =
+    categoryProducts?.length > 0 &&
+    categoryProducts.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
-      {" "}
       <Grid
         container
         sx={{ backgroundColor: "#f2f2f2", minHeight: "80vh" }}
@@ -52,21 +42,27 @@ const SubCategoryProducts = ({ params }) => {
         <Grid item xs={2} padding={2} hidden={{ xs: true }}>
           {categoryList && <AllCategorySideMenu category={categoryList} />}
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={12} sm={12}>
           {isLoading ? (
             <CategoryWiseProductLoading />
           ) : (
             <>
+              {" "}
               <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>
-                {params?.subCategoryName.replace(/ /g, "_")} :
+                {decodeURIComponent(params?.categoryName)} :
               </Typography>
               <Divider />
-              <Box
-                paddingY={1}
-                marginY={1}
-                display={"flex"}
-                justifyContent={"center"}
-              >
+              <Box paddingY={1} marginY={1}>
+                {categoryProducts?.length == 0 && !isLoading && (
+                  <Typography
+                    marginTop={3}
+                    variant="h6"
+                    textAlign={"center"}
+                    fontFamily={"Poppins"}
+                  >
+                    No products
+                  </Typography>
+                )}
                 <Box
                   paddingY={2}
                   display={"flex"}
@@ -102,7 +98,13 @@ const SubCategoryProducts = ({ params }) => {
             </>
           )}
 
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "5vh 0",
+            }}
+          >
             <Pagination
               color="success"
               count={Math.ceil(categoryProducts.length / itemsPerPage)}
@@ -117,4 +119,4 @@ const SubCategoryProducts = ({ params }) => {
   );
 };
 
-export default SubCategoryProducts;
+export default SingleCategoryProducts;

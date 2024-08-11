@@ -31,7 +31,7 @@ const errorNotify = () => toast.error("Something went wrong !");
 //   errorNotify: "Something went wrong !",
 // });
 const SingleProductCard = ({ product }) => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(window?.innerWidth);
   const [check, setCheck] = useState(false);
   const router = useRouter();
   const {

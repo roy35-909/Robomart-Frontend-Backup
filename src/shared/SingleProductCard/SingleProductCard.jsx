@@ -30,6 +30,9 @@ const errorNotify = () => toast.error("Something went wrong !");
 //   successNotify: "Successfully added !",
 //   errorNotify: "Something went wrong !",
 // });
+
+
+
 const SingleProductCard = ({ product }) => {
   const [screenWidth, setScreenWidth] = useState(window?.innerWidth);
   const [check, setCheck] = useState(false);
@@ -69,17 +72,6 @@ const SingleProductCard = ({ product }) => {
   }
   return (
     <>
-      <Head>
-        <title>
-          {product.name} | RobomartBD- The biggest online robo shop in
-          Bangladesh
-        </title>
-        <meta name="description" content={product.discription} />
-        <meta
-          name="keywords"
-          content={`${product.keywords}, ${product.brand}`}
-        />
-      </Head>
       <Card
         style={{ boxShadow: "none", width: "250px" }}
         className={`${styles.card} card`}

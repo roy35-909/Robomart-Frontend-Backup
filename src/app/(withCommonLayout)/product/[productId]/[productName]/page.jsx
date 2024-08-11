@@ -1,13 +1,22 @@
-import {
-  getAllProducts,
-  getSingleProduct,
-} from "@/utils/ApiCall/productApicall";
+import { getSingleProduct } from "@/utils/ApiCall/productApicall";
 import ProductDetailsPage from "./_ProductDetailsPage/ProductDetailsPage";
 
 // eslint-disable-next-line @next/next/no-async-client-component
+
+export async function generateMetadata({ params }, parent) {
+  const productDetails = await getSingleProduct(params.productId);
+  const metaData = {
+    title: productDetails?.name,
+    description: productDetails?.discription,
+    openGraph: {
+      images: [`${productDetails?.media[0]}`],
+    },
+  };
+  return metaData;
+}
 const SingleProduct = async ({ params }) => {
   try {
-    const productDetails = await getSingleProduct(params.productId); // Log the product details
+    const productDetails = await getSingleProduct(params.productId);
 
     return (
       <>

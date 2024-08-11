@@ -1,13 +1,12 @@
-"use client"
-import { Box, Typography } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
+"use client";
+import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import SingleProductCard from "../SingleProductCard/SingleProductCard";
 const RecentView = () => {
   const [data, setData] = useState([]);
 
@@ -51,16 +50,13 @@ const RecentView = () => {
               slidesPerView: 4,
               spaceBetween: 40,
             },
-            1024: {
-              slidesPerView: 5,
-              spaceBetween: 50,
-            },
+          
           }}
           className="mySwiper"
         >
           {data?.map((product, idx) => (
             <SwiperSlide key={idx}>
-              <Link
+              {/* <Link
                 style={{
                   textDecoration: "none",
                   color: "#4f4f4f",
@@ -91,7 +87,8 @@ const RecentView = () => {
                   />
                 </Box>
                 <p style={{ textAlign: "center" }}>{product?.name}</p>
-              </Link>
+              </Link> */}
+              <SingleProductCard product={product} />
             </SwiperSlide>
           ))}
         </Swiper>

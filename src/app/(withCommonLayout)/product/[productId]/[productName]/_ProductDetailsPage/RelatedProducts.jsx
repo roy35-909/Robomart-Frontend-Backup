@@ -1,15 +1,16 @@
 "use client";
+
 import { backendUrl } from "@/utils/backendApiUrlProvider";
-import { Box, CircularProgress, Typography } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { CircularProgress, Typography } from "@mui/material";
+import { lazy, Suspense, useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+const SingleProductCard = lazy(() =>
+  import("@/Shared/SingleProductCard/SingleProductCard")
+);
 const RelatedProducts = ({ categoriesId }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -72,16 +73,16 @@ const RelatedProducts = ({ categoriesId }) => {
                 slidesPerView: 4,
                 spaceBetween: 40,
               },
-              1024: {
-                slidesPerView: 5,
-                spaceBetween: 50,
-              },
+              // 1024: {
+              //   slidesPerView: 5,
+              //   spaceBetween: 50,
+              // },
             }}
             className="mySwiper"
           >
             {data?.map((product, idx) => (
               <SwiperSlide key={idx}>
-                <Link
+                {/* <Link
                   style={{
                     textDecoration: "none",
                     color: "#4f4f4f",
@@ -113,7 +114,11 @@ const RelatedProducts = ({ categoriesId }) => {
                     />
                   </Box>
                   <p style={{ textAlign: "center" }}>{product?.name}</p>
-                </Link>
+                </Link> */}
+                <Suspense fallback={() => ""}>
+                  {" "}
+                  <SingleProductCard product={product} />
+                </Suspense>
               </SwiperSlide>
             ))}
           </Swiper>

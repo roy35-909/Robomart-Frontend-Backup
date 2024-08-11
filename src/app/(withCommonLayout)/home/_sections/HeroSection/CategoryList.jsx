@@ -3,21 +3,41 @@ import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { getHomeData } from "@/utils/ApiCall/homedataApi";
 import { useRouter } from "next/navigation";
 import styles from "./Hero.module.scss";
 import SingleListItem from "./SingleListItem";
 const CategoryList = async () => {
+  const [sliceCount, setSliceCount] = useState(7);
   const [toggle, setToggle] = useState(false);
-  const homeData1 = await getHomeData();
-  // const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
+  // const homeData1 = await getHomeData();
+  const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
   const router = useRouter();
 
   const handleNavigation = (id) => {
     router.push(`/products/categories/${id}`);
   };
+
+  useEffect(() => {
+    // Function to handle screen resize
+    const handleResize = () => {
+      if (window.innerWidth < 1300) {
+        setSliceCount(5);
+      } else {
+        setSliceCount(7);
+      }
+    };
+
+    // Set the initial slice count based on the current window width
+    handleResize();
+
+    // Add event listener to handle window resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <>
@@ -46,7 +66,7 @@ const CategoryList = async () => {
 
         <div>
           <List component="nav">
-            {homeData1?.catagorylist?.slice(0, 7)?.map((category) => (
+            {homeData1?.catagorylist?.slice(0, sliceCount)?.map((category) => (
               <SingleListItem
                 key={"a"}
                 category={category}

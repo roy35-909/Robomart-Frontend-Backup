@@ -29,11 +29,9 @@ export const getSingleTutorialData = async (id) => {
     throw error;
   }
 };
-export const getSingleCategoryTutorialData = async (id) => {
+export const getSingleBlogData = async (id) => {
   try {
-    const result = await fetch(
-      `${backendUrl}/blog/get_all_blog_by_category/${id}`
-    );
+    const result = await fetch(`${backendUrl}/blog/get_blog/${id}`);
     if (!result.ok) {
       throw new Error(`Error: ${result.statusText}`);
     }
@@ -43,15 +41,29 @@ export const getSingleCategoryTutorialData = async (id) => {
     throw error;
   }
 };
-export const getSingleTagTutorialData = async (id) => {
-  try {
-    const result = await fetch(`${backendUrl}/blog/get_all_blog_by_tag/${id}`);
-    if (!result.ok) {
-      throw new Error(`Error: ${result.statusText}`);
-    }
-    return await result.json();
-  } catch (error) {
-    console.error(`Error fetching product with id ${id}:`, error);
-    throw error;
-  }
-};
+// export const getSingleCategoryTutorialData = async (id) => {
+//   try {
+//     const result = await fetch(
+//       `${backendUrl}/blog/get_all_blog_by_category/${id}`
+//     );
+//     if (!result.ok) {
+//       throw new Error(`Error: ${result.statusText}`);
+//     }
+//     return await result.json();
+//   } catch (error) {
+//     console.error(`Error fetching product with id ${id}:`, error);
+//     throw error;
+//   }
+// };
+// export const getSingleTagTutorialData = async (id) => {
+//   try {
+//     const result = await fetch(`${backendUrl}/blog/get_all_blog_by_tag/${id}`);
+//     if (!result.ok) {
+//       throw new Error(`Error: ${result.statusText}`);
+//     }
+//     return await result.json();
+//   } catch (error) {
+//     console.error(`Error fetching product with id ${id}:`, error);
+//     throw error;
+//   }
+// };

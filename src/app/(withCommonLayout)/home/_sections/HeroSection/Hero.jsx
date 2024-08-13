@@ -1,7 +1,7 @@
+"use client";
 import { Box, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 
-import SideCategoryLoading from "@/components/Skeletons/Home/SideCategoryLoading";
 import { useGetCategoryListProductsQuery } from "@/redux/api/api";
 import AllCategorySideMenu from "@/Shared/AllCategoryListSideMenu/AllCategorySideMenu";
 import OfferCards from "./Components/OfferCards/OfferCards";
@@ -10,6 +10,7 @@ import styles from "./Hero.module.scss";
 import OurFeatures from "./OurFeatures/OurFeatures";
 const Hero = () => {
   const [screenWidth, setScreenWidth] = useState(0);
+  const [sliceCount, setSliceCount] = useState(8);
 
   const {
     data: categoryList,
@@ -18,7 +19,14 @@ const Hero = () => {
   } = useGetCategoryListProductsQuery();
   useEffect(() => {
     setScreenWidth(window.innerWidth);
-  }, []);
+    if (screenWidth < 1500 && screenWidth > 1400) {
+      setSliceCount(6);
+    } else if (screenWidth < 1400 && screenWidth > 1200) {
+      setSliceCount(5);
+    } else {
+      setSliceCount(8);
+    }
+  }, [screenWidth]);
 
   return (
     <>
@@ -55,31 +63,33 @@ const Hero = () => {
           </Grid>
         </Grid>
       ) : ( */}
-        <>
-          <Grid
-            container
-            columnSpacing={2}
-            paddingTop={1}
-            // style={{ backgroundColor: "#F0F2F5" }}
-          >
-            <Grid item md={3} lg={2}>
-              <Box style={{ backgroundColor: "white", marginLeft: "20px" }}>
-                {/* <CategoryList /> */}
-                <div className={styles.categoryComponent}>
-                  {" "}
-                  <AllCategorySideMenu category={categoryList?.slice(0, 8)} />
-                </div>
-              </Box>
-            </Grid>
-            <Grid item md={9} lg={7} width={"100%"}>
-              <HeroSlider />
-            </Grid>
-            <Grid item md={12} lg={3} width={"100%"}>
-              <OfferCards />
-            </Grid>
+      <>
+        <Grid
+          container
+          columnSpacing={2}
+          paddingTop={1}
+          // style={{ backgroundColor: "#F0F2F5" }}
+        >
+          <Grid item md={3} lg={2}>
+            <Box style={{ backgroundColor: "white", marginLeft: "20px" }}>
+              {/* <CategoryList /> */}
+              <div className={styles.categoryComponent}>
+                {" "}
+                <AllCategorySideMenu
+                  category={categoryList?.slice(0, sliceCount)}
+                />
+              </div>
+            </Box>
           </Grid>
-          <OurFeatures />
-        </>
+          <Grid item md={9} lg={7} width={"100%"}>
+            <HeroSlider />
+          </Grid>
+          <Grid item md={12} lg={3} width={"100%"}>
+            <OfferCards />
+          </Grid>
+        </Grid>
+        <OurFeatures />
+      </>
       {/* )} */}
     </>
   );

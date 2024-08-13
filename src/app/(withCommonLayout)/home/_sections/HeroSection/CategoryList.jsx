@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import styles from "./Hero.module.scss";
 import SingleListItem from "./SingleListItem";
 const CategoryList = async () => {
-  const [sliceCount, setSliceCount] = useState(7);
+ 
   const [toggle, setToggle] = useState(false);
   // const homeData1 = await getHomeData();
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();

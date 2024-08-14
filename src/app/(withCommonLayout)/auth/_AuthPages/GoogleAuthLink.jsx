@@ -1,13 +1,14 @@
+"use client";
 /* eslint-disable react-hooks/exhaustive-deps */
 import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { CircularProgress, Typography } from "@mui/material";
 import axios from "axios";
-import { useRouter } from "next/navigation";
-import queryString from "query-string";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 const GoogleAuthLink = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const postLoginData = async (state, code) => {
     const details = {
@@ -62,9 +63,7 @@ const GoogleAuthLink = () => {
   };
 
   useEffect(() => {
-    const values = queryString.parse(location.search);
-
-    postLoginData(values.state, values.code);
+    postLoginData(searchParams.state, searchParams.code);
   }, []);
 
   return (

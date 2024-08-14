@@ -224,8 +224,11 @@
     flex-direction: column-reverse !important;
     .images {
       flex-direction: row;
+      flex-wrap: wrap;
       img {
-        width: calc(100% / 3);
+        // width: calc(100% / 3);
+        width: 50px;
+        height: 50px;
       }
     }
   }

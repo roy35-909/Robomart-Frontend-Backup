@@ -11,8 +11,6 @@ import OurSupplierNPartner from "./_sections/OurSupplierPartner/OurSupplierNPart
 import TopBlogs from "./_sections/TopBlogs/TopBlogs";
 import TopTutorial from "./_sections/TopTutorial/TopTutorial";
 
-
-
 // export const metadata = {
 //   generator: "Next.js",
 //   applicationName: "Next.js",

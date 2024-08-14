@@ -1,4 +1,3 @@
-"use client";
 import { CircularProgress } from "@mui/material";
 import Head from "next/head";
 import { redirect } from "next/navigation";

@@ -11,9 +11,11 @@ import { usePathname } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 
+
+
 const CommonLayout = ({ children }) => {
   const pathName = usePathname();
-  const canonicalUrl = `https://www.mywebsite.com${pathName}`;
+  // const canonicalUrl = new URL(pathName, metadata.metadataBase).href;
 
   return (
     <>

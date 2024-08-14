@@ -3,15 +3,15 @@ import ProductDetailsPage from "./_ProductDetailsPage/ProductDetailsPage";
 
 // eslint-disable-next-line @next/next/no-async-client-component
 
-export async function generateMetadata({ params, pathName }, parent) {
+export async function generateMetadata({ params }, parent) {
   const productDetails = await getSingleProduct(params.productId);
   const metaData = {
     title: productDetails?.name,
     description: productDetails?.discription,
     alternates: {
-      canonical: `https://www.robomartbd.com/product/${encodeURI(
-        productDetails?.name
-      )}`,
+      canonical: `https://www.robomartbd.com/product/${
+        productDetails?.id
+      }/${encodeURI(productDetails?.name)}`,
     },
     openGraph: {
       images: [`${productDetails?.media[0]}`],

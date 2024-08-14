@@ -1,13 +1,13 @@
-"use client"
+"use client";
 import { Box, Container, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import styles from "./AuthPage.module.scss";
 import Login from "./Login";
 import Register from "./Register";
-import styles from "./AuthPage.module.scss"
-import { usePathname } from "next/navigation";
-import Link from "next/link";
 const AuthPages = () => {
-  const [showPass,setShowPass] = useState(false);
+  const [showPass, setShowPass] = useState(false);
   const [component, setComponent] = useState("login");
   const pathName = usePathname();
   useEffect(() => {
@@ -65,7 +65,12 @@ const AuthPages = () => {
             </Typography>
           </Link>
         </Box>
-        <Box sx={{ py: 3 }} display={"flex"} justifyContent={"center"} className={styles.loginWrapper}>
+        <Box
+          sx={{ py: 3 }}
+          display={"flex"}
+          justifyContent={"center"}
+          className={styles.loginWrapper}
+        >
           {component === "login" && (
             <Login showPass={showPass} setShowPass={setShowPass} />
           )}

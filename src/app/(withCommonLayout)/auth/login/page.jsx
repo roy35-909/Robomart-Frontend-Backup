@@ -1,6 +1,13 @@
-"use client"
 import AuthPages from "../_AuthPages/AuthPages";
-import Login from "../_AuthPages/Login";
+export async function generateMetadata({ params }, parent) {
+  const metaData = {
+    title: "Login - Robomartbd ",
+    alternates: {
+      canonical: `https://www.robomartbd.com/login`,
+    },
+  };
+  return metaData;
+}
 
 const AuthLoginPage = () => {
   return (

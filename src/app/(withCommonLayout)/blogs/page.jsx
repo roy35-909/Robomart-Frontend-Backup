@@ -91,7 +91,7 @@ const AllBlogsPage = () => {
         <CategoryWiseProductLoading />
       ) : (
         <>
-          {" "}
+           {" "}
           {/* Pagination and tags */}
           <Container maxWidth={"xl"}>
             <PaginationFilter

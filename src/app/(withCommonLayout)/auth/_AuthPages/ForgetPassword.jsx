@@ -1,3 +1,4 @@
+"use client"
 import { backendUrl } from "@/utils/backendApiUrlProvider";
 import MoveToInboxIcon from "@mui/icons-material/MoveToInbox";
 import {

@@ -7,16 +7,11 @@ import MobileTopNavigation from "@/Shared/NavigationBars/MobileNavigationBar/Mob
 import NavigationBar from "@/Shared/NavigationBars/NavigationBar";
 import ScrollToTop from "@/utils/ScrollToTop";
 import { CircularProgress } from "@mui/material";
-import { usePathname } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 
 
-
 const CommonLayout = ({ children }) => {
-  const pathName = usePathname();
-  // const canonicalUrl = new URL(pathName, metadata.metadataBase).href;
-
   return (
     <>
       <Provider store={store}>

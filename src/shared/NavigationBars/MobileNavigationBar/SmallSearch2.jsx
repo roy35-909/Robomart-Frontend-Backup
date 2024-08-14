@@ -1,13 +1,13 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Divider, Grid, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Autosuggest from "react-autosuggest";
 
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useGetAllProductsQuery } from "../../../redux/api/api";
 import styles from "../HeroNavigationBar/HeroNavigation.module.scss";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
 // Custom CSS for suggestion box
 const suggestionBoxStyle = {
   position: "absolute",
@@ -31,7 +31,7 @@ const SmallSearch2 = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const goTODetails = (link) => {
-    navigate(link);
+    router.push(link);
   };
 
   const updateSuggestions = (value) => {
@@ -56,7 +56,7 @@ const SmallSearch2 = () => {
   };
 
   const handleSearchBtn = () => {
-    router.push(`/products/search=/${query}`);
+    router.push(`/searchProducts/${query}`);
   };
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -72,10 +72,7 @@ const SmallSearch2 = () => {
       <div
         onClick={() =>
           goTODetails(
-            `/product/${suggestion?.id}/${(suggestion?.name).replace(
-              / /g,
-              "_"
-            )}`
+            `/product/${suggestion?.id}/${encodeURIComponent(suggestion?.name)}`
           )
         }
         style={{
@@ -84,7 +81,14 @@ const SmallSearch2 = () => {
           alignItems: "center",
         }}
       >
-        <Image src={`${suggestion.photo}`} alt={suggestion.name} width="75" height={50} />
+        <Image
+          src={`${
+            suggestion?.photo ? suggestion?.photo : "/assets/no-img.jpg"
+          }`}
+          alt={suggestion.name}
+          width="75"
+          height={50}
+        />
         <div style={{ marginLeft: "20px" }}>
           {" "}
           <Typography

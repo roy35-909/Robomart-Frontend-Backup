@@ -73,9 +73,7 @@ const SearchBar = () => {
       <div
         onClick={() =>
           goTODetails(
-            `/product/${suggestion?.id}/${(suggestion?.name)
-              .replace(/ /g, "_")
-              .replace(/%/g, "percent")}`
+            `/product/${suggestion?.id}/${encodeURIComponent(suggestion?.name)}`
           )
         }
         style={{

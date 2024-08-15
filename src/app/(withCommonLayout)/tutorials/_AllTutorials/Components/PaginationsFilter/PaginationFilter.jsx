@@ -1,17 +1,16 @@
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Button, Grid } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-import React, { useEffect, useState } from "react";
-import { backendUrl } from "@/utils/backendApiUrlProvider";
 import Link from "next/link";
-
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const ITEM_HEIGHT = 48;
 
-const PaginationFilter = ({ handlePageChange, totalPages, page, }) => {
-  
+const PaginationFilter = ({ handlePageChange, totalPages, page }) => {
+  const pathname = usePathname();
+
   const [tags, seTags] = useState([]);
   const getTagsData = async () => {
     const dataToDb = await fetch(`${backendUrl}/blog/get_all_tag`);
@@ -67,13 +66,12 @@ const PaginationFilter = ({ handlePageChange, totalPages, page, }) => {
               }}
             >
               {tags?.length > 0 &&
-                tags?.map((tag,idx) => (
+                tags?.map((tag, idx) => (
                   <Link
                     key={idx}
-                    href={`/tutorials/tag/${tag?.id}/${(tag?.tag_name).replace(
-                      / /g,
-                      "_"
-                    )}`}
+                    href={`${
+                      pathname === "/tutorial" ? "/tutorial" : "/blogs"
+                    }/tag/${tag?.id}/${(tag?.tag_name).replace(/ /g, "_")}`}
                     style={{ textDecoration: "none", color: "black" }}
                   >
                     <MenuItem key={tag?.id} onClick={handleClose}>
@@ -95,7 +93,6 @@ const PaginationFilter = ({ handlePageChange, totalPages, page, }) => {
             />
           </Stack> */}
         </Grid>
-      
       </Grid>
     </div>
   );

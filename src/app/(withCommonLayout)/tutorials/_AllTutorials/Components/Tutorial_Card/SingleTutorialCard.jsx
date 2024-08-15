@@ -1,16 +1,15 @@
-"use client"
+"use client";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./SingleTutorial.module.scss";
-import Link from "next/link";
 const SingleTutorialCard = ({ tutorial }) => {
   const pathname = usePathname();
-
   return (
     <>
       {" "}
@@ -23,7 +22,7 @@ const SingleTutorialCard = ({ tutorial }) => {
         />
         <CardContent>
           <Link
-            href={`/${pathname === "/blogs" ? "blogs" : "tutorials"}/${
+            href={`/${pathname.includes("/blogs") ? "blogs" : "tutorials"}/${
               tutorial?.id
             }/${encodeURIComponent(tutorial?.title)}`}
             style={{ textDecoration: "none" }}
@@ -43,10 +42,9 @@ const SingleTutorialCard = ({ tutorial }) => {
         </CardContent>
         <CardActions>
           <Link
-            href={`/tutorials/${tutorial?.id}/${(tutorial?.title).replace(
-              / /g,
-              "_"
-            )}`}
+            href={`/${pathname.includes("/blogs") ? "blogs" : "tutorials"}/${
+              tutorial?.id
+            }/${encodeURIComponent(tutorial?.title)}`}
             style={{ textDecoration: "none" }}
           >
             {" "}

@@ -1,136 +1,18 @@
-"use client";
-import BottomPagination from "@/app/(withCommonLayout)/tutorials/_AllTutorials/Components/PaginationsFilter/BottomPagination/BottomPagination";
-import PaginationFilter from "@/app/(withCommonLayout)/tutorials/_AllTutorials/Components/PaginationsFilter/PaginationFilter";
-import SingleTutorialCard from "@/app/(withCommonLayout)/tutorials/_AllTutorials/Components/Tutorial_Card/SingleTutorialCard";
-import TutorialCategoryNav from "@/app/(withCommonLayout)/tutorials/_AllTutorials/Components/TutorialCategoryNav/TutorialCategoryNav";
-import CategoryWiseProductLoading from "@/components/Skeletons/Home/CategoryWiseProductLoading";
-import { backendUrl } from "@/utils/backendApiUrlProvider";
-import { Container, Divider, Grid, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-
-const AllBlogsPage = () => {
-  const [load, setLoad] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(30);
-  const [blogsData, setBlogsData] = useState([]);
-
-  /* pagination value */
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
-
-  /* get tutorials data  */
-
-  const getBlogsData = async () => {
-    setLoad(true);
-    const dataToDb = await fetch(
-      `${backendUrl}/blog/get_blog?page=${currentPage}`
-    );
-    const result = await dataToDb.json();
-    if (result?.results) {
-      setLoad(false);
-    }
-
-    setBlogsData(result?.results);
-  };
-
-  // Pagination logic
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = blogsData?.slice(indexOfFirstItem, indexOfLastItem);
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  useEffect(() => {
-    getBlogsData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
-
+import AllBlogsPage from "./AllBlogs";
+export const metadata = {
+  title: "Blogs - Robomart Bd - Largest online robotics shop",
+  alternates: {
+    canonical: `https://www.robomartbd.com/blogs`,
+  },
+  description:
+    "RobomartBD,robomartbd.com,Robot shop,Electronics shop bd,Robotics components shop,Robotics parts, Sensors for robots, Robot components, Servo motors, Microcontrollers for robotics, Arduino kits, Raspberry Pi accessories, Motion sensors, Ultrasonic sensors, Infrared sensors, Robot chassis, Motor drivers, Wheels for robots, Robot arms, Programmable robots, Robot kits for beginners, Electronic components for robots, AI-powered robotics, Machine vision sensors, Gyroscopes for robots, Accelerometers for robotics, Distance sensors, Force sensors, Light sensors, Temperature sensors, Pressure sensors, Bluetooth modules for robots, WiFi modules for robotics, GPS modules for robots, Robot power supplies, Battery packs for robots, Soldering equipment for robotics, Prototyping boards for robots, Circuitry for robots, Robotics programming languages, Computer vision for robots, Robotics simulation software, Machine learning for robotics, Autonomous robots, Mobile robots, Robotic manipulators, Robot grippers, Voice recognition for robots, Wireless communication for robots, Robotic actuators, Haptic feedback devices for robots, Sensors for obstacle avoidance, Robotics control systems, Robot navigation algorithms, ROS (Robot Operating System), Machine vision algorithms, Computer-aided design (CAD) for robotics, 3D printing for robot components, Robot vision systems, Lidar sensors for robots, Ultraviolet sensors for robotics, Inertial measurement units (IMUs), Magnetic sensors for robots, Laser range finders for robots, Infrared thermometers for robots, Robot vacuum cleaners, Drone components, Robot toys for education, STEM robotics kits, AI-driven robotics projects, Automated guided vehicles (AGVs), Robot welding equipment, Robot spray painting systems, Robotics in healthcare, Robotic surgery equipment, Industrial automation components, Collaborative robots (cobots), Exoskeletons for robotics, Robot vision inspection systems, Robot learning algorithms, Swarm robotics, Human-robot interaction, Robot vision-guided picking systems, Robot vision-guided assembly systems, Robot coding classes, Robot competitions, Robotic art installations, Robot entertainment systems, Robot pets and companions, Educational robotics workshops, Robot app development, Robot software development kits (SDKs), Virtual reality (VR) for robotics, Augmented reality (AR) for robotics, Robot maintenance tools, Robot repair kits, Robot cleaning equipment, Robot safety systems, Robot simulation environments, Robot research and development, Robot startup innovations, Industrial robot manufacturers, Educational robot suppliers, Robot enthusiast forums, Robotics news and updates",
+};
+const BlogsPages = () => {
   return (
-    <div style={{ minHeight: "70vh" }}>
-      <Container maxWidth={"xl"}>
-        <Typography
-          variant="h5"
-          style={{
-            fontFamily: "Poppins",
-            fontWeight: "bold",
-            textAlign: "center",
-            paddingTop: "3vh",
-          }}
-        >
-          {" "}
-          Robomart BD Blogs
-        </Typography>
-      </Container>
-      <Divider style={{ borderColor: "#e2e2e2" }} />
-      {/* search Bar */}
-      <div style={{ backgroundColor: "#F7F7F7", padding: "10vh 0vh 5vh 0vh" }}>
-        <p style={{ textAlign: "center" }}>
-          <Typography
-            variant="title1"
-            style={{
-              fontFamily: "Poppins",
-              fontWeight: "bold",
-              textAlign: "center",
-              padding: "3vh 0",
-            }}
-          >
-            {" "}
-            Choose your favorite category
-          </Typography>
-        </p>
-        <Container maxWidth={"xl"}>
-          {/* <TutorialSearchBar /> */}
-
-          {/* Category Nav */}
-          <TutorialCategoryNav />
-        </Container>
-      </div>
-      <Divider style={{ borderColor: "#e2e2e2" }} />
-
-      {load ? (
-        <CategoryWiseProductLoading />
-      ) : (
-        <>
-           {" "}
-          {/* Pagination and tags */}
-          <Container maxWidth={"xl"}>
-            <PaginationFilter
-              handlePageChange={handlePageChange}
-              totalPages={Math.ceil(blogsData?.length / itemsPerPage)}
-              page={currentPage}
-            />
-          </Container>
-          {/* blogs */}
-          <Container maxWidth="xl" style={{ padding: "5vh 0" }}>
-            <Grid container spacing={2} padding={1}>
-              {/* {load && <CircularProgress />} */}
-              {!load && blogsData?.length == 0 && <h5>No tutorials </h5>}
-              {currentItems?.length &&
-                currentItems?.map((tutorial, idx) => (
-                  <Grid key={idx} item xs={6} sm={6} md={4} lg={3}>
-                    <SingleTutorialCard tutorial={tutorial} />
-                  </Grid>
-                ))}
-            </Grid>
-          </Container>
-        </>
-      )}
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          padding: "2vh 0",
-        }}
-      >
-        <BottomPagination
-          handlePageChange={handlePageChange}
-          totalPages={Math.ceil(blogsData?.length / itemsPerPage)}
-          page={currentPage}
-        />
-      </div>
-    </div>
+    <>
+      <AllBlogsPage />
+    </>
   );
 };
 
-export default AllBlogsPage;
+export default BlogsPages;

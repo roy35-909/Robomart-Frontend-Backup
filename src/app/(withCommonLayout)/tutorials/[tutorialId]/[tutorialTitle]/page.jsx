@@ -7,7 +7,7 @@ export async function generateMetadata({ params }, parent) {
     title: tutorialDetails?.title,
     description: tutorialDetails?.title,
     alternates: {
-      canonical: `https://www.robomartbd.com/tutorials/${params?.tutorialId}/${params?.tutorialtTitle}`,
+      canonical: `https://www.robomartbd.com/tutorials/${params?.tutorialId}/${params?.tutorialTitle}`,
     },
   };
   return metaData;

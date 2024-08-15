@@ -3,7 +3,7 @@ export async function generateMetadata({ params }, parent) {
   const metaData = {
     title: `${decodeURI(params?.tagName)} - RobomartBD tutorials tag`,
     alternates: {
-      canonical: `https://www.robomartbd.com/tutorials/${params?.tagId}/${params?.tagName}`,
+      canonical: `https://www.robomartbd.com/tutorials/tag/${params?.tagId}/${params?.tagName}`,
     },
   };
   return metaData;

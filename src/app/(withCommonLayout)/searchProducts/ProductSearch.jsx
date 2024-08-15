@@ -1,16 +1,15 @@
 "use client";
 import CategoryWiseProductLoading from "@/components/Skeletons/Home/CategoryWiseProductLoading";
+import { useGetAllProductsQuery } from "@/redux/api/api";
 import SingleProductCard from "@/Shared/SingleProductCard/SingleProductCard";
-import { retrieveAndDecryptData } from "@/utils/encript";
 import { Container, Divider, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import styles from "./ProductSearch.module.scss";
 
-export default function ProductSearch({ params }) {
-  const searchTerm = params?.slug[0];
-
+export default function ProductSearch({ searchTerm }) {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState(retrieveAndDecryptData());
+  // const [data, setData] = useState(retrieveAndDecryptData());
+  const { data, isLoading, isError } = useGetAllProductsQuery();
   const [products, setProducts] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
 
@@ -20,9 +19,12 @@ export default function ProductSearch({ params }) {
       product?.name?.toLowerCase().includes(searchTerm?.toLowerCase())
     );
     setProducts(filteredSuggestions);
-    setLoading(false);
+    if (data) {
+      setLoading(false);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [data,searchTerm]);
+  console.log(products);
 
   return (
     <div style={{ minHeight: "70vh" }}>
@@ -48,7 +50,7 @@ export default function ProductSearch({ params }) {
           </div>
         ) : (
           <>
-            {products?.length === 0 &&!loading&& (
+            {products?.length === 0 && !loading && (
               <Typography
                 variant="h5"
                 style={{ textAlign: "center", padding: "5vh 0" }}

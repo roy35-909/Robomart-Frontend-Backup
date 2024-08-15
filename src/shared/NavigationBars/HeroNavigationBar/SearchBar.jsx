@@ -1,12 +1,12 @@
 "use client";
-import { Button, Divider, Grid, Typography } from "@mui/material";
-
 import { useGetAllProductsQuery } from "@/redux/api/api";
+import { Button, Divider, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Autosuggest from "react-autosuggest";
 import styles from "./HeroNavigation.module.scss";
+
 // Custom CSS for suggestion box
 const suggestionBoxStyle = {
   position: "absolute",
@@ -34,12 +34,12 @@ const SearchBar = () => {
   };
 
   const updateSuggestions = (value) => {
-    const filteredSuggestions = products?.filter(
-      (product1) => product1?.name.toLowerCase().includes(value.toLowerCase())
-      // product?.code?.toLowerCase().includes(value.toLowerCase())
-    );
-
-    setSuggestions(filteredSuggestions);
+    if (data) {
+      const filteredSuggestions = products?.filter((product) =>
+        product?.name.toLowerCase().includes(value.toLowerCase())
+      );
+      setSuggestions(filteredSuggestions);
+    }
   };
 
   // Autosuggest input onChange handler
@@ -54,22 +54,30 @@ const SearchBar = () => {
     // You can do something with the selected product, like navigate to its details page.
   };
 
+  // Function to fetch suggestions
+  const onSuggestionsFetchRequested = ({ value }) => {
+    updateSuggestions(value);
+  };
+
   const handleSearchBtn = () => {
     if (query !== "") {
-      router.push(`/searchProducts/${query}`);
+      router.push(`/searchProducts/?search=${query}`);
     }
   };
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       handleSearchBtn();
     }
   };
+
   useEffect(() => {
     setProducts(data);
   }, [data]);
+
   // Autosuggest rendering suggestions
   const renderSuggestion = (suggestion) => (
-    <div style={{ padding: "10px 10px" }}>
+    <div style={{ padding: "10px 10px", cursor: "pointer" }}>
       <div
         onClick={() =>
           goTODetails(
@@ -125,7 +133,6 @@ const SearchBar = () => {
               placeholder: "Search for products",
               value: query,
               onChange: handleInputChange,
-
               style: {
                 borderRadius: "10px",
                 width: "100%",
@@ -136,6 +143,7 @@ const SearchBar = () => {
               },
             }}
             suggestions={suggestions}
+            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
             onSuggestionSelected={handleSuggestionSelected}
             getSuggestionValue={(suggestion) => suggestion?.name}
             renderSuggestion={renderSuggestion}

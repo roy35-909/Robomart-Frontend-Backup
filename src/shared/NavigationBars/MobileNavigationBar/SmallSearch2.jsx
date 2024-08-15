@@ -35,12 +35,14 @@ const SmallSearch2 = () => {
   };
 
   const updateSuggestions = (value) => {
-    const filteredSuggestions = products?.filter(
-      (product1) => product1?.name.toLowerCase().includes(value.toLowerCase())
-      // product?.code?.toLowerCase().includes(value.toLowerCase())
-    );
+    if (data) {
+      const filteredSuggestions = products?.filter(
+        (product1) => product1?.name.toLowerCase().includes(value.toLowerCase())
+        // product?.code?.toLowerCase().includes(value.toLowerCase())
+      );
 
-    setSuggestions(filteredSuggestions);
+      setSuggestions(filteredSuggestions);
+    }
   };
 
   // Autosuggest input onChange handler
@@ -54,9 +56,13 @@ const SmallSearch2 = () => {
     setSelectedProduct(suggestion);
     // You can do something with the selected product, like navigate to its details page.
   };
+  // Function to fetch suggestions
+  const onSuggestionsFetchRequested = ({ value }) => {
+    updateSuggestions(value);
+  };
 
   const handleSearchBtn = () => {
-    router.push(`/searchProducts/${query}`);
+    router.push(`/searchProducts/?search=${query}`);
   };
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -133,6 +139,7 @@ const SmallSearch2 = () => {
               },
             }}
             suggestions={suggestions}
+            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
             onSuggestionSelected={handleSuggestionSelected}
             getSuggestionValue={(suggestion) => suggestion.name}
             renderSuggestion={renderSuggestion}

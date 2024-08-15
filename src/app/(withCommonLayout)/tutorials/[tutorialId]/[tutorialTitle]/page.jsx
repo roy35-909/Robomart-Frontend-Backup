@@ -6,6 +6,9 @@ export async function generateMetadata({ params }, parent) {
   const metaData = {
     title: tutorialDetails?.title,
     description: tutorialDetails?.title,
+    alternates: {
+      canonical: `https://www.robomartbd.com/tutorials/${params?.tutorialId}/${params?.tutorialtTitle}`,
+    },
   };
   return metaData;
 }

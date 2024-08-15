@@ -11,7 +11,6 @@ import {
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
@@ -30,8 +29,6 @@ const errorNotify = () => toast.error("Something went wrong !");
 //   successNotify: "Successfully added !",
 //   errorNotify: "Something went wrong !",
 // });
-
-
 
 const SingleProductCard = ({ product }) => {
   const [screenWidth, setScreenWidth] = useState(window?.innerWidth);
@@ -96,7 +93,7 @@ const SingleProductCard = ({ product }) => {
               image={
                 product?.photo ? `${product?.photo}` : "/assets/no-img.jpg"
               }
-              alt={`${product?.name} image`}
+              alt={`${product?.name ? product?.name : "product"} image`}
               sx={{ width: "100%" }}
               className={styles.cardImg}
             />

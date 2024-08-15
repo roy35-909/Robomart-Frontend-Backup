@@ -27,7 +27,7 @@ const CategoryProducts = () => {
           }
         >
           {" "}
-          {homeData?.catagory?.map((category, idx) => (
+          {homeData?.catagory?.slice(0, 5)?.map((category, idx) => (
             <SingleCategoryProducts
               key={idx}
               title={category?.name}

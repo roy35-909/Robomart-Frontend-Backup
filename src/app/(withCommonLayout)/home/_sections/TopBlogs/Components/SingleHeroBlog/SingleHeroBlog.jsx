@@ -13,7 +13,7 @@ const SingleHeroBlog = ({ blog }) => {
             <Image
               style={{ maxHeight: "500px" }}
               src={blog?.image ? `${blog?.image}` : "/assets/no-img.jpg"}
-              alt={blog?.title}
+              alt={blog?.title?blog?.title:"top-blog-image"}
               height={300}
               width={300}
             />

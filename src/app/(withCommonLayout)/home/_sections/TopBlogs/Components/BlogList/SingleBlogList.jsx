@@ -23,6 +23,7 @@ const SingleBlogList = ({ blog }) => {
                 style={{ maxHeight: "200px" }}
                 image={blog?.image ? `${blog?.image}` : "/assets/no-img.jpg"}
                 title={blog?.title}
+                alt={blog?.title ? blog?.title : "top-blog-image"}
               />
             </Link>
           </Grid>

@@ -5,9 +5,11 @@ import ProductDetailsPage from "./_ProductDetailsPage/ProductDetailsPage";
 
 export async function generateMetadata({ params }, parent) {
   const productDetails = await getSingleProduct(params.productId);
+  const metaKeywords = productDetails?.product_tags?.map((tag) => tag.name);
   const metaData = {
     title: productDetails?.name,
     description: productDetails?.discription,
+    keywords: metaKeywords,
     alternates: {
       canonical: `https://www.robomartbd.com/product/${
         productDetails?.id

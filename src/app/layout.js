@@ -23,7 +23,9 @@ export const metadata = {
   ],
   creator: "mdsabbir.dev",
   publisher: "https://robomartbd.com",
-
+  openGraph: {
+    images: [`/assets/logo.png`],
+  },
   // formatDetection: {
   //   email: false,
   //   address: false,

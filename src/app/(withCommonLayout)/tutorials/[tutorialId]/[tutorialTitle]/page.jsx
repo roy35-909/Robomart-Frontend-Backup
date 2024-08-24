@@ -3,9 +3,11 @@ import SIngleTutorialPage from "./_SingleTutorial/SIngleTutorialPage";
 
 export async function generateMetadata({ params }, parent) {
   const tutorialDetails = await getSingleTutorialData(params.tutorialId);
+  const metaKeywords = tutorialDetails?.blog_tag?.map((tag) => tag.name);
   const metaData = {
     title: tutorialDetails?.title,
     description: tutorialDetails?.title,
+    keywords: metaKeywords,
     alternates: {
       canonical: `https://www.robomartbd.com/tutorials/${params?.tutorialId}/${params?.tutorialTitle}`,
     },
@@ -15,7 +17,7 @@ export async function generateMetadata({ params }, parent) {
 
 const TutorialDetailsPage = async ({ params }) => {
   const tutorialDetails = await getSingleTutorialData(params?.tutorialId);
-
+  
   return (
     <>
       <SIngleTutorialPage tutorialDetails={tutorialDetails} params={params} />{" "}

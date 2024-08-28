@@ -3,7 +3,17 @@
 import AllCategorySideMenu from "@/Shared/AllCategoryListSideMenu/AllCategorySideMenu";
 import CategoryWiseProductLoading from "@/components/Skeletons/Home/CategoryWiseProductLoading";
 import { useGetCategoryListProductsQuery } from "@/redux/api/api";
-import { Box, Divider, Grid, Pagination, Typography } from "@mui/material";
+import {
+  Box,
+  Divider,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Pagination,
+  Select,
+  Typography,
+} from "@mui/material";
 import { lazy, Suspense, useState } from "react";
 const SingleProductCard = lazy(() =>
   import("@/Shared/SingleProductCard/SingleProductCard")
@@ -20,7 +30,7 @@ const SingleCategoryProducts = ({ data, params }) => {
     data?.length > 0 ? data : []
   );
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(70); // Set the number of items per page
+  const [itemsPerPage, setItemPerPage] = useState(50); // Set the number of items per page
 
   // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -30,7 +40,9 @@ const SingleCategoryProducts = ({ data, params }) => {
     categoryProducts.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+  const handleChange = (e) => {
+    setItemPerPage(e.target.value);
+  };
   return (
     <div>
       <Grid
@@ -47,10 +59,49 @@ const SingleCategoryProducts = ({ data, params }) => {
             <CategoryWiseProductLoading />
           ) : (
             <>
-              {" "}
-              <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>
-                {decodeURIComponent(params?.categoryName)} :
-              </Typography>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div style={{marginX:"5px"}}>
+                  <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>
+                    {decodeURIComponent(params?.categoryName)} :
+                  </Typography>
+                </div>
+                <FormControl
+                  sx={{
+                    marginTop: "10px",
+                    width: "90px",
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "var(--primaryColor)", // Default border color
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "var(--primaryColor)", // Border color when hovering
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "var(--primaryColor)", // Border color when focused
+                      },
+                    },
+                    "& label.Mui-focused": {
+                      color: "var(--primaryColor)", // Label color when focused
+                    },
+                  }}
+                >
+                  <InputLabel id="demo-simple-select-label">Items</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={itemsPerPage}
+                    label="Items"
+                    onChange={handleChange}
+                    size="small"
+                  >
+                    <MenuItem value={50}>50</MenuItem>
+                    <MenuItem value={100}>100</MenuItem>
+                    <MenuItem value={150}>150</MenuItem>
+                    <MenuItem value={200}>200</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+
               <Divider />
               <Box paddingY={1} marginY={1}>
                 {categoryProducts?.length == 0 && !isLoading && (

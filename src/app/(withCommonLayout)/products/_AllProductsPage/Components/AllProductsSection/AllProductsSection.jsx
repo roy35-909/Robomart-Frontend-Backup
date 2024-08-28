@@ -3,10 +3,13 @@ import { useGetAllProductsQuery } from "@/redux/api/api";
 import {
   Button,
   Divider,
+  FormControl,
   Grid,
+  InputLabel,
   Menu,
   MenuItem,
   Pagination,
+  Select,
   Typography,
 } from "@mui/material";
 import { lazy, Suspense, useEffect, useState } from "react";
@@ -20,7 +23,7 @@ const AllProductsSection = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(50); // Set the number of items per page
+  const [itemsPerPage, setItemPerPage] = useState(50); // Set the number of items per page
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -54,6 +57,9 @@ const AllProductsSection = () => {
   useEffect(() => {
     setAllProducts(data);
   }, [data]);
+  const handleChange = (e) => {
+    setItemPerPage(e.target.value);
+  };
 
   if (isLoading) {
     return (
@@ -119,39 +125,76 @@ const AllProductsSection = () => {
       <Typography variant="h6">Our Products</Typography>
       <Divider />
       {/* sorting */}
-      <div>
-        <Button
-          id="basic-button"
-          aria-controls={open ? "basic-menu" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          onClick={handleClick}
-          style={{
-            backgroundColor: "var(--primaryColor)",
-            color: "white",
-            fontWeight: "bold",
-            fontFamily: "Roboto",
-            marginTop: "10px",
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
+          <Button
+            id="basic-button"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+            style={{
+              backgroundColor: "var(--primaryColor)",
+              color: "white",
+              fontWeight: "bold",
+              fontFamily: "Roboto",
+              marginTop: "10px",
+            }}
+          >
+            Sort By
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem onClick={() => handleSort("lowToHigh")}>
+              Price: Low {`>`} High
+            </MenuItem>
+            <MenuItem onClick={() => handleSort("highToLow")}>
+              Price: High {`>`} Low
+            </MenuItem>
+          </Menu>
+        </div>
+        <FormControl
+          sx={{
+            marginTop:"10px",
+            width: "90px",
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "var(--primaryColor)", // Default border color
+              },
+              "&:hover fieldset": {
+                borderColor: "var(--primaryColor)", // Border color when hovering
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "var(--primaryColor)", // Border color when focused
+              },
+            },
+            "& label.Mui-focused": {
+              color: "var(--primaryColor)", // Label color when focused
+            },
           }}
         >
-          Sort By
-        </Button>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-        >
-          <MenuItem onClick={() => handleSort("lowToHigh")}>
-            Price: Low {`>`} High
-          </MenuItem>
-          <MenuItem onClick={() => handleSort("highToLow")}>
-            Price: High {`>`} Low
-          </MenuItem>
-        </Menu>
+          <InputLabel id="demo-simple-select-label">Items</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={itemsPerPage}
+            label="Items"
+            onChange={handleChange}
+            size="small"
+          >
+            <MenuItem value={50}>50</MenuItem>
+            <MenuItem value={100}>100</MenuItem>
+            <MenuItem value={150}>150</MenuItem>
+            <MenuItem value={200}>200</MenuItem>
+          </Select>
+        </FormControl>
       </div>
 
       <Grid container spacing={2} marginBottom={2}>

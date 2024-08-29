@@ -37,6 +37,16 @@ const PageNavigationBar = () => {
         <StorefrontIcon /> <span> Shop </span>
       </Link>
       <Link
+        href="/readyProjects"
+        className={`${
+          pathname === "/readyProjects" ? styles.activeRoute : ""
+        } ${styles.navigationMenu_Item}`}
+      >
+        <>
+          <SmartToyIcon /> <span style={{ marginLeft: "5px" }}> Projects </span>
+        </>
+      </Link>
+      <Link
         href="/tutorials"
         className={`${pathname === "/tutorials" ? styles.activeRoute : ""} ${
           styles.navigationMenu_Item
@@ -61,16 +71,6 @@ const PageNavigationBar = () => {
         <>
           <ContactMailIcon />{" "}
           <span style={{ marginLeft: "5px" }}> Contact</span>
-        </>
-      </Link>
-      <Link
-        href="/readyProjects"
-        className={`${
-          pathname === "/readyProjects" ? styles.activeRoute : ""
-        } ${styles.navigationMenu_Item}`}
-      >
-        <>
-          <SmartToyIcon /> <span style={{ marginLeft: "5px" }}> Projects </span>
         </>
       </Link>
     </Box>

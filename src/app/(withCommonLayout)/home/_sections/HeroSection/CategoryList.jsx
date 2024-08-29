@@ -9,11 +9,11 @@ import { useRouter } from "next/navigation";
 import styles from "./Hero.module.scss";
 import SingleListItem from "./SingleListItem";
 const CategoryList = async () => {
- 
   const [toggle, setToggle] = useState(false);
   // const homeData1 = await getHomeData();
   const { data: homeData1, isLoading: homeLoading } = useGetHomeDataQuery();
   const router = useRouter();
+  const [sliceCount, setSliceCount] = useState(7);
 
   const handleNavigation = (id) => {
     router.push(`/products/categories/${id}`);
@@ -25,7 +25,7 @@ const CategoryList = async () => {
       if (window.innerWidth < 1300) {
         setSliceCount(5);
       } else {
-        setSliceCount(7);
+        setSliceCount(10);
       }
     };
 

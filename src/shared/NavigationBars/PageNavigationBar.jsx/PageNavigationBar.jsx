@@ -2,12 +2,12 @@ import ContactMailIcon from "@mui/icons-material/ContactMail";
 import HomeIcon from "@mui/icons-material/Home";
 import PlayLessonIcon from "@mui/icons-material/PlayLesson";
 import RssFeedSharpIcon from "@mui/icons-material/RssFeedSharp";
+import SmartToyIcon from "@mui/icons-material/SmartToy";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import { Box } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./PageNavigation.module.scss";
-
 const PageNavigationBar = () => {
   const pathname = usePathname();
 
@@ -61,6 +61,16 @@ const PageNavigationBar = () => {
         <>
           <ContactMailIcon />{" "}
           <span style={{ marginLeft: "5px" }}> Contact</span>
+        </>
+      </Link>
+      <Link
+        href="/readyProjects"
+        className={`${
+          pathname === "/readyProjects" ? styles.activeRoute : ""
+        } ${styles.navigationMenu_Item}`}
+      >
+        <>
+          <SmartToyIcon /> <span style={{ marginLeft: "5px" }}> Projects </span>
         </>
       </Link>
     </Box>

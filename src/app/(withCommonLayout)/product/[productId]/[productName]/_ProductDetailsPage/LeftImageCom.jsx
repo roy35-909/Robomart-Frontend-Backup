@@ -7,6 +7,7 @@ const LeftImageCom = ({ productDetails }) => {
   const [checkDuplicate, setCheckDuplicate] = useState(false);
   const [bgPosition, setBgPosition] = useState("50% 50%");
   const [imageIndex, setImageIndex] = useState(0);
+  console.log(productDetails);
 
   const zoom = (e) => {
     const { left, top, width, height } = e.target.getBoundingClientRect();
@@ -32,6 +33,34 @@ const LeftImageCom = ({ productDetails }) => {
     "/assets/no-img.jpg";
   if (typeof window !== "undefined") {
     const cacheRecentView = localStorage?.getItem("recentViewProducts");
+ const recentProjectView = localStorage?.getItem("recentProjectsView");
+
+ if (productDetails?.catagorys[0] === 2) {
+   if (!recentProjectView) {
+     const recentArr = [];
+     recentArr.push(productDetails);
+     localStorage.setItem("recentProjectsView", JSON.stringify(recentArr));
+   } else {
+     const pastRecentArr = JSON.parse(recentProjectView);
+
+     const checkDuplicateInput = pastRecentArr.some(
+       (item) => JSON.stringify(item) === JSON.stringify(productDetails)
+     );
+
+     if (!checkDuplicateInput) {
+       if (pastRecentArr.length >= 5) {
+         pastRecentArr.shift();
+       }
+       pastRecentArr.push(productDetails);
+       localStorage.setItem(
+         "recentProjectsView",
+         JSON.stringify(pastRecentArr)
+       );
+     }
+   }
+ }
+
+
     if (!cacheRecentView) {
       const recentArr = [];
       recentArr.push(productDetails);

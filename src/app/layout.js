@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Head>
-        <link rel="icon" href="/public/favicon.ico" />
+        <link rel="icon" href="/src/app/favicon.ico" />
       </Head>
       <body>{children}</body>
     </html>

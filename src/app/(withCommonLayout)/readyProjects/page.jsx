@@ -6,7 +6,7 @@ const ReadyProjectPage = () => {
   return (
     <div>
       <TopSectionProjects />
-      <Container maxWidth={"lg"}>
+      <Container maxWidth={"xl"}>
         <MiddleSectionProjects />
       </Container>
     </div>

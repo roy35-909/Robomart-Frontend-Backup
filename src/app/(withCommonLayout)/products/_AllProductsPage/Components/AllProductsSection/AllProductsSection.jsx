@@ -23,7 +23,8 @@ const AllProductsSection = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemPerPage] = useState(50); // Set the number of items per page
+  const [itemsPerPage, setItemsPerPage] = useState(50); // Set the number of items per page
+  const [loading, setLoading] = useState(isLoading);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -33,7 +34,7 @@ const AllProductsSection = () => {
     setAnchorEl(null);
   };
 
-  // Sorting function (to be implemented)
+  // Sorting function
   const handleSort = (option) => {
     let sortedProducts = [...allProducts]; // Create a copy of the products array
 
@@ -54,68 +55,42 @@ const AllProductsSection = () => {
   const currentItems = allProducts?.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   useEffect(() => {
     setAllProducts(data);
-  }, [data]);
+    setLoading(isLoading);
+  }, [data, isLoading]);
+
   const handleChange = (e) => {
-    setItemPerPage(e.target.value);
+    setLoading(true);
+    setItemsPerPage(e.target.value);
+    setCurrentPage(1); // Reset to the first page after changing items per page
+
+    // Simulate loading time to show skeleton
+    setTimeout(() => {
+      setLoading(false);
+    }, 500); // Adjust the timeout as needed
   };
 
-  if (isLoading) {
+  if (loading) {
     return (
       <Grid container spacing={2} marginBottom={2}>
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          md={4}
-          lg={3}
-          xl={2}
-          display={"flex"}
-          justifyContent={"center"}
-          marginTop={2}
-        >
-          <ProductCardSckeleton />
-        </Grid>
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          md={4}
-          lg={3}
-          xl={2}
-          display={"flex"}
-          justifyContent={"center"}
-          marginTop={2}
-        >
-          <ProductCardSckeleton />
-        </Grid>
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          md={4}
-          lg={3}
-          xl={2}
-          display={"flex"}
-          justifyContent={"center"}
-          marginTop={2}
-        >
-          <ProductCardSckeleton />
-        </Grid>
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          md={4}
-          lg={3}
-          xl={2}
-          display={"flex"}
-          justifyContent={"center"}
-          marginTop={2}
-        >
-          <ProductCardSckeleton />
-        </Grid>
+        {[...Array(itemsPerPage)].map((_, idx) => (
+          <Grid
+            key={idx}
+            item
+            xs={6}
+            sm={6}
+            md={4}
+            lg={3}
+            xl={2}
+            display={"flex"}
+            justifyContent={"center"}
+            marginTop={2}
+          >
+            <ProductCardSckeleton />
+          </Grid>
+        ))}
       </Grid>
     );
   }
@@ -162,7 +137,7 @@ const AllProductsSection = () => {
         </div>
         <FormControl
           sx={{
-            marginTop:"10px",
+            marginTop: "10px",
             width: "90px",
             "& .MuiOutlinedInput-root": {
               "& fieldset": {

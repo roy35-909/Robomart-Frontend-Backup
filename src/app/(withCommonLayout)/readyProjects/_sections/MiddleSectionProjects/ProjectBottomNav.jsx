@@ -103,7 +103,7 @@ const ProjectBottomNav = () => {
               key={scat?.id}
               variant={selectedTab === scat?.id ? "contained" : "outlined"}
               sx={{
-                marginX: "2px",
+                margin: "2px",
                 color:
                   selectedTab === scat?.id ? "white" : "var(--primaryColor)",
                 backgroundColor:

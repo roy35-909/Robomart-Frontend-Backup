@@ -14,7 +14,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 const SingleProductCard = lazy(() =>
   import("@/Shared/SingleProductCard/SingleProductCard")
 );
@@ -25,12 +25,12 @@ const SingleCategoryProducts = ({ data, params }) => {
     isLoading: catLoading,
     isError,
   } = useGetCategoryListProductsQuery();
-  const [isLoading, setIsLoading] = useState(false);
   const [categoryProducts, setCategoryProducts] = useState(
     data?.length > 0 ? data : []
   );
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemPerPage] = useState(50); // Set the number of items per page
+  const [itemsPerPage, setItemsPerPage] = useState(50); // Set the number of items per page
+  const [loading, setLoading] = useState(false);
 
   // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -40,9 +40,23 @@ const SingleCategoryProducts = ({ data, params }) => {
     categoryProducts.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   const handleChange = (e) => {
-    setItemPerPage(e.target.value);
+    setLoading(true);
+    setItemsPerPage(e.target.value);
+    setCurrentPage(1); // Reset to the first page after changing items per page
+
+    // Simulate loading time to show skeleton
+    setTimeout(() => {
+      setLoading(false);
+    }, 500); // Adjust the timeout as needed
   };
+
+  useEffect(() => {
+    setCategoryProducts(data);
+    setLoading(catLoading);
+  }, [data, catLoading]);
+
   return (
     <div>
       <Grid
@@ -55,12 +69,12 @@ const SingleCategoryProducts = ({ data, params }) => {
           {categoryList && <AllCategorySideMenu category={categoryList} />}
         </Grid>
         <Grid item xs={12} sm={12}>
-          {isLoading ? (
+          {loading ? (
             <CategoryWiseProductLoading />
           ) : (
             <>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div style={{marginX:"5px"}}>
+                <div style={{ marginX: "5px" }}>
                   <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>
                     {decodeURIComponent(params?.categoryName)} :
                   </Typography>
@@ -104,7 +118,7 @@ const SingleCategoryProducts = ({ data, params }) => {
 
               <Divider />
               <Box paddingY={1} marginY={1}>
-                {categoryProducts?.length == 0 && !isLoading && (
+                {categoryProducts?.length == 0 && !loading && (
                   <Typography
                     marginTop={3}
                     variant="h6"
@@ -126,7 +140,7 @@ const SingleCategoryProducts = ({ data, params }) => {
                       }
                     >
                       {currentItems?.length > 0 &&
-                        !isLoading &&
+                        !loading &&
                         currentItems?.map((product) => (
                           <Grid
                             item

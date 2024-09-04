@@ -70,7 +70,7 @@ const MobileNavigation = () => {
               borderRadius: pathname === "/readyProjects" ? "5px" : "",
               borderBottom: "none",
             }}
-            label="Projects"
+            label="Ready Projects"
             icon={<SmartToyIcon />}
           />
 

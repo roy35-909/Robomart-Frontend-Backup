@@ -1,6 +1,7 @@
 "use client";
 import CategoryWiseProductLoading from "@/components/Skeletons/Home/CategoryWiseProductLoading";
 import { useGetCategoryListProductsQuery } from "@/redux/api/api";
+import SingleProjectCard from "@/Shared/SingleProductCard/SingleProjectCard";
 import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Button, Grid, Skeleton } from "@mui/material";
 import { lazy, Suspense, useEffect, useState } from "react";
@@ -129,16 +130,16 @@ const ProjectBottomNav = () => {
             {productList?.map((product) => (
               <Grid
                 item
-                xs={6}
-                sm={6}
-                md={3}
-                lg={3}
-                xl={2}
+                xs={12}
+                sm={12}
+                md={6}
+                lg={4}
+                xl={4}
                 display={"flex"}
                 justifyContent={"center"}
                 key={product?.id}
               >
-                <SingleProductCard product={product} />
+                <SingleProjectCard product={product} />
               </Grid>
             ))}
           </Suspense>

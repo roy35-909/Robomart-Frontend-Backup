@@ -1,9 +1,10 @@
 "use client";
+import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 const textFieldStyles = {
   "& .MuiOutlinedInput-root": {
-    
     "&:hover fieldset": {
       borderColor: "var(--primaryColor)", // Border color when hovering
     },
@@ -16,6 +17,41 @@ const textFieldStyles = {
   },
 };
 const CustomProjectFrom = () => {
+  const sendEmail = (data) => {
+    fetch(`${backendUrl}/order_management/post_contact`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result?.msg === "Done!") {
+          setFormData({
+            name: "",
+            email: "",
+            message: "",
+          });
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Email send Successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Something went wrong !",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
+
   const {
     register,
     handleSubmit,
@@ -23,7 +59,12 @@ const CustomProjectFrom = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const description = ` Phone: ${data.mobile}- Address: ${data?.address}-- Project title: ${data.title} - Project Description: ${data.description}`;
+    sendEmail({
+      name: data?.name,
+      email: data?.email,
+      msg: description,
+    });
     // Handle form submission
   };
 
@@ -114,7 +155,14 @@ const CustomProjectFrom = () => {
       </Grid>
 
       <Box mt={2} textAlign="center">
-        <Button type="submit" variant="contained" sx={{background:"var(--primaryColor) !important",color:"white !important"}}>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            background: "var(--primaryColor) !important",
+            color: "white !important",
+          }}
+        >
           Submit
         </Button>
       </Box>

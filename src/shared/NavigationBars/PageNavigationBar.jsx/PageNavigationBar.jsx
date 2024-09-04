@@ -43,7 +43,7 @@ const PageNavigationBar = () => {
         } ${styles.navigationMenu_Item}`}
       >
         <>
-          <SmartToyIcon /> <span style={{ marginLeft: "5px" }}> Projects </span>
+          <SmartToyIcon /> <span style={{ marginLeft: "5px" }}>Ready Projects </span>
         </>
       </Link>
       <Link

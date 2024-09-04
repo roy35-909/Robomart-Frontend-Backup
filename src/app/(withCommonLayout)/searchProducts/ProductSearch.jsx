@@ -24,7 +24,6 @@ export default function ProductSearch({ searchTerm }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data,searchTerm]);
-  console.log(products);
 
   return (
     <div style={{ minHeight: "70vh" }}>

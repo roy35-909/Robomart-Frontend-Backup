@@ -7,7 +7,7 @@ const LeftImageCom = ({ productDetails }) => {
   const [checkDuplicate, setCheckDuplicate] = useState(false);
   const [bgPosition, setBgPosition] = useState("50% 50%");
   const [imageIndex, setImageIndex] = useState(0);
-  console.log(productDetails);
+ 
 
   const zoom = (e) => {
     const { left, top, width, height } = e.target.getBoundingClientRect();
@@ -34,7 +34,7 @@ const LeftImageCom = ({ productDetails }) => {
   if (typeof window !== "undefined") {
     const cacheRecentView = localStorage?.getItem("recentViewProducts");
  const recentProjectView = localStorage?.getItem("recentProjectsView");
-
+//! in production it should 10
  if (productDetails?.catagorys[0] === 2) {
    if (!recentProjectView) {
      const recentArr = [];

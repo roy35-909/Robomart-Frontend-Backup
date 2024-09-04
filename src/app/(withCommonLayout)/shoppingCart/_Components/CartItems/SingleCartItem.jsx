@@ -59,7 +59,6 @@ const SingleCartItem = ({ product, setIsDataChange }) => {
     errorNotify();
     setCheck(false);
   }
-  console.log(product);
   
   return (
     <>

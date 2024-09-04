@@ -8,15 +8,24 @@ import OfferCards from "./Components/OfferCards/OfferCards";
 import HeroSlider from "./Components/Slider/HeroSlider";
 import styles from "./Hero.module.scss";
 import OurFeatures from "./OurFeatures/OurFeatures";
+const updateArrayWithFixedFirstElement = (arr) => {
+  const filter = arr.filter((ele) => ele.id === 12);
+  const filteredArray = arr.filter((element) => element?.id !== 12);
+  return [...filter, ...filteredArray];
+};
 const Hero = () => {
   const [screenWidth, setScreenWidth] = useState(0);
   const [sliceCount, setSliceCount] = useState(8);
-
   const {
     data: categoryList,
     isLoading,
     isError,
   } = useGetCategoryListProductsQuery();
+
+  const [newCategory] = useState(
+    categoryList ? updateArrayWithFixedFirstElement(categoryList) : []
+  );
+
   useEffect(() => {
     setScreenWidth(window.innerWidth);
     if (screenWidth < 1500 && screenWidth > 1400) {
@@ -76,7 +85,7 @@ const Hero = () => {
               <div className={styles.categoryComponent}>
                 {" "}
                 <AllCategorySideMenu
-                  category={categoryList?.slice(0, sliceCount)}
+                  category={newCategory?.slice(0, sliceCount)}
                 />
               </div>
             </Box>

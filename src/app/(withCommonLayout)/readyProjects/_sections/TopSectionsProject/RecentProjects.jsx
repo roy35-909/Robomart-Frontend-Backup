@@ -10,7 +10,7 @@ import styles from "./recentProject.module.scss";
 export default function RecentProjects() {
   const [data, setData] = useState([]);
   useEffect(() => {
-    const productsData = localStorage.getItem("recentViewProducts");
+    const productsData = localStorage.getItem("recentProjectsView");
     const parseData = JSON.parse(productsData);
     const reverseData = parseData?.reverse();
     setData(reverseData);
@@ -28,7 +28,7 @@ export default function RecentProjects() {
               {" "}
               <CardMedia
                 component="img"
-                sx={{ width: "100px", height: "100px" }}
+                sx={{ width: "70px", height: "70px" }}
                 image={`${
                   product?.photo ? product?.photo : "/assets/no-img.jpg"
                 }`}

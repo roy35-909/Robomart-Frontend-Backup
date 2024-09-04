@@ -8,7 +8,7 @@ const SingleProductCard = lazy(() =>
 
 const FilteredProductList = (productLoading, productList) => {
   const [isLoading] = useState(productLoading);
-  console.log(productList);
+  
 
   return (
     <>

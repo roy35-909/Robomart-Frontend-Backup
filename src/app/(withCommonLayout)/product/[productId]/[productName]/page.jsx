@@ -5,7 +5,9 @@ import ProductDetailsPage from "./_ProductDetailsPage/ProductDetailsPage";
 
 export async function generateMetadata({ params }, parent) {
   const productDetails = await getSingleProduct(params.productId);
-  const metaKeywords = productDetails?.product_tags?.map((tag) => tag.name);
+  // const metaKeywords = tagArray.split(",");
+  const metaKeywords = productDetails?.product_tags;
+
   const metaData = {
     title: productDetails?.name,
     description: productDetails?.discription,

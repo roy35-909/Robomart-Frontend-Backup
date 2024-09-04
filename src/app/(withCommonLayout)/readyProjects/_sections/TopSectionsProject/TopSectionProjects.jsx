@@ -12,7 +12,28 @@ const TopSectionProjects = () => {
   return (
     <div>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={3} padding={2}>
+          <div
+            style={{
+              border: "1px solid #d1d1d16b",
+              height: "100%",
+              marginLeft: "2px",
+            }}
+          >
+            <Typography
+              style={{
+                fontFamily: "var(--primaryFont)",
+                textAlign: "center",
+                fontWeight: "bold",
+                fontSize: "18px",
+              }}
+            >
+              Most Recent
+            </Typography>
+            <RecentProjects />
+          </div>
+        </Grid>
+        <Grid item xs={12} md={6}>
           <Swiper
             modules={[Navigation, Pagination]}
             pagination={{ clickable: true }}
@@ -46,15 +67,6 @@ const TopSectionProjects = () => {
               />
             </SwiperSlide>
           </Swiper>
-        </Grid>
-        <Grid item xs={12} md={4} padding={2}>
-          <div style={{ border: "1px solid #d1d1d16b", height: "100%" }}>
-            <Typography style={{fontFamily:"var(--primaryFont)",textAlign:"center",fontWeight:"bold",fontSize:"18px"}}>
-              {" "}
-              Recent Projects View{" "}
-            </Typography>
-            <RecentProjects />
-          </div>
         </Grid>
       </Grid>
     </div>

@@ -17,6 +17,12 @@ const textFieldStyles = {
   },
 };
 const CustomProjectFrom = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const sendEmail = (data) => {
     fetch(`${backendUrl}/order_management/post_contact`, {
       method: "POST",
@@ -28,11 +34,7 @@ const CustomProjectFrom = () => {
       .then((res) => res.json())
       .then((result) => {
         if (result?.msg === "Done!") {
-          setFormData({
-            name: "",
-            email: "",
-            message: "",
-          });
+          reset();
           Swal.fire({
             position: "center",
             icon: "success",
@@ -51,12 +53,6 @@ const CustomProjectFrom = () => {
         }
       });
   };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
 
   const onSubmit = (data) => {
     const description = ` Phone: ${data.mobile}- Address: ${data?.address}-- Project title: ${data.title} - Project Description: ${data.description}`;

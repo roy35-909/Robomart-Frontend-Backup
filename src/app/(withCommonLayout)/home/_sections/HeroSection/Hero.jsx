@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { Box, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -9,22 +10,20 @@ import HeroSlider from "./Components/Slider/HeroSlider";
 import styles from "./Hero.module.scss";
 import OurFeatures from "./OurFeatures/OurFeatures";
 const updateArrayWithFixedFirstElement = (arr) => {
-  const filter = arr.filter((ele) => ele.id === 12);
-  const filteredArray = arr.filter((element) => element?.id !== 12);
+  const filter = arr?.filter((ele) => ele?.id === 12);
+  const filteredArray = arr?.filter((element) => element?.id !== 12);
   return [...filter, ...filteredArray];
 };
 const Hero = () => {
   const [screenWidth, setScreenWidth] = useState(0);
   const [sliceCount, setSliceCount] = useState(8);
+  const [newCategory, setNewCategory] = useState([]);
+
   const {
     data: categoryList,
     isLoading,
     isError,
   } = useGetCategoryListProductsQuery();
-
-  const [newCategory] = useState(
-    categoryList ? updateArrayWithFixedFirstElement(categoryList) : []
-  );
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -36,7 +35,11 @@ const Hero = () => {
       setSliceCount(8);
     }
   }, [screenWidth]);
-
+  useEffect(() => {
+    if (categoryList) {
+      setNewCategory(updateArrayWithFixedFirstElement(categoryList));
+    }
+  }, [categoryList]);
   return (
     <>
       {/* {screenWidth > 1200 && screenWidth < 1500 ? (

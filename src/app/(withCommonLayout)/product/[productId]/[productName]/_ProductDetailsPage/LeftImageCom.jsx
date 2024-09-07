@@ -34,7 +34,7 @@ const LeftImageCom = ({ productDetails }) => {
   if (typeof window !== "undefined") {
     const cacheRecentView = localStorage?.getItem("recentViewProducts");
  const recentProjectView = localStorage?.getItem("recentProjectsView");
-//! in production it should 10
+//! in production it should 12
  if (productDetails?.catagorys[0] === 2) {
    if (!recentProjectView) {
      const recentArr = [];

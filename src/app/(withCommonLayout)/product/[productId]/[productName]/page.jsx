@@ -18,7 +18,7 @@ export async function generateMetadata({ params }, parent) {
       }/${encodeURI(productDetails?.name)}`,
     },
     openGraph: {
-      images: [`${productDetails?.media[0]}`],
+      images: [`${productDetails?.media[0]?.photo}`],
     },
   };
   return metaData;

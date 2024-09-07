@@ -1,7 +1,7 @@
 import ProductDetailsPageSkeleton from "@/components/Skeletons/ProductDetailsPageSkeleton";
 import RecentView from "@/Shared/RecntView/RecentView";
-import { storeRecentViewProduct } from "@/utils/ApiCall/productApicall";
 import { Box, Button, Container, Divider, Grid, Rating } from "@mui/material";
+import Head from "next/head";
 import AddToCartButton from "./AddToCartButton";
 import BottomTabs from "./BottomTabs";
 import LeftImageCom from "./LeftImageCom";
@@ -10,13 +10,66 @@ import RelatedProducts from "./RelatedProducts";
 const ProductDetailsPage = ({ productDetails }) => {
   // const [loading, setLoading] = useState(false);
   // const router = useRouter();
-  
+
+  function addProductJsonLd(productDetails) {
+    const photos = productDetails?.media?.map((img) => img?.photo);
+    return {
+      __html: `{
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "${productDetails?.name}",
+      "image": [${photos}],
+      "description": "${productDetails?.discription}",
+      "sku": "${productDetails?.product_code}",
+      "mpn": "",
+      "brand": {
+        "@type": "Brand",
+        "name": "RobomartBd"
+      },
+      "review": {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "${productDetails?.ratting}",
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Md Hafizud Rahman"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "${productDetails?.ratting}",
+        "reviewCount": "${productDetails?.total_review}"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.robomartbd.com/product/${
+          productDetails?.id
+        }/${encodeURI(productDetails?.name)}",
+        "priceCurrency": "BDT",
+        "price": "${productDetails?.after_discount}",
+        "itemCondition": "https://schema.org/UsedCondition",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  `,
+    };
+  }
+
   return (
-    <div>
+    <>
       {!productDetails ? (
         <ProductDetailsPageSkeleton />
       ) : (
         <Container sx={{ py: "5vh" }}>
+          <Head>
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={addProductJsonLd(productDetails)}
+              key="product-jsonld"
+            />
+          </Head>
           <Grid container spacing={2} sx={{ justifyContent: "center" }}>
             <Grid item md={6} className={styles.left}>
               {productDetails?.media !== undefined && (
@@ -97,7 +150,7 @@ const ProductDetailsPage = ({ productDetails }) => {
           <RelatedProducts categoriesId={productDetails?.catagorys} />
         </Container>
       )}
-    </div>
+    </>
   );
 };
 

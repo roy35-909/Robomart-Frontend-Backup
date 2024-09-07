@@ -3,9 +3,10 @@ import CategoryWiseProductLoading from "@/components/Skeletons/Home/CategoryWise
 import { useGetCategoryListProductsQuery } from "@/redux/api/api";
 import SingleProjectCard from "@/Shared/SingleProductCard/SingleProjectCard";
 import { backendUrl } from "@/utils/backendApiUrlProvider";
-import { Button, Grid, Skeleton } from "@mui/material";
+import { Box, Button, Grid, Skeleton } from "@mui/material";
+import Link from "next/link";
 import { lazy, Suspense, useEffect, useState } from "react";
-
+import styles from "./midSec.module.scss";
 const SingleProductCard = lazy(() =>
   import("@/Shared/SingleProductCard/SingleProductCard")
 );
@@ -125,25 +126,34 @@ const ProjectBottomNav = () => {
       {productLoading ? (
         <CategoryWiseProductLoading />
       ) : (
-        <Grid container spacing={2} paddingY={5}>
-          <Suspense fallback={<div></div>}>
-            {productList?.map((product) => (
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                md={6}
-                lg={4}
-                xl={4}
-                display={"flex"}
-                justifyContent={"center"}
-                key={product?.id}
-              >
-                <SingleProjectCard product={product} />
-              </Grid>
-            ))}
-          </Suspense>
-        </Grid>
+        <>
+          <Grid container spacing={2} paddingY={5}>
+            <Suspense fallback={<div></div>}>
+              {productList?.slice(0, 9)?.map((product) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={12}
+                  md={6}
+                  lg={4}
+                  xl={4}
+                  display={"flex"}
+                  justifyContent={"center"}
+                  key={product?.id}
+                >
+                  <SingleProjectCard product={product} />
+                </Grid>
+              ))}
+            </Suspense>
+          </Grid>
+          <Box display={"flex"} justifyContent={"flex-end"}>
+            <Link href={`/readyProjects/all`}>
+              <Button className={styles.showMoreBtn}>
+                <i>{`Show More >>`}</i>
+              </Button>
+            </Link>
+          </Box>
+        </>
       )}
     </div>
   );

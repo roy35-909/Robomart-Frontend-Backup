@@ -5,8 +5,9 @@
 }
 .category {
   transition: all 0.3s ease-in;
-  border: 2px solid var(--primaryColor);
+  border: 0.05px solid var(--primaryColor);
+  border-radius: 5px;
 }
 .category:hover {
-  border: 3px solid var(--primaryColor);
+  border: 2px solid var(--primaryColor);
 }

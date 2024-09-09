@@ -46,7 +46,7 @@ export default function RecentProjects() {
                   className={`${styles.link}`}
                 >
                   <Typography component="div" variant="subtitle1">
-                    {product?.name}
+                    {product?.name.slice(0,80)}...
                   </Typography>
                 </Link>
               </CardContent>

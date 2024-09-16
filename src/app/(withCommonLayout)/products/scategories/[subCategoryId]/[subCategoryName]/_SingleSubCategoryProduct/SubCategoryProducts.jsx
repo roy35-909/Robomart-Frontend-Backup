@@ -76,7 +76,7 @@ const SubCategoryProducts = ({ data, params }) => {
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <div style={{ marginX: "5px" }}>
                   <Typography marginTop={3} variant="h6" fontFamily={"Poppins"}>
-                    {decodeURIComponent(params?.subCategoryNamegit )} :
+                    {decodeURIComponent(params?.subCategoryName )} :
                   </Typography>
                 </div>
                 <FormControl

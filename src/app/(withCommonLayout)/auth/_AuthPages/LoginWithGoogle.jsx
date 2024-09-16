@@ -1,6 +1,6 @@
 import GoogleIcon from "@mui/icons-material/Google";
 import { Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./AuthPage.module.scss";
 const LoginWithGoogle = () => {
   const apiUrl = process.env.NEXT_PUBLIC_GOOGLE_AUTH_LINK;
@@ -11,7 +11,9 @@ const LoginWithGoogle = () => {
   };
   const authLoginGoogle = async () => {
     try {
-      const response = await fetch(apiUrl);
+      const response = await fetch(apiUrl, {
+        credentials: "include",
+      });
       const data = await response.json();
       setAuthUrl(data?.authorization_url);
     } catch (err) {

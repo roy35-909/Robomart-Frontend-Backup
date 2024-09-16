@@ -3,42 +3,35 @@
 import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { CircularProgress, Typography } from "@mui/material";
 import axios from "axios";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 const GoogleAuthLink = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
-  const postLoginData = async (state, code) => {
-    const details = {
-      state: state,
-      code: code,
-    };
+  const fullUrl = window.location.href;
 
-    const formBody = Object.keys(details)
-      .map(
-        (key) =>
-          encodeURIComponent(key) + "=" + encodeURIComponent(details[key])
-      )
-      .join("&");
-
+  const postLoginData = async () => {
     try {
       const res = await axios.post(
-        `${backendUrl}/api/auth/o/google-oauth2/?${formBody}`,
+        `${backendUrl}/api/auth/o/google-oauth2/?${fullUrl?.split("?")[1]}`,
+        null,
         {
           headers: {
+            Accept: "application/json",
             "Content-Type": "application/x-www-form-urlencoded",
           },
+          withCredentials: true,
         }
       );
-
       try {
         if (res.data.access) {
           localStorage.setItem("user", JSON.stringify(res.data.access));
 
           //   reset();
           router.push("/home");
+
+          // window.location.reload();
           Swal.fire({
             position: "center",
             icon: "success",
@@ -46,7 +39,6 @@ const GoogleAuthLink = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          window.location.reload();
         }
       } catch (e) {
         Swal.fire({
@@ -63,8 +55,8 @@ const GoogleAuthLink = () => {
   };
 
   useEffect(() => {
-    postLoginData(searchParams.state, searchParams.code);
-  }, []);
+    postLoginData();
+  }, [fullUrl]);
 
   return (
     <div style={{ minHeight: "80vh" }}>

@@ -6,6 +6,7 @@ export const robomartApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: `${backendUrl}/`,
+    credentials: "include",
     prepareHeaders: async (headers) => {
       const storedData = await localStorage.getItem("user");
       const userData = await JSON.parse(storedData);

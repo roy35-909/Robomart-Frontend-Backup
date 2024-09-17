@@ -25,7 +25,7 @@ const ProjectBottomNav = () => {
 
   useEffect(() => {
     if (categoryList) {
-      const category = categoryList.find((cat) => cat?.id === 2);
+      const category = categoryList.find((cat) => cat?.id === 12);
       setData(category?.sub_category || []);
       setAllProduct();
     }
@@ -34,7 +34,7 @@ const ProjectBottomNav = () => {
   const setAllProduct = () => {
     setProductLoading(true);
     setSelectedTab("all");
-    fetch(`${backendUrl}/api/catagory/${2}/category`)
+    fetch(`${backendUrl}/api/catagory/${12}/category`)
       .then((res) => res.json())
       .then((data) => {
         setProductList(data);

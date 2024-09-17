@@ -11,7 +11,7 @@ const AllProjects = () => {
   const [data, setData] = useState([]);
   const [productLoading, setProductLoading] = useState(true);
   useEffect(() => {
-    fetch(`${backendUrl}/api/catagory/${2}/category`)
+    fetch(`${backendUrl}/api/catagory/${12}/category`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);

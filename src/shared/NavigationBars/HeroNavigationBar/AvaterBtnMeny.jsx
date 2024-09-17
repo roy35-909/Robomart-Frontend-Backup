@@ -40,8 +40,7 @@ const AvaterBtnMeny = ({ data }) => {
     handleCloseUserMenu();
     router.push("/home");
     localStorage.clear();
-    window.location.reload();
-    router.push("/home");
+    router.refresh();
   };
 
   const handleSearch = () => {

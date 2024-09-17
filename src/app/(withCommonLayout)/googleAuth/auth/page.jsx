@@ -1,3 +1,4 @@
+"use client"
 import GoogleAuthLink from "../../auth/_AuthPages/GoogleAuthLink";
 
 const GoogleAuthPage = () => {

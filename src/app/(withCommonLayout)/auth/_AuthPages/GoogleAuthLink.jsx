@@ -4,12 +4,12 @@ import { backendUrl } from "@/utils/backendApiUrlProvider";
 import { CircularProgress, Typography } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 const GoogleAuthLink = () => {
   const router = useRouter();
 
-  const fullUrl = window.location.href;
+  const [fullUrl, setFullUrl] = useState("");
 
   const postLoginData = async () => {
     try {
@@ -30,7 +30,7 @@ const GoogleAuthLink = () => {
 
           //   reset();
           router.push("/home");
-
+          router.refresh();
           // window.location.reload();
           Swal.fire({
             position: "center",
@@ -55,6 +55,9 @@ const GoogleAuthLink = () => {
   };
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      setFullUrl(window.location.href);
+    }
     postLoginData();
   }, [fullUrl]);
 

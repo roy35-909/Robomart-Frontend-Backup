@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 const pages = ["Products", "Pricing", "Blog"];
@@ -21,7 +21,7 @@ const AvaterBtnMeny = ({ data }) => {
   const [query, setQuery] = useState("");
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-
+  const pathName = usePathname();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -40,6 +40,9 @@ const AvaterBtnMeny = ({ data }) => {
     handleCloseUserMenu();
     router.push("/home");
     localStorage.clear();
+    if (pathName === "/home") {
+      window.location.reload();
+    }
     router.refresh();
   };
 

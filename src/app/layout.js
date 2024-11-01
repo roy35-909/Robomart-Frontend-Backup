@@ -10,7 +10,7 @@ export const metadata = {
     canonical: `https://www.robomartbd.com`,
   },
   applicationName: "Robomart BD",
-  referrer: "https://robomartbd.com",
+  referrer: "no-referrer",
   keywords: [
     "Bangladesh large robotics shop",
     "Robotics component shop",

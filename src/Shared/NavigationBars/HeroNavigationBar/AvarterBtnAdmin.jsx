@@ -85,7 +85,7 @@ const AvarterBtnAdmin = ({ data }) => {
           </Link>
           <Divider />
           <Link
-            href="/dashboard/admin/orderManagement/"
+            href="/dashboard/admin/OrderManagement/"
             style={{ textDecoration: "none", color: "black" }}
           >
             <MenuItem onClick={handleCloseUserMenu}>
